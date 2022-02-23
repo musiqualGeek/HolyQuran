@@ -1,9 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import React, { useEffect } from "react";
 
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
-const Verses = ({ navigation }) => {
+const Verses = ({ navigation, route }) => {
+  useEffect(() => {
+    console.log("from vers", route.params.verse);
+  }, []);
   return (
     <View style={styles.mainContainer}>
       <View style={styles.borderContainer}>
@@ -33,10 +43,23 @@ const Verses = ({ navigation }) => {
               name="bookmark"
               color="#DAB53F"
               size={24}
-              style={{ margin: 20, position: 'absolute', right: -140 }}
+              style={{ margin: 20, position: "absolute", right: -140 }}
             />
           </TouchableOpacity>
         </View>
+        <ScrollView style={{ flex: 1 }}>
+          <Text
+            style={{
+              maxWidth: "100%",
+              color: "white",
+              fontSize: 18,
+              paddingHorizontal: 20,
+              paddingVertical: 20,
+            }}
+          >
+            {route.params.verse.verse}
+          </Text>
+        </ScrollView>
         <Image
           style={styles.imageMosque}
           source={require("../assets/mosque.png")}
@@ -44,7 +67,7 @@ const Verses = ({ navigation }) => {
       </View>
     </View>
   );
-}
+};
 
 export default Verses;
 
