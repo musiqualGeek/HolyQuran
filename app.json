@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "ptkzonelabs.holyquran"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"

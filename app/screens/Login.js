@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,13 +7,19 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
 
+import { useFonts } from "@expo-google-fonts/quicksand";
+import { StatusBar } from "expo-status-bar";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/utils";
 
 const Login = ({ navigation }) => {
+  let [fontsLoaded] = useFonts({
+    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
+    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
+    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
+  });
   const [email, setEmail] = useState("alex@gmail.com");
   const [password, setPassword] = useState("hellodude");
   const handleLogin = async () => {
@@ -29,71 +36,81 @@ const Login = ({ navigation }) => {
       console.log("from catch in login redux actions");
     }
   };
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.borderContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/app_logo.png")}
-        />
-        <View style={styles.card}>
-          <Text style={styles.textWelcome}>WELCOME TO</Text>
-          <Text style={styles.textQuran}>The Holy Quran</Text>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Email"
-              value={email}
-              placeholderTextColor="grey"
-              onChangeText={setEmail}
+
+  if (!fontsLoaded) {
+    return <Text>Alex waiting</Text>;
+  } else {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={styles.borderContainer}>
+          <Image
+            style={styles.image}
+            source={require("../assets/appIcon_Iphone.jpg")}
+          />
+          <View style={styles.card}>
+            <Text style={styles.textWelcome}>WELCOME TO</Text>
+            <Text style={styles.textQuran}>The Holy Quran</Text>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.inputText}
+                placeholder="Email"
+                value={email}
+                placeholderTextColor="grey"
+                onChangeText={setEmail}
+              >
+                {/* <MaterialIcons name="email" color="gray" size={24} /> */}
+              </TextInput>
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.inputText}
+                placeholder="Password"
+                value={password}
+                placeholderTextColor="grey"
+                onChangeText={setPassword}
+                secureTextEntry={true}
+              >
+                {/* <MaterialIcons name="vpn-key" color="gray" size={24} /> */}
+              </TextInput>
+            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ForgotPassword")}
             >
-              {/* <MaterialIcons name="email" color="gray" size={24} /> */}
-            </TextInput>
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Password"
-              value={password}
-              placeholderTextColor="grey"
-              onChangeText={setPassword}
-              secureTextEntry={true}
-            >
-              {/* <MaterialIcons name="vpn-key" color="gray" size={24} /> */}
-            </TextInput>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-            <Text style={styles.forgot}>Forgot Password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
-            <Text style={styles.loginText}>LOGIN</Text>
-          </TouchableOpacity>
-          <Text style={styles.textOR}>OR</Text>
-          <Text style={styles.textLoginWith}>Login with</Text>
-          <View style={styles.socialIcons}>
-            <View style={styles.googleIcon}>
-              <TouchableOpacity>
-                <AntDesign name="google" color="#DB4437" size={24} />
-              </TouchableOpacity>
+              <Text style={styles.forgot}>Forgot Password?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+              <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableOpacity>
+            <Text style={styles.textOR}>OR</Text>
+            <Text style={styles.textLoginWith}>Login with</Text>
+            <View style={styles.socialIcons}>
+              <View style={styles.googleIcon}>
+                <TouchableOpacity>
+                  <AntDesign name="google" color="#DB4437" size={24} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.facebookIcon}>
+                <TouchableOpacity>
+                  <FontAwesome name="facebook" color="#4267B2" size={24} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.appleIcon}>
+                <TouchableOpacity>
+                  <FontAwesome name="apple" color="#ececec" size={24} />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.facebookIcon}>
-              <TouchableOpacity>
-                <FontAwesome name="facebook" color="#4267B2" size={24} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.appleIcon}>
-              <TouchableOpacity>
-                <FontAwesome name="apple" color="#ececec" size={24} />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text style={styles.noAccount}>
+                Don't have an account? Sign up
+              </Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={styles.noAccount}>Don't have an account? Sign up</Text>
-          </TouchableOpacity>
         </View>
+        <StatusBar style="auto" />
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 export default Login;
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 15,
-    backgroundColor: "#264A27",
+    backgroundColor: "#2D5C2E",
     overflow: "hidden",
     width: 310,
     height: 460,
@@ -127,21 +144,23 @@ const styles = StyleSheet.create({
     marginStart: 20,
   },
   forgot: {
-    color: "#DAB53F",
-    fontSize: 12,
+    color: "white",
+    fontSize: 13,
     marginTop: 5,
     textAlign: "right",
+    fontFamily: "Quicksand_1",
     marginEnd: 20,
   },
   googleIcon: {
     marginStart: 0,
   },
   image: {
-    width: 120,
-    height: 180,
+    width: 185,
+    height: 185,
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 40,
+    borderRadius: 20
   },
   inputText: {
     height: 50,
@@ -168,18 +187,19 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "#fff",
-    fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Quicksand_1",
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "white",
   },
   noAccount: {
-    color: "#DAB53F",
+    color: "white",
     fontSize: 14,
     marginTop: 16,
     textAlign: "center",
+    fontFamily: "Quicksand_1",
   },
   socialIcons: {
     flexDirection: "row",
@@ -190,25 +210,27 @@ const styles = StyleSheet.create({
   textLoginWith: {
     fontSize: 12,
     textAlign: "center",
-    color: "#DAB53F",
+    color: "white",
+    fontFamily: "Quicksand_1",
   },
   textOR: {
     fontSize: 12,
     textAlign: "center",
     marginTop: 10,
     color: "#ececec",
+    fontFamily: "Quicksand_1",
   },
   textWelcome: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 24,
     color: "#ececec",
     marginTop: 16,
+    fontFamily: "Quicksand_1",
   },
   textQuran: {
     textAlign: "center",
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#DAB53F",
-    marginTop: 5,
+    color: "white",
+    fontFamily: "Quicksand_1",
   },
 });

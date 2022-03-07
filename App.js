@@ -12,6 +12,7 @@ import Service from "./app/screens/Service";
 import Bookmark from "./app/screens/Bookmark";
 import Home from "./app/screens/Home";
 import Verses from "./app/screens/Verses";
+import TestScreen from "./app/screens/TestScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splashscreen">
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Splashscreen"
           component={Splashscreen}
           options={{ headerShown: false }}
@@ -46,8 +47,8 @@ const App = () => {
           name="Introduction"
           component={Introduction}
           options={{ headerShown: false }}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="Language"
           component={Language}
           options={{ headerShown: false }}
@@ -66,7 +67,7 @@ const App = () => {
           name="Bookmark"
           component={Bookmark}
           options={{ headerShown: false }}
-        /> */}
+        />
         <Stack.Screen
           name="Home"
           component={Home}
@@ -75,6 +76,11 @@ const App = () => {
         <Stack.Screen
           name="Verses"
           component={Verses}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TestScreen"
+          component={TestScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

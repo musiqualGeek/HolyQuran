@@ -8,91 +8,103 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import React, { FC, ReactElement, useState } from "react";
-import Parse from "parse/react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "@expo-google-fonts/quicksand";
+// import React, { FC, ReactElement, useState } from "react";
+// import Parse from "parse/react-native";
+// import { useNavigation } from "@react-navigation/native";
 
 const ForgotPassword = ({ navigation }) => {
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.borderContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Ionicons
-            name="arrow-back"
-            color="#DAB53F"
-            size={24}
-            style={{ margin: 20 }}
-          />
-        </TouchableOpacity>
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 24,
-            fontWeight: "bold",
-            marginTop: -50,
-            color: "#DAB53F",
-          }}
-        >
-          Forgot Password
-        </Text>
-
-        <View style={styles.card}>
+  let [fontsLoaded] = useFonts({
+    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
+    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
+    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <Text>Alex waiting</Text>;
+  } else {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={styles.borderContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Ionicons
+              name="arrow-back"
+              color="#DAB53F"
+              size={24}
+              style={{ margin: 20 }}
+            />
+          </TouchableOpacity>
           <Text
             style={{
-              marginTop: 45,
-              marginStart: 20,
-              marginEnd: 20,
-              color: "#DAB53F",
-              fontSize: 16,
               textAlign: "center",
+              fontSize: 24,
+              fontFamily: 'Quicksand_1',
+              marginTop: -50,
+              color: "#DAB53F",
             }}
           >
-            {"Please enter your account email to reset your password:"}
+            Forgot Password
           </Text>
-          <TextInput
-            style={{
-              width: "90%",
-              height: 45,
-              backgroundColor: "white",
-              borderRadius: 10,
-              marginTop: 40,
-              paddingStart: 20,
-              justifyContent: "center",
-              alignSelf: "center",
-            }}
-            placeholder={"Your account email"}
-          />
-          <TouchableOpacity onPress={() => doUserPasswordReset()}>
-            <View
+
+          <View style={styles.card}>
+            <Text
               style={{
-                backgroundColor: "#DAB53F",
-                width: "60%",
-                height: 45,
                 marginTop: 45,
-                borderRadius: 10,
-                justifyContent: "center",
-                alignSelf: "center",
+                marginStart: 20,
+                marginEnd: 20,
+                color: "#DAB53F",
+                fontSize: 16,
+                fontFamily: 'Quicksand_2',
+                textAlign: "center",
               }}
             >
-              <Text
+              {"Please enter your account email to reset your password:"}
+            </Text>
+            <TextInput
+              style={{
+                width: "90%",
+                height: 45,
+                backgroundColor: "white",
+                borderRadius: 10,
+                marginTop: 40,
+                paddingStart: 20,
+                justifyContent: "center",
+                fontFamily: 'Quicksand_1',
+                alignSelf: "center",
+              }}
+              placeholder={"Your account email"}
+            />
+            <TouchableOpacity onPress={() => doUserPasswordReset()}>
+              <View
                 style={{
-                  textAlign: "center",
-                  color: "#264A27",
-                  fontWeight: "bold",
+                  backgroundColor: "#DAB53F",
+                  width: "60%",
+                  height: 45,
+                  marginTop: 45,
+                  borderRadius: 10,
+                  justifyContent: "center",
+                  alignSelf: "center",
                 }}
               >
-                {"Submit"}
-              </Text>
-            </View>
-          </TouchableOpacity>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: "#264A27",
+                    fontFamily: 'Quicksand_1'
+                  }}
+                >
+                  {"Submit"}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <Image
+            style={styles.imageMosque}
+            source={require("../assets/mosque.png")}
+          />
         </View>
-        <Image
-          style={styles.imageMosque}
-          source={require("../assets/mosque.png")}
-        />
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 export default ForgotPassword;

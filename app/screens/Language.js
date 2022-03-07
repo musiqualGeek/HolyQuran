@@ -1,65 +1,77 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "@expo-google-fonts/quicksand";
 
 const Language = ({ navigation }) => {
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.borderContainer}>
-        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-        <TouchableOpacity onPress={() => navigation.navigate("Bookmark")}>
-            <FontAwesome
-              name="bookmark"
-              color="#DAB53F"
-              size={24}
-              style={{ margin: 16 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Service")}>
-            <Ionicons
-              name="settings-sharp"
-              color="#DAB53F"
-              size={24}
-              style={{ margin: 16 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <FontAwesome
-              name="user-circle"
-              color="#DAB53F"
-              size={24}
-              style={{ margin: 16 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <Image
-          style={styles.image}
-          source={require("../assets/app_logo.png")}
-        />
-        <View style={styles.card}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>READ THE HOLY QURAN</Text>
+  let [fontsLoaded] = useFonts({
+    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
+    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
+    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <Text>Alex waiting</Text>;
+  } else {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={styles.borderContainer}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+            <TouchableOpacity onPress={() => navigation.navigate("Bookmark")}>
+              <FontAwesome
+                name="bookmark"
+                color="gray"
+                size={24}
+                style={{ margin: 16 }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Service")}>
+              <Ionicons
+                name="settings-sharp"
+                color="gray"
+                size={24}
+                style={{ margin: 16 }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <FontAwesome
+                name="user-circle"
+                color="gray"
+                size={24}
+                style={{ margin: 16 }}
+              />
+            </TouchableOpacity>
           </View>
-          <Text style={styles.selectLanguageText}>SELECT LANGUAGE</Text>
-          <TouchableOpacity>
-            <View style={styles.arabic}>
-              <Text style={styles.textArabic}>Arabic</Text>
+          <Image
+            style={styles.image}
+            source={require("../assets/appIcon_Iphone.jpg")}
+          />
+          <View style={styles.card}>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>READ THE HOLY QURAN</Text>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.english}>
-              <Text style={styles.textEnglish}>English</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <View style={styles.readButton}>
-              <Text style={styles.textRead}>READ</Text>
-            </View>
-          </TouchableOpacity>
+            <Text style={styles.selectLanguageText}>SELECT LANGUAGE</Text>
+            <TouchableOpacity>
+              <View style={styles.arabic}>
+                <Text style={styles.textArabic}>Arabic</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.english}>
+                <Text style={styles.textEnglish}>English</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <View style={styles.readButton}>
+                <Text style={styles.textRead}>READ</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
+        <StatusBar style="auto" />
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 export default Language;
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
     width: 320,
     height: 50,
     marginTop: 16,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#147b32",
     justifyContent: "center",
   },
   header: {
@@ -111,24 +123,25 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#2D5C2E",
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: 'Quicksand_1',
     textAlign: "center",
   },
   image: {
-    width: 150,
-    height: 250,
+    width: 200,
+    height: 200,
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 30,
+    borderRadius: 20
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "white",
   },
   readButton: {
     width: "50%",
     height: 50,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#147b32",
     marginTop: 20,
     borderRadius: 15,
     justifyContent: "center",
@@ -138,21 +151,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
     color: "gray",
+    fontFamily: 'Quicksand_2',
   },
   textArabic: {
     textAlign: "center",
     color: "gray",
     fontSize: 20,
+    fontFamily: 'Quicksand_1',
   },
   textEnglish: {
     textAlign: "center",
     color: "#fff",
     fontSize: 20,
+    fontFamily: 'Quicksand_1',
   },
   textRead: {
-    color: "#DAB53F",
+    color: "white",
     textAlign: "center",
-    fontWeight: "bold",
+    fontFamily: 'Quicksand_1',
     fontSize: 16,
   },
 });

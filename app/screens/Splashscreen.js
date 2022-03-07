@@ -1,35 +1,46 @@
 import { StyleSheet, Text, View, Image, Platform, Button } from "react-native";
 import React, { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "@expo-google-fonts/quicksand";
 
 const Splashscreen = ({ navigation }) => {
-  //Splashscreen delay 
+  //Splashscreen delay
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("Register");
     }, 3000);
   }, []);
-
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.borderContainer}>
-        <View>
-          <Text style={styles.textQuran}>THE HOLY QURAN</Text>
+  let [fontsLoaded] = useFonts({
+    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
+    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
+    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <Text>Alex waiting</Text>;
+  } else {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={styles.borderContainer}>
+          <View>
+            <Text style={styles.textQuran}>THE HOLY QURAN</Text>
+          </View>
+          <Image
+            style={styles.image}
+            source={require("../assets/app_logo.png")}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.textEnglish}>
+              English Translation and Commentry{"\n"}by
+            </Text>
+          </View>
+          <View style={styles.authorNameBackground}>
+            <Text style={styles.textAuthorName}>Maulana Muhammad Ali</Text>
+          </View>
         </View>
-        <Image
-          style={styles.image}
-          source={require("../assets/app_logo.png")}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.textEnglish}>
-            English Translation and Commentry{"\n"}by
-          </Text>
-        </View>
-        <View style={styles.authorNameBackground}>
-          <Text style={styles.textAuthorName}>Maulana Muhammad Ali</Text>
-        </View>
+        <StatusBar style="auto" />
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 export default Splashscreen;
@@ -61,11 +72,11 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#496F51",
   },
   textAuthorName: {
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 24,
+    fontFamily: 'Quicksand_1',
     color: "#2D5C2E",
     textAlign: "center",
   },
@@ -73,6 +84,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#DAB53F",
     fontSize: 28,
+    fontFamily: 'Quicksand_2',
   },
   textContainer: {
     marginTop: 40,
@@ -81,7 +93,7 @@ const styles = StyleSheet.create({
   },
   textQuran: {
     fontSize: 36,
-    fontWeight: "bold",
+    fontFamily: 'Quicksand_1',
     textAlign: "center",
     marginTop: 40,
     color: "#DAB53F",
