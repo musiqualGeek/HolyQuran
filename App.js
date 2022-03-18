@@ -16,6 +16,7 @@ import TestScreen from "./app/screens/TestScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import TabSection from './app/screens/TabSection';
 
 const Stack = createStackNavigator();
 
@@ -70,7 +71,17 @@ const App = () => {
         />
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={TabSection}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Parts"
+          component={TabSection}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PayAudio"
+          component={TabSection}
           options={{ headerShown: false }}
         />
         <Stack.Screen

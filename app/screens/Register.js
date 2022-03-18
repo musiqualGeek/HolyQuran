@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
@@ -40,6 +41,10 @@ const Register = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <Image
             style={styles.image}
@@ -90,20 +95,26 @@ const Register = ({ navigation }) => {
 export default Register;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   card: {
     borderRadius: 15,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#496F51",
     overflow: "hidden",
-    width: 310,
+    width: 280,
     height: 420,
     alignSelf: "center",
     marginTop: 50,
@@ -112,7 +123,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   haveAccount: {
-    color: "#DAB53F",
+    color: "#fff",
     fontSize: 14,
     marginTop: 30,
     textAlign: "center",
@@ -123,7 +134,7 @@ const styles = StyleSheet.create({
     height: 185,
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 40,
+    marginTop: 45,
     borderRadius: 20
   },
   inputText: {
@@ -157,6 +168,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   textLoginWith: {
     fontSize: 16,
@@ -168,11 +180,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#ececec",
     marginTop: 30,
-    fontFamily: 'Quicksand_3'
+    fontFamily: 'Quicksand_1'
   },
   textQuran: {
     textAlign: "center",
-    fontSize: 36,
+    fontSize: 32,
     color: "#DAB53F",
     marginTop: 5,
     fontFamily: 'Quicksand_1'

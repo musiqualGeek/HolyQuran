@@ -6,6 +6,8 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  ImageBackground,
+  Platform
 } from "react-native";
 
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -42,6 +44,10 @@ const Login = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <Image
             style={styles.image}
@@ -119,21 +125,27 @@ const styles = StyleSheet.create({
   appleIcon: {
     marginStart: 20,
   },
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   card: {
     borderRadius: 15,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#496F51",
     overflow: "hidden",
-    width: 310,
-    height: 460,
+    width: Platform.OS === "android" ? 280 : 300,
+    height: Platform.OS === "android" ? 470 : 440,
     alignSelf: "center",
     marginTop: 50,
     shadowRadius: 10,
@@ -193,6 +205,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   noAccount: {
     color: "white",
@@ -229,8 +242,8 @@ const styles = StyleSheet.create({
   },
   textQuran: {
     textAlign: "center",
-    fontSize: 36,
-    color: "white",
+    fontSize: 32,
+    color: "#DAB53F",
     fontFamily: "Quicksand_1",
   },
 });

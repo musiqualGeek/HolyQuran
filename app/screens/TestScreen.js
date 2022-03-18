@@ -7,7 +7,7 @@ export default function TestScreen() {
     <View style={styles.mainContainer}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/border_680.png")}
+          source={require("../assets/border_1.png")}
         />   
         <StatusBar style="auto" />
     </View>

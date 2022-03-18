@@ -5,7 +5,6 @@ import {
   View,
   FlatList,
   Platform,
-  ImageBackground,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -181,10 +180,10 @@ const Home = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
-        <ImageBackground
+        {/* <ImageBackground
           style={styles.image}
           source={require("../assets/border_new.png")}
-        />
+        /> */}
         <View style={styles.borderContainer}>
           <TouchableOpacity onPress={() => navigation.navigate("Language")}>
             <Ionicons
@@ -262,18 +261,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     backgroundColor: "#fff",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // marginTop: Platform.OS === "android" ? 48 : 44,
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
+    borderWidth: 5,
+    borderColor: "#496F51",
     paddingBottom: 16,
-    marginEnd: 10,
-    marginBottom: 16,
-    marginTop: 24,
   },
   container: {
     marginTop: 16,
@@ -281,7 +275,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginStart: 20,
     marginEnd: 20,
-    marginBottom: 10,
+    
     justifyContent: "center",
   },
   image: {

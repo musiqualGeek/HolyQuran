@@ -1,10 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  ScrollView,
+  Platform
+} from "react-native";
+import React, { useEffect } from "react";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
+import { isLoaded } from "expo-font";
 
-const Bookmark = ({ navigation }) => {
+const Bookmark = ({ navigation, route }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
@@ -15,33 +24,37 @@ const Bookmark = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <Ionicons
                 name="arrow-back"
-                color="#DAB53F"
+                color="gray"
                 size={24}
-                style={{ margin: 20 }}
+                style={{marginStart: 24}}
+                // style={{ position: "absolute", right: 24 }}
+                // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
               />
             </TouchableOpacity>
             <Text
               style={{
                 justifyContent: "center",
-                alignSelf: "center",
+                alignItems: "center",
                 fontSize: 24,
                 fontFamily: "Quicksand_1",
-                marginStart: 60,
-                color: "#DAB53F",
+                marginTop: -5,
+                color: "#264A27",
+                position: "absolute",
+                right: Platform.OS === 'android' ? 145 : 160
               }}
             >
               Bookmark
             </Text>
           </View>
-          <Image
-            style={styles.imageMosque}
-            source={require("../assets/mosque.png")}
-          />
         </View>
       </View>
     );
@@ -51,27 +64,32 @@ const Bookmark = ({ navigation }) => {
 export default Bookmark;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
+    marginTop: 24,
   },
   header: {
     flexDirection: "row",
+    // justifyContent: "space-around",
+    // alignSelf: "flex-start",
+    marginTop: 30,
   },
-  imageMosque: {
-    width: "100%",
-    height: 250,
-    position: "absolute",
-    bottom: 0,
-    marginTop: -15,
-  },
+ 
   mainContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
 });

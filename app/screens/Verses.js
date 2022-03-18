@@ -28,8 +28,8 @@ const Verses = ({ navigation, route }) => {
     return (
       <View style={styles.mainContainer}>
         <ImageBackground
-          style={styles.image}
-          source={require("../assets/border_new.png")}
+          style={styles.border}
+          source={require("../assets/border_1.png")}
         />
         <View style={styles.borderContainer}>
           <View style={styles.header}>
@@ -62,7 +62,7 @@ const Verses = ({ navigation, route }) => {
                 name="bookmark-o"
                 color="gray"
                 size={24}
-                style={{ position: "absolute", right: Platform.OS === 'android' ? -280 : -310 }}
+                style={{ position: "absolute", right: Platform.OS === 'android' ? -280 : -310, marginTop: Platform.OS === 'android' ? 2 : 0 }}
               />
             </TouchableOpacity>
           </View>
@@ -71,11 +71,12 @@ const Verses = ({ navigation, route }) => {
               style={{
                 maxWidth: "100%",
                 color: "white",
-                fontSize: 16,
-                fontFamily: "Quicksand_1",
+                fontSize: Platform.OS === 'android' ? 18 : 16,
+                // fontFamily: "Quicksand_1",
                 paddingHorizontal: 20,
                 paddingVertical: 20,
-                marginStart: 10,
+                marginStart: 16,
+                marginEnd: 16,
                 marginTop: 20,
                 color: "#000",
               }}
@@ -92,6 +93,12 @@ const Verses = ({ navigation, route }) => {
 export default Verses;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
     // borderWidth: 2,
@@ -108,12 +115,7 @@ const styles = StyleSheet.create({
     // alignSelf: "flex-start",
     marginTop: 30,
   },
-  image: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    bottom: 0,
-  },
+ 
   mainContainer: {
     flex: 1,
     backgroundColor: "#fff",

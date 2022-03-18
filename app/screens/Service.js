@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import React from "react";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -28,6 +28,10 @@ const Service = ({ navigation }) => {
     };
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.navigate("Language")}>
@@ -61,10 +65,6 @@ const Service = ({ navigation }) => {
           <TouchableOpacity style={styles.changePasswordBtn} onPress={() => navigation.navigate("ForgotPassword")}>
             <Text style={styles.changePasswordText}>CHANGE PASSWORD</Text>
           </TouchableOpacity>
-          <Image
-            style={styles.imageMosque}
-            source={require("../assets/mosque.png")}
-          />
         </View>
       </View>
     );
@@ -74,11 +74,17 @@ const Service = ({ navigation }) => {
 export default Service;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
@@ -100,20 +106,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-  },
-  // image: {
-  //   width: 150,
-  //   height: 250,
-  //   justifyContent: "center",
-  //   alignSelf: "center",
-  //   marginTop: 40,
-  // },
-  imageMosque: {
-    width: "100%",
-    height: 250,
-    position: "absolute",
-    bottom: 0,
-    marginTop: -15,
+    marginTop: 30,
   },
   logoutBtn: {
     width: "80%",
@@ -133,5 +126,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
 });

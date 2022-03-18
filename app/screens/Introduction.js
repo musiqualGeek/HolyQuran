@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Platform } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -14,14 +14,18 @@ const Introduction = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <TouchableOpacity onPress={() => navigation.navigate("Language")}>
             <Text
               style={{
-                color: "white",
+                color: "black",
                 textAlign: "right",
-                marginEnd: 16,
-                marginTop: 16,
+                marginEnd: 30,
+                marginTop: Platform.OS === "android" ? 36 : 45,
                 fontFamily: 'Quicksand_1'
               }}
             >
@@ -36,7 +40,7 @@ const Introduction = ({ navigation }) => {
             style={{
               textAlign: "center",
               fontSize: 20,
-              color: "white",
+              color: "black",
               marginTop: 24,
               fontFamily: 'Quicksand_1'
             }}
@@ -46,9 +50,10 @@ const Introduction = ({ navigation }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 28,
-              color: "white",
-              fontFamily: 'Quicksand_1'
+              fontSize: Platform.OS === "android" ? 24 : 24,
+              color: "black",
+              fontFamily: 'Quicksand_1',
+              marginTop: Platform.OS === "android" ? 0 : 10,
             }}
           >
             Maulana Muhammad Ali
@@ -56,9 +61,9 @@ const Introduction = ({ navigation }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 20,
-              color: "white",
-              marginTop: 5,
+              fontSize: Platform.OS === "android" ? 20 : 20,
+              color: "black",
+              marginTop: Platform.OS === "android" ? 10 : 30,
               fontFamily: 'Quicksand_1'
             }}
           >
@@ -68,8 +73,8 @@ const Introduction = ({ navigation }) => {
             style={{
               textAlign: "center",
               fontSize: 24,
-              color: "white",
-              marginTop: 48,
+              color: "black",
+              marginTop: 30,
               fontFamily: 'Quicksand_1'
             }}
           >
@@ -78,9 +83,9 @@ const Introduction = ({ navigation }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 17,
-              color: "white",
-              marginTop: 18,
+              fontSize: Platform.OS === "android" ? 15 : 16,
+              color: "black",
+              marginTop: Platform.OS === "android" ? 10 : 24,
               fontFamily: 'Quicksand_1'
             }}
           >
@@ -89,11 +94,11 @@ const Introduction = ({ navigation }) => {
           <Text
             style={{
               textAlign: "center",
-              fontSize: 17,
-              color: "white",
+              fontSize: Platform.OS === "android" ? 16 : 16,
+              color: "black",
               position: "absolute",
               bottom: 0,
-              marginBottom: 130,
+              marginBottom: Platform.OS === "android" ? 170 : 200,
               justifyContent: "center",
               alignSelf: "center",
               fontFamily: 'Quicksand_1'
@@ -107,25 +112,25 @@ const Introduction = ({ navigation }) => {
             style={{
               textAlign: "center",
               fontSize: 16,
-              color: "white",
+              color: "black",
               position: "absolute",
               bottom: 0,
-              marginBottom: 70,
+              marginBottom: Platform.OS === "android" ? 100 : 120,
               justifyContent: "center",
               alignSelf: "center",
               fontFamily: 'Quicksand_1'
             }}
           >
-            Also available in eBook, print and audio formats
+            Also available in eBook, print and{"\n"}audio formats
           </Text>
           <Text
             style={{
               textAlign: "center",
               fontSize: 20,
-              color: "white",
+              color: "black",
               position: "absolute",
               bottom: 0,
-              marginBottom: 16,
+              marginBottom: Platform.OS === "android" ? 30 : 50,
               justifyContent: "center",
               alignSelf: "center",
               fontFamily: 'Quicksand_1'
@@ -143,30 +148,38 @@ const Introduction = ({ navigation }) => {
 export default Introduction;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "white",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "black",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   textEnglish: {
     textAlign: "center",
-    marginTop: 40,
-    fontSize: 24,
-    color: "white",
+    marginTop: 30,
+    fontSize: Platform.OS === "android" ? 24 : 24,
+    color: "black",
     fontFamily: 'Quicksand_1'
   },
   textHolyQuran: {
     textAlign: "center",
-    fontSize: 40,
-    color: "white",
-    fontFamily: 'Quicksand_1'
+    fontSize: Platform.OS === "android" ? 36 : 40,
+    color: "black",
+    fontFamily: 'Quicksand_1',
+    marginTop: Platform.OS === "ios" ? 24 : 0,
   },
 });

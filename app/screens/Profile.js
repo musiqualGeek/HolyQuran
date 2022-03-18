@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import React from "react";
 
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
@@ -16,7 +16,12 @@ const Profile = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
+        <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.navigate("Language")}>
             <Ionicons
               name="arrow-back"
@@ -110,10 +115,7 @@ const Profile = ({ navigation }) => {
               {auth.currentUser.email && auth.currentUser.email}
             </Text>
           </View>
-          <Image
-            style={styles.imageMosque}
-            source={require("../assets/mosque.png")}
-          />
+          </View>
         </View>
       </View>
     );
@@ -123,17 +125,23 @@ const Profile = ({ navigation }) => {
 export default Profile;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   emailContainer: {
-    width: "90%",
+    width: "80%",
     backgroundColor: "#DAB53F",
     borderRadius: 25,
     height: 50,
@@ -141,33 +149,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 5,
   },
-  imageMosque: {
-    width: "100%",
-    height: 250,
-    position: "absolute",
-    bottom: 0,
-    marginTop: 25,
-  },
+  
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   nameContainer: {
-    width: "90%",
+    width: "80%",
     backgroundColor: "#DAB53F",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",
     justifyContent: "center",
     marginTop: 5,
-  },
-  profilePic: {
-    width: 120,
-    height: 120,
-    backgroundColor: "#DAB53F",
-    borderRadius: 120 / 2,
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 40,
   },
 });
