@@ -1,8 +1,21 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground} from "react-native";
-import React from "react";
-import { Ionicons, FontAwesome5, Feather } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
+import React, { useState } from "react";
+import {
+  FontAwesome5,
+  FontAwesome,
+  Ionicons,
+  Entypo,
+} from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
+import { Menu, MenuItem, MenuDivider } from "react-native-material-menu";
 
 const Language = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -10,6 +23,11 @@ const Language = ({ navigation }) => {
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
+  const [visible, setVisible] = useState(false);
+
+  const hideMenu = () => setVisible(false);
+
+  const showMenu = () => setVisible(true);
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
   } else {
@@ -21,12 +39,74 @@ const Language = ({ navigation }) => {
         />
         <View style={styles.borderContainer}>
           <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-            <TouchableOpacity onPress={() => navigation.navigate("Bookmark")}>
+            <Menu
+              visible={visible}
+              onRequestClose={hideMenu}
+              anchor={
+                <Entypo
+                  onPress={showMenu}
+                  name="dots-three-vertical"
+                  color="gray"
+                  size={24}
+                  style={{
+                    marginTop: 45,
+                    marginEnd: 30,
+                    alignSelf: "flex-end",
+                  }}
+                />
+              }
+            >
+              <MenuItem onPress={() => navigation.navigate("Profile")}>
+                <FontAwesome
+                  onPress={showMenu}
+                  name="user"
+                  color="#DAB53F"
+                  size={16}
+                />
+                {"   "}
+                <Text>Profile</Text>
+              </MenuItem>
+              <MenuItem onPress={() => navigation.navigate("Bookmark")}>
+                <FontAwesome
+                  onPress={showMenu}
+                  name="bookmark"
+                  color="#DAB53F"
+                  size={16}
+                />
+                {"   "}
+                <Text>Bookmark</Text>
+              </MenuItem>
+              <MenuItem onPress={() => navigation.navigate("Annotations")}>
+                <FontAwesome5
+                  onPress={showMenu}
+                  name="pen"
+                  color="#DAB53F"
+                  size={14}
+                />
+                {"  "}
+                <Text>Annotation</Text>
+              </MenuItem>
+              <MenuDivider />
+              <MenuItem onPress={() => navigation.navigate("Service")}>
+                <Ionicons
+                  onPress={showMenu}
+                  name="settings-sharp"
+                  color="#DAB53F"
+                  size={16}
+                />
+                {"  "}
+                <Text>Service</Text>
+              </MenuItem>
+            </Menu>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Bookmark")}>
               <Feather
                 name="bookmark"
                 color="gray"
                 size={24}
-                style={{ margin: Platform.OS === "android" ? 36 : 36, marginEnd: Platform.OS === "android" ? 16 : 16}}
+                style={{
+                  margin: Platform.OS === "android" ? 36 : 36,
+                  marginEnd: Platform.OS === "android" ? 16 : 16,
+                }}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("Service")}>
@@ -34,7 +114,10 @@ const Language = ({ navigation }) => {
                 name="settings-outline"
                 color="gray"
                 size={24}
-                style={{ marginTop: Platform.OS === "android" ? 36 : 36, marginEnd: Platform.OS === "android" ? 16 : 16}}
+                style={{
+                  marginTop: Platform.OS === "android" ? 36 : 36,
+                  marginEnd: Platform.OS === "android" ? 16 : 16,
+                }}
               />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -42,9 +125,12 @@ const Language = ({ navigation }) => {
                 name="user-circle"
                 color="gray"
                 size={24}
-                style={{ marginTop: Platform.OS === "android" ? 36 : 36, marginEnd: 36}}
+                style={{
+                  marginTop: Platform.OS === "android" ? 36 : 36,
+                  marginEnd: 36,
+                }}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <Image
             style={styles.image}
@@ -55,7 +141,7 @@ const Language = ({ navigation }) => {
               <Text style={styles.headerText}>READ THE HOLY QURAN</Text>
             </View>
             <Text style={styles.selectLanguageText}>SELECT LANGUAGE</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Arabic")}>
               <View style={styles.arabic}>
                 <Text style={styles.textArabic}>Arabic</Text>
               </View>
@@ -85,7 +171,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     marginTop: 16,
-    backgroundColor: "#a5acaf",
+    backgroundColor: "#000000",
     justifyContent: "center",
   },
   border: {
@@ -133,9 +219,9 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#2D5C2E",
     fontSize: 24,
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
     textAlignVertical: "center",
-    textAlign: 'center'
+    textAlign: "center",
   },
   image: {
     width: 200,
@@ -143,7 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 30,
-    borderRadius: 20
+    borderRadius: 20,
   },
   mainContainer: {
     flex: 1,
@@ -163,24 +249,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
     color: "gray",
-    fontFamily: 'Quicksand_2',
+    fontFamily: "Quicksand_2",
   },
   textArabic: {
     textAlign: "center",
-    color: "gray",
+    color: "white",
     fontSize: 20,
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
   },
   textEnglish: {
     textAlign: "center",
     color: "#fff",
     fontSize: 20,
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
   },
   textRead: {
     color: "white",
     textAlign: "center",
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
     fontSize: 16,
   },
 });

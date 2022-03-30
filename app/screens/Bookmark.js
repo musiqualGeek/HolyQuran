@@ -30,26 +30,27 @@ const Bookmark = ({ navigation, route }) => {
         />
         <View style={styles.borderContainer}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
               <Ionicons
                 name="arrow-back"
-                color="gray"
+                color="#DAB53F"
                 size={24}
-                style={{marginStart: 24}}
+                style={{ marginTop: 20, marginStart: 36}}
                 // style={{ position: "absolute", right: 24 }}
                 // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
               />
             </TouchableOpacity>
             <Text
               style={{
+                // justifyContent: "center",
+                // alignItems: "center",
                 justifyContent: "center",
-                alignItems: "center",
+                alignSelf: "center",
                 fontSize: 24,
-                fontFamily: "Quicksand_1",
-                marginTop: -5,
-                color: "#264A27",
-                position: "absolute",
-                right: Platform.OS === 'android' ? 145 : 160
+                fontFamily: 'Quicksand_1',
+                color: "#DAB53F",
+                marginStart: 60,
+                marginTop: 15
               }}
             >
               Bookmark
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     // justifyContent: "space-around",
     // alignSelf: "flex-start",
-    marginTop: 30,
   },
  
   mainContainer: {

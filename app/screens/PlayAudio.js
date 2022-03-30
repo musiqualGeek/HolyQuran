@@ -7,40 +7,13 @@ import {
 } from "react-native";
 import React from "react";
 
-import PlayParts from "../components/PlayChapters";
+import PlayChapters from "../components/PlayChapters";
 
 export default function PlayAudio() {
   return (
     <ScrollView>
       <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <PlayParts />
+        <PlayChapters />
       </TouchableOpacity>
     </ScrollView>
   );

@@ -39,7 +39,7 @@ const Service = ({ navigation }) => {
                 name="arrow-back"
                 color="#DAB53F"
                 size={24}
-                style={{ margin: 20 }}
+                style={{ marginTop: 20, marginStart: 36 }}
               />
             </TouchableOpacity>
             <Text
@@ -49,7 +49,8 @@ const Service = ({ navigation }) => {
                 fontSize: 24,
                 fontFamily: 'Quicksand_1',
                 color: "#DAB53F",
-                marginStart: 75,
+                marginStart: 80,
+                marginTop: 15
               }}
             >
               Service

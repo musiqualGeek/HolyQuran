@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Platform , StatusBar} from "react-native";
+import { StyleSheet, Text, View, Platform , StatusBar } from "react-native";
 // import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
@@ -6,6 +6,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import Home from "./Home";
 import Parts from "./Parts";
 import PlayAudio from "./PlayAudio";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createMaterialTopTabNavigator();
 const STATUS_BAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   appBar: {
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: 'row',
     width: "100%",
     backgroundColor: "#496F51",
     height: Platform.OS === "android" ? 48 : 44,

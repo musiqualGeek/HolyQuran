@@ -27,7 +27,7 @@ const Profile = ({ navigation }) => {
               name="arrow-back"
               color="#DAB53F"
               size={24}
-              style={{ margin: 20 }}
+              style={{ marginTop: 48, marginStart: 36}}
             />
           </TouchableOpacity>
           <Text
@@ -37,7 +37,7 @@ const Profile = ({ navigation }) => {
               fontSize: 24,
               fontFamily: 'Quicksand_1',
               color: "#DAB53F",
-              marginTop: -50,
+              marginTop: -35,
             }}
           >
             Profile
@@ -149,7 +149,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 5,
   },
-  
+  // header: {
+  //   flexDirection: "row",
+  //   // justifyContent: "space-around",
+  //   // alignSelf: "flex-start",
+  // },
   mainContainer: {
     flex: 1,
     backgroundColor: "white",

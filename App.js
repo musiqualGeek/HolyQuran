@@ -7,8 +7,10 @@ import Login from "./app/screens/Login";
 import ForgotPassword from "./app/screens/ForgotPassword";
 import Introduction from "./app/screens/Introduction";
 import Language from "./app/screens/Language";
+import Arabic from "./app/screens/Arabic";
 import Profile from "./app/screens/Profile";
 import Service from "./app/screens/Service";
+import Annotations from "./app/screens/Annotations";
 import Bookmark from "./app/screens/Bookmark";
 import Home from "./app/screens/Home";
 import Verses from "./app/screens/Verses";
@@ -55,6 +57,11 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="Arabic"
+          component={Arabic}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Profile"
           component={Profile}
           options={{ headerShown: false }}
@@ -67,6 +74,11 @@ const App = () => {
         <Stack.Screen
           name="Bookmark"
           component={Bookmark}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Annotations"
+          component={Annotations}
           options={{ headerShown: false }}
         />
         <Stack.Screen

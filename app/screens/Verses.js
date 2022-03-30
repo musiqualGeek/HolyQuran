@@ -5,10 +5,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   ScrollView,
-  Platform
+  Platform,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import { Searchbar } from "react-native-paper";
+import HighlightText from "@sanar/react-native-highlight-text";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { isLoaded } from "expo-font";
@@ -19,9 +21,8 @@ const Verses = ({ navigation, route }) => {
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
-  useEffect(() => {
-    console.log("from vers", route.params.verse);
-  }, []);
+
+  const [search, setSearch] = useState("");
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
   } else {
@@ -38,7 +39,7 @@ const Verses = ({ navigation, route }) => {
                 name="arrow-back"
                 color="gray"
                 size={24}
-                style={{marginStart: 24}}
+                style={{ marginStart: 24 }}
                 // style={{ position: "absolute", right: 24 }}
                 // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
               />
@@ -52,7 +53,7 @@ const Verses = ({ navigation, route }) => {
                 marginTop: -5,
                 color: "#264A27",
                 position: "absolute",
-                right: Platform.OS === 'android' ? 145 : 160
+                right: Platform.OS === "android" ? 145 : 160,
               }}
             >
               Verses
@@ -62,27 +63,70 @@ const Verses = ({ navigation, route }) => {
                 name="bookmark-o"
                 color="gray"
                 size={24}
-                style={{ position: "absolute", right: Platform.OS === 'android' ? -280 : -310, marginTop: Platform.OS === 'android' ? 2 : 0 }}
+                style={{
+                  position: "absolute",
+                  right: Platform.OS === "android" ? -280 : -310,
+                  marginTop: Platform.OS === "android" ? 2 : 0,
+                }}
               />
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ flex: 1, marginBottom: 24 }}>
-            <Text
+          <View style={styles.searchBox}>
+            <Searchbar
+              placeholder="Search"
+              onChangeText={setSearch}
+              value={search}
+            />
+          </View>
+          <Text
               style={{
                 maxWidth: "100%",
                 color: "white",
-                fontSize: Platform.OS === 'android' ? 18 : 16,
-                // fontFamily: "Quicksand_1",
+                fontSize: Platform.OS === "android" ? 18 : 16,
+                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+                fontWeight: "bold",
+                alignSelf: "center",
                 paddingHorizontal: 20,
                 paddingVertical: 20,
-                marginStart: 16,
-                marginEnd: 16,
+                marginStart: 10,
+                marginEnd: 10,
                 marginTop: 20,
-                color: "#000",
+                color: "#ff4c4c",
               }}
             >
-              {route.params.verse.verse}
+              {route.params.verse.chapter}
             </Text>
+          <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 0 }}>
+            <HighlightText
+              style={{
+                marginStart: 16,
+                marginEnd: 16,
+                marginTop: 5,
+                paddingHorizontal: 16,
+                paddingVertical: 16,
+                fontSize: Platform.OS === "android" ? 15 : 16,
+                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+              }}
+              highlightStyle={{ backgroundColor: "yellow" }}
+              searchWords={[search]}
+              textToHighlight={route.params.verse.verse}
+              // highlightComponent={<Text
+              //   style={{
+              //     maxWidth: "100%",
+              //     color: "white",
+              //     fontSize: Platform.OS === "android" ? 15 : 16,
+              //     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+              //     paddingHorizontal: 20,
+              //     paddingVertical: 20,
+              //     marginStart: 10,
+              //     marginEnd: 10,
+              //     marginTop: 5,
+              //     color: "#000",
+              //   }}
+              // >
+              //   {route.params.verse.verse}
+              // </Text>}
+            />
           </ScrollView>
         </View>
       </View>
@@ -115,10 +159,14 @@ const styles = StyleSheet.create({
     // alignSelf: "flex-start",
     marginTop: 30,
   },
- 
   mainContainer: {
     flex: 1,
     backgroundColor: "#fff",
     marginTop: Platform.OS === "android" ? 48 : 44,
+  },
+  searchBox: {
+    width: "80%",
+    alignSelf: "center",
+    marginTop: 36,
   },
 });
