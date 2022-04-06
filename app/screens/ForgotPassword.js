@@ -4,8 +4,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Image,
-  Alert,
+  ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -24,13 +23,17 @@ const ForgotPassword = ({ navigation }) => {
   } else {
     return (
       <View style={styles.mainContainer}>
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+        />
         <View style={styles.borderContainer}>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Ionicons
               name="arrow-back"
               color="#DAB53F"
               size={24}
-              style={{ margin: 20 }}
+              style={{ marginStart: 36, marginTop: 48 }}
             />
           </TouchableOpacity>
           <Text
@@ -38,7 +41,7 @@ const ForgotPassword = ({ navigation }) => {
               textAlign: "center",
               fontSize: 24,
               fontFamily: 'Quicksand_1',
-              marginTop: -50,
+              marginTop: -36,
               color: "#DAB53F",
             }}
           >
@@ -51,7 +54,7 @@ const ForgotPassword = ({ navigation }) => {
                 marginTop: 45,
                 marginStart: 20,
                 marginEnd: 20,
-                color: "#DAB53F",
+                color: "#fff",
                 fontSize: 16,
                 fontFamily: 'Quicksand_2',
                 textAlign: "center",
@@ -92,15 +95,11 @@ const ForgotPassword = ({ navigation }) => {
                     fontFamily: 'Quicksand_1'
                   }}
                 >
-                  {"Submit"}
+                  {"Reset"}
                 </Text>
               </View>
             </TouchableOpacity>
           </View>
-          <Image
-            style={styles.imageMosque}
-            source={require("../assets/mosque.png")}
-          />
         </View>
       </View>
     );
@@ -110,18 +109,24 @@ const ForgotPassword = ({ navigation }) => {
 export default ForgotPassword;
 
 const styles = StyleSheet.create({
+  border: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
   borderContainer: {
     flex: 1,
-    borderWidth: 2,
-    borderColor: "#DAB53F",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // borderWidth: 2,
+    // borderColor: "#DAB53F",
+    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   card: {
     borderRadius: 15,
-    backgroundColor: "#264A27",
+    backgroundColor: "#496F51",
     overflow: "hidden",
     width: 300,
     height: 300,
@@ -140,6 +145,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#2D5C2E",
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "android" ? 48 : 44,
   },
 });

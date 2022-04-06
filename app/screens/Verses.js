@@ -15,14 +15,37 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { isLoaded } from "expo-font";
 
+// const superTable = ['\u1d43']
+
 const Verses = ({ navigation, route }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
-
+  // const [chapter, setChapter] = useState(null)
+  // const [verse, setVerse] = useState(null)
+  // useEffect(() => {
+  //   console.log('\\')
+  //   if(route?.params?.verse?.chapter) setChapter(route.params.verse.chapter)
+  //   if(route?.params?.verse?.verse) setVerse(route.params.verse.verse)
+  // }, [])
+  // const highlightText = string => (
+  //     <Text style={styles.highlightText}>{string}</Text>
+  // );
+  // const replaceSuperLetter = () => {
+  //   for (let i = 0; i < superTable?.length ; i++) {
+  //     let res = verse.replace(/\u1d43/gi, "\"{highlightText('\u1d43')}\"");  
+  //     console.log('response => ', res)
+  //   }
+  // }
+  // useEffect(() => {
+  //   if(verse)
+  //   replaceSuperLetter()
+  // }, [chapter, verse])
   const [search, setSearch] = useState("");
+  
+
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
   } else {
@@ -96,17 +119,50 @@ const Verses = ({ navigation, route }) => {
             >
               {route.params.verse.chapter}
             </Text>
-          <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 0 }}>
+          <Text
+              style={{
+                maxWidth: "100%",
+                color: "white",
+                fontSize: 12,
+                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+                fontWeight: "bold",
+                alignSelf: "center",
+                marginStart: 10,
+                marginEnd: 10,
+                color: "green",
+              }}
+            >
+              {route.params.verse.info}
+            </Text>
+          <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 20 }}>
+          <Text
+              style={{
+                maxWidth: "100%",
+                color: "white",
+                textAlign: 'justify',
+                fontSize: Platform.OS === "android" ? 15 : 16,
+                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+                alignSelf: "center",
+                paddingHorizontal: 20,
+                marginStart: 10,
+                marginEnd: 10,
+                marginTop: 10,
+                color: "black",
+              }}
+            >
+              {route.params.verse.intro}
+            </Text>
             <HighlightText
               style={{
+                textAlign: 'justify',
                 marginStart: 16,
                 marginEnd: 16,
-                marginTop: 5,
+                marginTop: 0,
                 paddingHorizontal: 16,
-                paddingVertical: 16,
                 fontSize: Platform.OS === "android" ? 15 : 16,
                 fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
               }}
+              selectable={true}
               highlightStyle={{ backgroundColor: "yellow" }}
               searchWords={[search]}
               textToHighlight={route.params.verse.verse}
@@ -124,7 +180,7 @@ const Verses = ({ navigation, route }) => {
               //     color: "#000",
               //   }}
               // >
-              //   {route.params.verse.verse}
+              //   {verse}
               // </Text>}
             />
           </ScrollView>
@@ -168,5 +224,8 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     marginTop: 36,
+  },
+  highlightText:{
+    color: 'red',
   },
 });

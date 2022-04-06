@@ -89,7 +89,7 @@ const Profile = ({ navigation }) => {
                 fontSize: 16,
               }}
             >
-              {auth.currentUser.displayName}
+              {auth.currentUser.displayName && auth.currentUser.displayName}
             </Text>
           </View>
           <Text

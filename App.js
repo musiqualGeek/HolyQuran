@@ -12,7 +12,7 @@ import Profile from "./app/screens/Profile";
 import Service from "./app/screens/Service";
 import Annotations from "./app/screens/Annotations";
 import Bookmark from "./app/screens/Bookmark";
-import Home from "./app/screens/Home";
+import Home from "./app/screens/HomeChapters";
 import Verses from "./app/screens/Verses";
 import TestScreen from "./app/screens/TestScreen";
 

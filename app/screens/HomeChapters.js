@@ -134,7 +134,7 @@ const data = [
 
 const dataTable = quoran;
 
-const Home = ({ navigation }) => {
+const HomeChapters = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
@@ -254,7 +254,7 @@ const Home = ({ navigation }) => {
   }
 };
 
-export default Home;
+export default HomeChapters;
 
 const styles = StyleSheet.create({
   mainContainer: {

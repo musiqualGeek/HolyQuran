@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  Dimensions,
 } from "react-native";
 import React, { useEffect } from "react";
 
+import PdfReader from "rn-pdf-reader-js";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { isLoaded } from "expo-font";
@@ -52,6 +54,15 @@ const Bookmark = ({ navigation, route }) => {
           <View style={styles.block_1}>
             <View style={styles.part}>
               <TouchableOpacity>
+                <PdfReader
+                  style={{
+                    width: Dimensions.get("window").width,
+                    height: Dimensions.get("window").height,
+                  }}
+                  source={{
+                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca",
+                  }}
+                />
                 <Text
                   style={{
                     textAlign: "center",
@@ -67,6 +78,15 @@ const Bookmark = ({ navigation, route }) => {
             </View>
             <View style={styles.part}>
               <TouchableOpacity>
+                <PdfReader
+                  style={{
+                    width: Dimensions.get("window").width,
+                    height: Dimensions.get("window").height,
+                  }}
+                  source={{
+                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c",
+                  }}
+                />
                 <Text
                   style={{
                     textAlign: "center",
@@ -84,6 +104,15 @@ const Bookmark = ({ navigation, route }) => {
           <View style={styles.block_2}>
             <View style={styles.part}>
               <TouchableOpacity>
+                <PdfReader
+                  style={{
+                    width: Dimensions.get("window").width,
+                    height: Dimensions.get("window").height,
+                  }}
+                  source={{
+                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde",
+                  }}
+                />
                 <Text
                   style={{
                     textAlign: "center",
@@ -99,6 +128,15 @@ const Bookmark = ({ navigation, route }) => {
             </View>
             <View style={styles.part}>
               <TouchableOpacity>
+                <PdfReader
+                  style={{
+                    width: Dimensions.get("window").width,
+                    height: Dimensions.get("window").height,
+                  }}
+                  source={{
+                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809",
+                  }}
+                />
                 <Text
                   style={{
                     textAlign: "center",
@@ -115,6 +153,15 @@ const Bookmark = ({ navigation, route }) => {
           </View>
           <View style={styles.part}>
             <TouchableOpacity>
+              <PdfReader
+                style={{
+                  width: Dimensions.get("window").width,
+                  height: Dimensions.get("window").height,
+                }}
+                source={{
+                  uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9",
+                }}
+              />
               <Text
                 style={{
                   textAlign: "center",
@@ -180,6 +227,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 48,
     borderRadius: 20,
-    elevation: 5
+    elevation: 5,
   },
 });

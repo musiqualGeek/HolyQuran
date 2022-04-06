@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Platform , StatusBar } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Home from "./Home";
+import HomeChapters from "./HomeChapters";
 import Parts from "./Parts";
 import PlayAudio from "./PlayAudio";
 import { Ionicons } from "@expo/vector-icons";
@@ -35,7 +35,7 @@ const TabSection = () => {
       <Tab.Navigator
         tabBarOptions={tabBarOptions}
       >
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="HomeChapters" component={HomeChapters} />
         <Tab.Screen name="Parts" component={Parts} />
         <Tab.Screen name="Audio" component={PlayAudio} />
       </Tab.Navigator>
