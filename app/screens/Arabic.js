@@ -52,9 +52,16 @@ const Bookmark = ({ navigation, route }) => {
             Arabic Translation{"\n"}Of Quran
           </Text>
           <View style={styles.block_1}>
+          {/* <TouchableOpacity
+              style={{width:50,height:40,backgroundColor:'red'}}
+                onPress={()=> {console.log('hi there')}}
+              >
+                <Text>Oussama</Text>
+              </TouchableOpacity> */}
             <View style={styles.part}>
-              <TouchableOpacity>
-                <PdfReader
+             
+              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca"} )}>
+                {/* <PdfReader
                   style={{
                     width: Dimensions.get("window").width,
                     height: Dimensions.get("window").height,
@@ -62,7 +69,7 @@ const Bookmark = ({ navigation, route }) => {
                   source={{
                     uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca",
                   }}
-                />
+                /> */}
                 <Text
                   style={{
                     textAlign: "center",
@@ -77,8 +84,8 @@ const Bookmark = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>
             <View style={styles.part}>
-              <TouchableOpacity>
-                <PdfReader
+              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c"} )}>
+                {/* <PdfReader
                   style={{
                     width: Dimensions.get("window").width,
                     height: Dimensions.get("window").height,
@@ -86,7 +93,7 @@ const Bookmark = ({ navigation, route }) => {
                   source={{
                     uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c",
                   }}
-                />
+                /> */}
                 <Text
                   style={{
                     textAlign: "center",
@@ -103,8 +110,8 @@ const Bookmark = ({ navigation, route }) => {
           </View>
           <View style={styles.block_2}>
             <View style={styles.part}>
-              <TouchableOpacity>
-                <PdfReader
+              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde"} )}>
+                {/* <PdfReader
                   style={{
                     width: Dimensions.get("window").width,
                     height: Dimensions.get("window").height,
@@ -112,7 +119,7 @@ const Bookmark = ({ navigation, route }) => {
                   source={{
                     uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde",
                   }}
-                />
+                /> */}
                 <Text
                   style={{
                     textAlign: "center",
@@ -127,8 +134,8 @@ const Bookmark = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>
             <View style={styles.part}>
-              <TouchableOpacity>
-                <PdfReader
+              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809"} )}>
+                {/* <PdfReader
                   style={{
                     width: Dimensions.get("window").width,
                     height: Dimensions.get("window").height,
@@ -136,7 +143,7 @@ const Bookmark = ({ navigation, route }) => {
                   source={{
                     uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809",
                   }}
-                />
+                /> */}
                 <Text
                   style={{
                     textAlign: "center",
@@ -152,8 +159,8 @@ const Bookmark = ({ navigation, route }) => {
             </View>
           </View>
           <View style={styles.part}>
-            <TouchableOpacity>
-              <PdfReader
+            <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9"} )}>
+              {/* <PdfReader
                 style={{
                   width: Dimensions.get("window").width,
                   height: Dimensions.get("window").height,
@@ -161,7 +168,7 @@ const Bookmark = ({ navigation, route }) => {
                 source={{
                   uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9",
                 }}
-              />
+              /> */}
               <Text
                 style={{
                   textAlign: "center",

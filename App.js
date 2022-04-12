@@ -19,6 +19,7 @@ import TestScreen from "./app/screens/TestScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabSection from './app/screens/TabSection';
+import ArabicPDF from './app/screens/ArabicPDF';
 
 const Stack = createStackNavigator();
 
@@ -99,6 +100,11 @@ const App = () => {
         <Stack.Screen
           name="Verses"
           component={Verses}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArabicPDF"
+          component={ArabicPDF}
           options={{ headerShown: false }}
         />
         <Stack.Screen

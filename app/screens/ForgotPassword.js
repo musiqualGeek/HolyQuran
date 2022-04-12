@@ -28,26 +28,33 @@ const ForgotPassword = ({ navigation }) => {
           source={require("../assets/border_1.png")}
         />
         <View style={styles.borderContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Ionicons
-              name="arrow-back"
-              color="#DAB53F"
-              size={24}
-              style={{ marginStart: 36, marginTop: 48 }}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              fontFamily: 'Quicksand_1',
-              marginTop: -36,
-              color: "#DAB53F",
-            }}
-          >
-            Forgot Password
-          </Text>
-
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Ionicons
+                name="arrow-back"
+                color="#DAB53F"
+                size={24}
+                style={{ marginTop: 20, marginStart: 36}}
+                // style={{ position: "absolute", right: 24 }}
+                // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                // justifyContent: "center",
+                // alignItems: "center",
+                justifyContent: "center",
+                alignSelf: "center",
+                fontSize: 24,
+                fontFamily: 'Quicksand_1',
+                color: "#DAB53F",
+                marginStart: 36,
+                marginTop: 14
+              }}
+            >
+              Forgot Password
+            </Text>
+          </View>
           <View style={styles.card}>
             <Text
               style={{
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
+    marginTop: 24
   },
   card: {
     borderRadius: 15,
@@ -135,6 +143,11 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowRadius: 2,
     elevation: 3,
+  },
+  header: {
+    flexDirection: "row",
+    // justifyContent: "space-around",
+    // alignSelf: "flex-start",
   },
   imageMosque: {
     width: "100%",

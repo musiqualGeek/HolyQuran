@@ -95,7 +95,7 @@ const Login = ({ navigation }) => {
                   <AntDesign name="google" color="#DB4437" size={24} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.facebookIcon}>
+              {/* <View style={styles.facebookIcon}>
                 <TouchableOpacity>
                   <FontAwesome name="facebook" color="#4267B2" size={24} />
                 </TouchableOpacity>
@@ -104,7 +104,7 @@ const Login = ({ navigation }) => {
                 <TouchableOpacity>
                   <FontAwesome name="apple" color="#ececec" size={24} />
                 </TouchableOpacity>
-              </View>
+              </View> */}
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={styles.noAccount}>
