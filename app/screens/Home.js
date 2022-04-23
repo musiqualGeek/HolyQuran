@@ -6,7 +6,6 @@ import {
   FlatList,
   Platform,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
@@ -134,7 +133,7 @@ const data = [
 
 const dataTable = quoran;
 
-const HomeChapters = ({ navigation }) => {
+const Home = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
@@ -210,6 +209,7 @@ const HomeChapters = ({ navigation }) => {
               placeholder="Search"
               onChangeText={setSearch}
               value={search}
+              borderColor="#36bf49"
             />
             {searchArray.length > 0 ? (
               <FlatList
@@ -254,7 +254,7 @@ const HomeChapters = ({ navigation }) => {
   }
 };
 
-export default HomeChapters;
+export default Home;
 
 const styles = StyleSheet.create({
   mainContainer: {

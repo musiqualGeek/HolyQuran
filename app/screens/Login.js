@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,25 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-  Platform
+  Platform,
 } from "react-native";
 
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { StatusBar } from "expo-status-bar";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/utils";
+import { AntDesign, Entypo } from "@expo/vector-icons";
+
+import {
+  signInUser,
+  resetAllAuthForms,
+  ResetErrorsState,
+} from "../redux/User/user.actions";
+
+import { useDispatch, useSelector } from "react-redux";
+
+const mapState = ({ user }) => ({
+  propertySignInSuccess: user.propertySignInSuccess,
+  errors: user.errors,
+});
 
 const Login = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -22,20 +33,61 @@ const Login = ({ navigation }) => {
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
-  const [email, setEmail] = useState("alex@gmail.com");
-  const [password, setPassword] = useState("hellodude");
+  console.log("Loign Screen");
+  const { propertySignInSuccess, errors } = useSelector(mapState);
+  const dispatch = useDispatch();
+  dispatch(ResetErrorsState);
+  const [email, onChangeEmail] = useState("passenger@gmail.com");
+  const [password, onChangepassword] = useState("hellodude");
+  const [isSecure, setIsSecure] = useState(true);
+  const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
+  const [emailErrors, setEmailErrors] = useState("");
+  const [passwordErrors, setPasswordErrors] = useState("");
+  const [currentErrors, setCurrentErrors] = useState(errors);
+
+  useEffect(() => {
+    ResetForm();
+  }, []);
+
+  const ResetForm = () => {
+    // onChangeEmail("");
+    // onChangepassword("");
+    setCurrentErrors("");
+  };
+
+  const handlePasswordSecure = () => {
+    setIsSecure(!isSecure);
+    if (isSecure) {
+      setIconPasswordName("eye-with-line");
+    } else {
+      setIconPasswordName("eye");
+    }
+  };
+
+  useEffect(() => {
+    if (propertySignInSuccess) {
+      ResetForm();
+      dispatch(resetAllAuthForms());
+    }
+  }, [propertySignInSuccess]);
+
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-        .then(async () => {
-          console.log("User logged in !!");
-          navigation.navigate("Introduction");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      console.log("from catch in login redux actions");
+    var checking_form = "true";
+    if (email.length === 0 || email.indexOf("@") === -1) {
+      setEmailErrors("* Email Field Required");
+      checking_form = "false";
+    } else {
+      setEmailErrors("");
+    }
+    if (password.length < 6) {
+      setPasswordErrors("* Password Field Required, 6 caracter min");
+      checking_form = "false";
+    } else {
+      setPasswordErrors("");
+    }
+
+    if (checking_form === "true") {
+      dispatch(signInUser({ email, password }));
     }
   };
 
@@ -62,31 +114,46 @@ const Login = ({ navigation }) => {
                 placeholder="Email"
                 value={email}
                 placeholderTextColor="grey"
-                onChangeText={setEmail}
-              >
-                {/* <MaterialIcons name="email" color="gray" size={24} /> */}
-              </TextInput>
+                onChangeText={onChangeEmail}
+              />
             </View>
+            <Text style={styles.fieldErrors}>{emailErrors}</Text>
             <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                placeholder="Password"
-                value={password}
-                placeholderTextColor="grey"
-                onChangeText={setPassword}
-                secureTextEntry={true}
-              >
-                {/* <MaterialIcons name="vpn-key" color="gray" size={24} /> */}
-              </TextInput>
+            <TextInput
+                    style={styles.inputText}
+                    onChangeText={onChangepassword}
+                    value={password}
+                    secureTextEntry={isSecure}
+                    placeholder="Password"
+                    placeholderTextColor={"grey"}
+                  />
+                  <Entypo
+                    style={styles.eyeIcon}
+                    name={iconPasswordName}
+                    size={25}
+                    color="black"
+                    onPress={handlePasswordSecure}
+                  />
+              
             </View>
+            <Text style={styles.fieldErrors}>{passwordErrors}</Text>
+            {email && password ? (
+                <TouchableOpacity style={styles.pinkBtn} onPress={handleLogin}>
+                  <Text style={styles.textBtn}>Sign In</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity style={styles.disabledBtn}>
+                  <Text style={styles.textBtn}>Sign In</Text>
+                </TouchableOpacity>
+              )}
             <TouchableOpacity
               onPress={() => navigation.navigate("ForgotPassword")}
             >
               <Text style={styles.forgot}>Forgot Password?</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+            {/* <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
               <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text style={styles.textOR}>OR</Text>
             <Text style={styles.textLoginWith}>Login with</Text>
             <View style={styles.socialIcons}>
@@ -245,5 +312,25 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#DAB53F",
     fontFamily: "Quicksand_1",
+  },
+  textBtn: {
+    color: "white",
+    fontSize: 24,
+    textAlign: "center",
+    paddingVertical: 8,
+  },
+  pinkBtn: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "#DAB53F",
+    marginVertical: 10,
+    borderRadius: 10,
+  },
+  disabledBtn: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "grey",
+    marginVertical: 10,
+    borderRadius: 10,
   },
 });

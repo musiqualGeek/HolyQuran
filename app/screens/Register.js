@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,23 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from "react-native";
-
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
+import {
+  signUpUser,
+  resetAllAuthForms,
+  ResetErrorsState,
+} from "../redux/User/user.actions";
+import { useSelector, useDispatch } from "react-redux";
+import { Entypo } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/utils";
+const mapState = ({ user }) => ({
+  propertySignUpSuccess: user.propertySignUpSuccess,
+  errors: user.errors,
+});
 
 const Register = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -21,85 +31,195 @@ const Register = ({ navigation }) => {
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
-  const [email, setEmail] = useState("alex@gmail.com");
-  const [password, setPassword] = useState("hellodude");
-  const handleSubmit = async () => {
-    try {
-      console.log("Here Line 22");
-      await createUserWithEmailAndPassword(auth, email, password).then(
-        (userCredentials) => {
-          console.log("UserCredential => ", userCredentials);
-          navigation.navigate("Introduction");
-        }
-      );
-    } catch (error) {
-      console.error("error line 27 ", error);
+
+  // Start
+  console.log("Register Screen");
+  const { propertySignUpSuccess, errors } = useSelector(mapState);
+  const dispatch = useDispatch();
+  dispatch(ResetErrorsState);
+
+  const [firstName, onChangefirstName] = useState("rami");
+  const [email, onChangeEmail] = useState("rami@gmail.com");
+  const [password, onChangepassword] = useState("hellodude");
+  const [isSelected, setSelected] = useState(false);
+  const [isSecure, setIsSecure] = useState(true);
+  const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
+  const [error, setError] = useState([]);
+  // Hnadle Errors
+  const [firstNameErrors, setFirstNameErrors] = useState("");
+  const [emailErrors, setEmailErrors] = useState("");
+  const [passwordErrors, setPasswordErrors] = useState("");
+  const [termsErrors, setTermsErrors] = useState("");
+  const [currentErrors, setCurrentErrors] = useState(errors);
+
+  // useEffect(() => {
+  //   ResetForm();
+  // }, []);
+
+  const ResetForm = () => {
+    onChangefirstName("");
+    onChangeEmail("");
+    onChangepassword("");
+    setIsSecure(true);
+    setIconPasswordName("eye");
+    setSelected(false);
+    setError([]);
+    setCurrentErrors("");
+  };
+
+  const handlePasswordSecure = () => {
+    setIsSecure(!isSecure);
+    if (isSecure) {
+      setIconPasswordName("eye-with-line");
+    } else {
+      setIconPasswordName("eye");
     }
   };
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
+
+  useEffect(() => {
+    if (propertySignUpSuccess) {
+      ResetForm();
+      dispatch(resetAllAuthForms());
+      navigation.navigate("Login");
+    }
+  }, [propertySignUpSuccess]);
+
+  const handleRegister = async () => {
+    console.log("Here");
+    var checking_form = "true";
+    if (firstName.length === 0) {
+      setFirstNameErrors("* First Name Field Required");
+      checking_form = "false";
+    } else {
+      setFirstNameErrors("");
+    }
+    if (email.length === 0 || email.indexOf("@") === -1) {
+      setEmailErrors("* Email Field Required");
+      checking_form = "false";
+    } else {
+      setEmailErrors("");
+    }
+    if (password.length < 6) {
+      setPasswordErrors("* Password Field Required, 6 caracter min");
+      checking_form = "false";
+    } else {
+      setPasswordErrors("");
+    }
+    if (checking_form === "true") {
+      console.log("done");
+      dispatch(signUpUser({ fullname: firstName, email, password }));
+    }
+  };
+  // End
+  // if (!fontsLoaded) {
+  //   return <Text>Alex waiting</Text>;
+  // } else {
     return (
-      <View style={styles.mainContainer}>
+      <>
         <ImageBackground
           style={styles.border}
           source={require("../assets/border_1.png")}
         />
-        <View style={styles.borderContainer}>
-          <Image
-            style={styles.image}
-            source={require("../assets/appIcon_Iphone.jpg")}
-          />
-          <View style={styles.card}>
-            <Text style={styles.textWelcome}>WELCOME TO</Text>
-            <Text style={styles.textQuran}>The Holy Quran</Text>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                value={email}
-                placeholder="Email"
-                placeholderTextColor="#003f5c"
-                onChangeText={setEmail}
-              >
+        <View style={styles.mainContainer}>
+          <ScrollView style={styles.borderContainer}>
+            <Image
+              style={styles.image}
+              source={require("../assets/appIcon_Iphone.jpg")}
+            />
+            <View style={styles.card}>
+              <Text style={styles.textWelcome}>WELCOME TO</Text>
+              <Text style={styles.textQuran}>The Holy Quran</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.inputText}
+                  onChangeText={onChangefirstName}
+                  value={firstName}
+                  placeholder="Fullname"
+                  placeholderTextColor="#003f5c"
+                />
                 {/* <MaterialIcons name="email" color="gray" size={24} /> */}
-              </TextInput>
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                value={password}
-                placeholder="Password"
-                placeholderTextColor="#003f5c"
-                onChangeText={setPassword}
-                secureTextEntry={true}
-              >
+              </View>
+              <Text style={styles.fieldErrors}>{firstNameErrors}</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.inputText}
+                  value={email}
+                  placeholder="Email"
+                  placeholderTextColor="#003f5c"
+                  onChangeText={onChangeEmail}
+                />
+                {/* <MaterialIcons name="email" color="gray" size={24} /> */}
+              </View>
+              <Text style={styles.fieldErrors}>{emailErrors}</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onChangepassword}
+                  value={password}
+                  secureTextEntry={isSecure}
+                  placeholder="Password"
+                  placeholderTextColor={"grey"}
+                />
+                <Entypo
+                  style={styles.eyeIcon}
+                  name={iconPasswordName}
+                  size={25}
+                  color="black"
+                  onPress={handlePasswordSecure}
+                />
                 {/* <MaterialIcons name="vpn-key" color="gray" size={24} /> */}
-              </TextInput>
-            </View>
-            <TouchableOpacity style={styles.registerBtn} onPress={handleSubmit}>
-              <Text style={styles.registerText}>Register</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Text style={styles.haveAccount}>
-                Already have an account? Login
+              </View>
+              <Text style={styles.fieldErrors}>{passwordErrors}</Text>
+              <View>
+                {firstName && email && password ? (
+                  <TouchableOpacity
+                    style={styles.registerBtn}
+                    onPress={handleRegister}
+                  >
+                    <Text style={styles.registerText}>Register</Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity style={styles.registerBtn}>
+                    <Text style={styles.registerText}>Register</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+              <Text style={[styles.fieldErrors, { marginTop: 10 }]}>
+                {currentErrors}
               </Text>
-            </TouchableOpacity>
+              {/* < style={styles.registerBtn} onPress={handleSubmit}>
+              <Text style={styles.registerText}>Register</Text>
+            </TouchableOpacity> */}
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.haveAccount}>
+                  Already have an account? Login
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
           </View>
-        </View>
-        <StatusBar style="auto" />
-      </View>
+          <StatusBar style="auto" />
+      </>
     );
   }
-};
 
 export default Register;
 
 const styles = StyleSheet.create({
   border: {
-    width: "100%",
-    height: "100%",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
     position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
     bottom: 0,
+    opacity: 1,
+    zIndex: -1,
+    resizeMode: "cover",
+    marginTop: Platform.OS === "android" ? 48 : 44,
+    // position: "absolute",
+    // bottom: 0,
   },
   borderContainer: {
     flex: 1,
@@ -115,9 +235,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#496F51",
     overflow: "hidden",
     width: 280,
-    height: 420,
+    // height: 420,
     alignSelf: "center",
-    marginTop: 50,
+    marginVertical: 50,
     shadowRadius: 10,
     shadowRadius: 2,
     elevation: 3,
@@ -127,15 +247,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 30,
     textAlign: "center",
-    fontFamily: 'Quicksand_2'
+    fontFamily: "Quicksand_2",
+    marginBottom: 20,
   },
   image: {
-    width: 185,
-    height: 185,
+    width: 160,
+    height: 160,
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 45,
-    borderRadius: 20
+    borderRadius: 20,
   },
   inputText: {
     height: 50,
@@ -163,11 +284,11 @@ const styles = StyleSheet.create({
   registerText: {
     color: "#fff",
     textAlign: "center",
-    fontFamily: 'Quicksand_1'
+    fontFamily: "Quicksand_1",
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     marginTop: Platform.OS === "android" ? 48 : 44,
   },
   textLoginWith: {
@@ -180,13 +301,32 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#ececec",
     marginTop: 30,
-    fontFamily: 'Quicksand_1'
+    fontFamily: "Quicksand_1",
   },
   textQuran: {
     textAlign: "center",
     fontSize: 32,
     color: "#DAB53F",
     marginTop: 5,
-    fontFamily: 'Quicksand_1'
+    fontFamily: "Quicksand_1",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 20,
+    top: 22,
+    fontSize: 22,
+  },
+  disabledBtn: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "grey",
+    marginTop: 50,
+    borderRadius: 10,
+  },
+  fieldErrors: {
+    // backgroundColor: "white",
+    color: "red",
+    fontSize: 14,
+    textAlign: "center",
   },
 });

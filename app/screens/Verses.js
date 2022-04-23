@@ -35,7 +35,7 @@ const Verses = ({ navigation, route }) => {
   // );
   // const replaceSuperLetter = () => {
   //   for (let i = 0; i < superTable?.length ; i++) {
-  //     let res = verse.replace(/\u1d43/gi, "\"{highlightText('\u1d43')}\"");  
+  //     let res = verse.replace(/\u1d43/gi, "\"{highlightText('\u1d43')}\"");
   //     console.log('response => ', res)
   //   }
   // }
@@ -44,7 +44,6 @@ const Verses = ({ navigation, route }) => {
   //   replaceSuperLetter()
   // }, [chapter, verse])
   const [search, setSearch] = useState("");
-  
 
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
@@ -102,44 +101,44 @@ const Verses = ({ navigation, route }) => {
             />
           </View>
           <Text
-              style={{
-                maxWidth: "100%",
-                color: "white",
-                fontSize: Platform.OS === "android" ? 18 : 16,
-                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                fontWeight: "bold",
-                alignSelf: "center",
-                paddingHorizontal: 20,
-                paddingVertical: 20,
-                marginStart: 10,
-                marginEnd: 10,
-                marginTop: 20,
-                color: "#ff4c4c",
-              }}
-            >
-              {route.params.verse.chapter}
-            </Text>
+            style={{
+              maxWidth: "100%",
+              color: "white",
+              fontSize: Platform.OS === "android" ? 18 : 16,
+              fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+              fontWeight: "bold",
+              alignSelf: "center",
+              paddingHorizontal: 20,
+              paddingVertical: 20,
+              marginStart: 10,
+              marginEnd: 10,
+              marginTop: 20,
+              color: "#ff4c4c",
+            }}
+          >
+            {route.params.verse.chapter}
+          </Text>
           <Text
-              style={{
-                maxWidth: "100%",
-                color: "white",
-                fontSize: 12,
-                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                fontWeight: "bold",
-                alignSelf: "center",
-                marginStart: 10,
-                marginEnd: 10,
-                color: "green",
-              }}
-            >
-              {route.params.verse.info}
-            </Text>
+            style={{
+              maxWidth: "100%",
+              color: "white",
+              fontSize: 12,
+              fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+              fontWeight: "bold",
+              alignSelf: "center",
+              marginStart: 10,
+              marginEnd: 10,
+              color: "green",
+            }}
+          >
+            {route.params.verse.info}
+          </Text>
           <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 20 }}>
-          <Text
+            <Text
               style={{
                 maxWidth: "100%",
                 color: "white",
-                textAlign: 'justify',
+                textAlign: "justify",
                 fontSize: Platform.OS === "android" ? 15 : 16,
                 fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
                 alignSelf: "center",
@@ -154,7 +153,7 @@ const Verses = ({ navigation, route }) => {
             </Text>
             <HighlightText
               style={{
-                textAlign: 'justify',
+                textAlign: "justify",
                 marginStart: 16,
                 marginEnd: 16,
                 marginTop: 0,
@@ -186,6 +185,7 @@ const Verses = ({ navigation, route }) => {
           </ScrollView>
         </View>
       </View>
+      
     );
   }
 };
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 36,
   },
-  highlightText:{
-    color: 'red',
+  highlightText: {
+    color: "red",
   },
 });
