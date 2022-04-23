@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Platform,
+  ScrollView,
 } from "react-native";
 
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -37,21 +38,21 @@ const Login = ({ navigation }) => {
   const { propertySignInSuccess, errors } = useSelector(mapState);
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
-  const [email, onChangeEmail] = useState("passenger@gmail.com");
+  const [email, onChangeEmail] = useState("rami@gmail.com");
   const [password, onChangepassword] = useState("hellodude");
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
-  const [currentErrors, setCurrentErrors] = useState(errors);
+  const [currentErrors, setCurrentErrors] = useState("");
 
-  useEffect(() => {
-    ResetForm();
-  }, []);
+  // useEffect(() => {
+  //   ResetForm();
+  // }, []);
 
   const ResetForm = () => {
-    // onChangeEmail("");
-    // onChangepassword("");
+    onChangeEmail("");
+    onChangepassword("");
     setCurrentErrors("");
   };
 
@@ -91,78 +92,96 @@ const Login = ({ navigation }) => {
     }
   };
 
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
+  useEffect(() => {
+    console.log(propertySignInSuccess, errors);
+    setCurrentErrors(errors);
+  }, [errors]);
+
+  // if (!fontsLoaded) {
+  //   return <Text>Alex waiting</Text>;
+  // } else {
+  return (
+    <ScrollView style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.borderContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/appIcon_Iphone.jpg")}
         />
-        <View style={styles.borderContainer}>
-          <Image
-            style={styles.image}
-            source={require("../assets/appIcon_Iphone.jpg")}
-          />
-          <View style={styles.card}>
-            <Text style={styles.textWelcome}>WELCOME TO</Text>
-            <Text style={styles.textQuran}>The Holy Quran</Text>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                placeholder="Email"
-                value={email}
-                placeholderTextColor="grey"
-                onChangeText={onChangeEmail}
-              />
-            </View>
-            <Text style={styles.fieldErrors}>{emailErrors}</Text>
-            <View style={styles.inputView}>
+        <View style={styles.card}>
+          <Text style={styles.textWelcome}>WELCOME TO</Text>
+          <Text style={styles.textQuran}>The Holy Quran</Text>
+          <View style={styles.inputView}>
             <TextInput
-                    style={styles.inputText}
-                    onChangeText={onChangepassword}
-                    value={password}
-                    secureTextEntry={isSecure}
-                    placeholder="Password"
-                    placeholderTextColor={"grey"}
-                  />
-                  <Entypo
-                    style={styles.eyeIcon}
-                    name={iconPasswordName}
-                    size={25}
-                    color="black"
-                    onPress={handlePasswordSecure}
-                  />
-              
-            </View>
-            <Text style={styles.fieldErrors}>{passwordErrors}</Text>
-            {email && password ? (
-                <TouchableOpacity style={styles.pinkBtn} onPress={handleLogin}>
-                  <Text style={styles.textBtn}>Sign In</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity style={styles.disabledBtn}>
-                  <Text style={styles.textBtn}>Sign In</Text>
-                </TouchableOpacity>
-              )}
-            <TouchableOpacity
-              onPress={() => navigation.navigate("ForgotPassword")}
-            >
-              <Text style={styles.forgot}>Forgot Password?</Text>
+              style={styles.inputText}
+              placeholder="Email"
+              value={email}
+              placeholderTextColor="grey"
+              onChangeText={onChangeEmail}
+            />
+          </View>
+          <Text style={styles.fieldErrors}>{emailErrors}</Text>
+          <View
+            style={[
+              styles.inputView,
+              {
+                position: "relative",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingHorizontal: 20,
+              },
+            ]}
+          >
+            <TextInput
+              style={styles.inputText}
+              onChangeText={onChangepassword}
+              value={password}
+              secureTextEntry={isSecure}
+              placeholder="Password"
+              placeholderTextColor={"grey"}
+            />
+            <Entypo
+              style={styles.eyeIcon}
+              name={iconPasswordName}
+              size={25}
+              color="black"
+              onPress={handlePasswordSecure}
+            />
+          </View>
+          <Text style={styles.fieldErrors}>{passwordErrors}</Text>
+          {email && password ? (
+            <TouchableOpacity style={styles.pinkBtn} onPress={handleLogin}>
+              <Text style={styles.textBtn}>Sign In</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+          ) : (
+            <TouchableOpacity disabled style={styles.pinkBtn2}>
+              <Text style={styles.textBtn}>Sign In</Text>
+            </TouchableOpacity>
+          )}
+          <Text style={[styles.fieldErrors, { marginTop: 10 }]}>
+            {currentErrors}
+          </Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text style={styles.forgot}>Forgot Password?</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity> */}
-            <Text style={styles.textOR}>OR</Text>
-            <Text style={styles.textLoginWith}>Login with</Text>
-            <View style={styles.socialIcons}>
-              <View style={styles.googleIcon}>
-                <TouchableOpacity>
-                  <AntDesign name="google" color="#DB4437" size={24} />
-                </TouchableOpacity>
-              </View>
-              {/* <View style={styles.facebookIcon}>
+          <Text style={styles.textOR}>OR</Text>
+          <Text style={styles.textLoginWith}>Login with</Text>
+          <View style={styles.socialIcons}>
+            <View style={styles.googleIcon}>
+              <TouchableOpacity>
+                <AntDesign name="google" color="#DB4437" size={24} />
+              </TouchableOpacity>
+            </View>
+            {/* <View style={styles.facebookIcon}>
                 <TouchableOpacity>
                   <FontAwesome name="facebook" color="#4267B2" size={24} />
                 </TouchableOpacity>
@@ -172,18 +191,15 @@ const Login = ({ navigation }) => {
                   <FontAwesome name="apple" color="#ececec" size={24} />
                 </TouchableOpacity>
               </View> */}
-            </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text style={styles.noAccount}>
-                Don't have an account? Sign up
-              </Text>
-            </TouchableOpacity>
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text style={styles.noAccount}>Don't have an account? Sign up</Text>
+          </TouchableOpacity>
         </View>
-        <StatusBar style="auto" />
       </View>
-    );
-  }
+      <StatusBar style="auto" />
+    </ScrollView>
+  );
 };
 
 export default Login;
@@ -200,24 +216,22 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
   },
   card: {
+    padding: 15,
     borderRadius: 15,
     backgroundColor: "#496F51",
     overflow: "hidden",
-    width: Platform.OS === "android" ? 280 : 300,
-    height: Platform.OS === "android" ? 470 : 440,
+    width: "80%",
     alignSelf: "center",
     marginTop: 50,
     shadowRadius: 10,
     shadowRadius: 2,
     elevation: 3,
+    marginBottom: 10,
   },
   facebookIcon: {
     marginStart: 20,
@@ -226,9 +240,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 13,
     marginTop: 5,
-    textAlign: "right",
+    textAlign: "center",
     fontFamily: "Quicksand_1",
-    marginEnd: 20,
+    marginLeft: 10,
   },
   googleIcon: {
     marginStart: 0,
@@ -239,7 +253,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 40,
-    borderRadius: 20
+    borderRadius: 20,
   },
   inputText: {
     height: 50,
@@ -320,11 +334,22 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   pinkBtn: {
-    width: "100%",
-    height: 50,
+    width: "90%",
     backgroundColor: "#DAB53F",
-    marginVertical: 10,
-    borderRadius: 10,
+    borderRadius: 25,
+    height: 50,
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  pinkBtn2: {
+    width: "90%",
+    backgroundColor: "grey",
+    borderRadius: 25,
+    height: 50,
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 30,
   },
   disabledBtn: {
     width: "100%",
@@ -332,5 +357,10 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     marginVertical: 10,
     borderRadius: 10,
+  },
+  fieldErrors: {
+    color: "red",
+    fontSize: 14,
+    textAlign: "center",
   },
 });

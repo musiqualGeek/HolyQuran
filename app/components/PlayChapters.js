@@ -12,6 +12,28 @@ import Verse2 from "../assets/verseAudio2.mp3";
 import Verse3 from "../assets/verseAudio3.mp3";
 
 import { FontAwesome } from "@expo/vector-icons";
+// const data = [
+//   {
+//     id: id,
+//     audio: audio,
+//     title: title,
+//   },
+//   {
+//     id: id,
+//     audio: audio,
+//     title: title,
+//   },
+//   {
+//     id: id,
+//     audio: audio,
+//     title: title,
+//   },
+//   {
+//     id: id,
+//     audio: audio,
+//     title: title,
+//   },
+// ];
 const PlayChapters = (props) => {
   var Verse1 = "../assets/verseAudio.mp3";
   var Verse2 = "../assets/verseAudio2.mp3";
@@ -73,98 +95,38 @@ const PlayChapters = (props) => {
       : undefined;
   }, [sound]);
 
+  const AudioComp = (props) => {
+    const { func, title } = props;
+    return (
+      <TouchableOpacity onPress={func}>
+        <View style={styles.item}>
+          <View style={styles.itemLeft}>
+            <View style={styles.square}></View>
+            <Text style={styles.itemText}>{title}</Text>
+          </View>
+          <View>
+            <TouchableOpacity>
+              <FontAwesome
+                name="volume-up"
+                color="gray"
+                size={24}
+                style={{ margin: 16 }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <ScrollView>
-      <TouchableOpacity onPress={playSound1}>
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>Chapter-1</Text>
-          </View>
-          <View>
-            <TouchableOpacity>
-              <FontAwesome
-                name="volume-up"
-                color="gray"
-                size={24}
-                style={{ margin: 16 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={playSound2}>
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>Chapter-2</Text>
-          </View>
-          <View>
-            <TouchableOpacity>
-              <FontAwesome
-                name="volume-up"
-                color="gray"
-                size={24}
-                style={{ margin: 16 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={playSound3}>
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>Chapter-3</Text>
-          </View>
-          <View>
-            <TouchableOpacity>
-              <FontAwesome
-                name="volume-up"
-                color="gray"
-                size={24}
-                style={{ margin: 16 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={playSound4}>
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>Chapter-4</Text>
-          </View>
-          <View>
-            <TouchableOpacity>
-              <FontAwesome
-                name="volume-up"
-                color="gray"
-                size={24}
-                style={{ margin: 16 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={playSound5}>
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>Chapter-5</Text>
-          </View>
-          <View>
-            <TouchableOpacity>
-              <FontAwesome
-                name="volume-up"
-                color="gray"
-                size={24}
-                style={{ margin: 16 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
+    <ScrollView style={{ flex: 1 }}>
+      <AudioComp func={playSound1} title="Chapter-1" />
+      <AudioComp func={playSound2} title="Chapter-2" />
+      <AudioComp func={playSound3} title="Chapter-3" />
+      <AudioComp func={playSound4} title="Chapter-4" />
+      <AudioComp func={playSound5} title="Chapter-5" />
+      {/* <CurrentPlayingAudio  /> */}
     </ScrollView>
   );
 };

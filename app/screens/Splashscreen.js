@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Platform, Button } from "react-native";
 import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Image, Platform, Button, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
 
@@ -33,9 +33,12 @@ const Splashscreen = ({ navigation }) => {
               English Translation and Commentry{"\n"}by
             </Text>
           </View>
-          <View style={styles.authorNameBackground}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Register")}
+            style={styles.authorNameBackground}
+          >
             <Text style={styles.textAuthorName}>Maulana Muhammad Ali</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <StatusBar style="auto" />
       </View>
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
   },
   textAuthorName: {
     fontSize: 24,
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
     color: "#2D5C2E",
     textAlign: "center",
   },
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#DAB53F",
     fontSize: 28,
-    fontFamily: 'Quicksand_2',
+    fontFamily: "Quicksand_2",
   },
   textContainer: {
     marginTop: 40,
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
   },
   textQuran: {
     fontSize: 36,
-    fontFamily: 'Quicksand_1',
+    fontFamily: "Quicksand_1",
     textAlign: "center",
     marginTop: 40,
     color: "#DAB53F",

@@ -5,26 +5,20 @@ import { Ionicons } from "@expo/vector-icons";
 import { signOut } from "firebase/auth";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { auth } from "../../firebase/utils";
+import { signOutUser } from "../redux/User/user.actions";
+import { useDispatch } from "react-redux";
+
 
 const Service = ({ navigation }) => {
+  const dispatch = useDispatch();
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
     Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
   });
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    const handleLogout = async () => {
-      try {
-        signOut(auth).then(() => {
-          console.log("User signed out!");
-          navigation.navigate("Login");
-        });
-      } catch (err) {
-        console.log("Error from Sign out action !!");
-        console.log(err);
-      }
+  
+    const handleLogout = () => {
+      dispatch(signOutUser());
     };
     return (
       <View style={styles.mainContainer}>
@@ -70,7 +64,6 @@ const Service = ({ navigation }) => {
       </View>
     );
   }
-};
 
 export default Service;
 

@@ -36,7 +36,7 @@ const TabSection = () => {
         tabBarOptions={tabBarOptions}
       >
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Parts" component={Parts} />
+        {/* <Tab.Screen name="Parts" component={Parts} /> */}
         <Tab.Screen name="Audio" component={PlayAudio} />
       </Tab.Navigator>
     </View>

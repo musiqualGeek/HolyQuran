@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -18,7 +19,7 @@ import {
 } from "../redux/User/user.actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Entypo } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
+// import { ScrollView } from "react-native-gesture-handler";
 
 const mapState = ({ user }) => ({
   propertySignUpSuccess: user.propertySignUpSuccess,
@@ -41,20 +42,17 @@ const Register = ({ navigation }) => {
   const [firstName, onChangefirstName] = useState("rami");
   const [email, onChangeEmail] = useState("rami@gmail.com");
   const [password, onChangepassword] = useState("hellodude");
-  const [isSelected, setSelected] = useState(false);
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
-  const [error, setError] = useState([]);
   // Hnadle Errors
   const [firstNameErrors, setFirstNameErrors] = useState("");
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
-  const [termsErrors, setTermsErrors] = useState("");
-  const [currentErrors, setCurrentErrors] = useState(errors);
+  const [currentErrors, setCurrentErrors] = useState("");
 
-  // useEffect(() => {
-  //   ResetForm();
-  // }, []);
+  useEffect(() => {
+    ResetForm();
+  }, []);
 
   const ResetForm = () => {
     onChangefirstName("");
@@ -62,8 +60,6 @@ const Register = ({ navigation }) => {
     onChangepassword("");
     setIsSecure(true);
     setIconPasswordName("eye");
-    setSelected(false);
-    setError([]);
     setCurrentErrors("");
   };
 
@@ -106,102 +102,100 @@ const Register = ({ navigation }) => {
       setPasswordErrors("");
     }
     if (checking_form === "true") {
-      console.log("done");
       dispatch(signUpUser({ fullname: firstName, email, password }));
     }
   };
+
+  useEffect(() => {
+    console.log(propertySignUpSuccess, errors);
+    setCurrentErrors(errors);
+  }, [errors]);
   // End
   // if (!fontsLoaded) {
   //   return <Text>Alex waiting</Text>;
   // } else {
-    return (
-      <>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
-        />
-        <View style={styles.mainContainer}>
-          <ScrollView style={styles.borderContainer}>
-            <Image
-              style={styles.image}
-              source={require("../assets/appIcon_Iphone.jpg")}
-            />
-            <View style={styles.card}>
-              <Text style={styles.textWelcome}>WELCOME TO</Text>
-              <Text style={styles.textQuran}>The Holy Quran</Text>
-              <View style={styles.inputView}>
-                <TextInput
-                  style={styles.inputText}
-                  onChangeText={onChangefirstName}
-                  value={firstName}
-                  placeholder="Fullname"
-                  placeholderTextColor="#003f5c"
-                />
-                {/* <MaterialIcons name="email" color="gray" size={24} /> */}
-              </View>
-              <Text style={styles.fieldErrors}>{firstNameErrors}</Text>
-              <View style={styles.inputView}>
-                <TextInput
-                  style={styles.inputText}
-                  value={email}
-                  placeholder="Email"
-                  placeholderTextColor="#003f5c"
-                  onChangeText={onChangeEmail}
-                />
-                {/* <MaterialIcons name="email" color="gray" size={24} /> */}
-              </View>
-              <Text style={styles.fieldErrors}>{emailErrors}</Text>
-              <View style={styles.inputView}>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={onChangepassword}
-                  value={password}
-                  secureTextEntry={isSecure}
-                  placeholder="Password"
-                  placeholderTextColor={"grey"}
-                />
-                <Entypo
-                  style={styles.eyeIcon}
-                  name={iconPasswordName}
-                  size={25}
-                  color="black"
-                  onPress={handlePasswordSecure}
-                />
-                {/* <MaterialIcons name="vpn-key" color="gray" size={24} /> */}
-              </View>
-              <Text style={styles.fieldErrors}>{passwordErrors}</Text>
-              <View>
-                {firstName && email && password ? (
-                  <TouchableOpacity
-                    style={styles.registerBtn}
-                    onPress={handleRegister}
-                  >
-                    <Text style={styles.registerText}>Register</Text>
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity style={styles.registerBtn}>
-                    <Text style={styles.registerText}>Register</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-              <Text style={[styles.fieldErrors, { marginTop: 10 }]}>
-                {currentErrors}
-              </Text>
-              {/* < style={styles.registerBtn} onPress={handleSubmit}>
-              <Text style={styles.registerText}>Register</Text>
-            </TouchableOpacity> */}
-              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text style={styles.haveAccount}>
-                  Already have an account? Login
-                </Text>
-              </TouchableOpacity>
+  return (
+    <>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.mainContainer}>
+        <ScrollView style={styles.borderContainer}>
+          <Image
+            style={styles.image}
+            source={require("../assets/appIcon_Iphone.jpg")}
+          />
+          <View style={styles.card}>
+            <Text style={styles.textWelcome}>WELCOME TO</Text>
+            <Text style={styles.textQuran}>The Holy Quran</Text>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.inputText}
+                onChangeText={onChangefirstName}
+                value={firstName}
+                placeholder="Fullname"
+                placeholderTextColor="#003f5c"
+              />
             </View>
-          </ScrollView>
+            <Text style={styles.fieldErrors}>{firstNameErrors}</Text>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.inputText}
+                value={email}
+                placeholder="Email"
+                placeholderTextColor="#003f5c"
+                onChangeText={onChangeEmail}
+              />
+            </View>
+            <Text style={styles.fieldErrors}>{emailErrors}</Text>
+            <View style={styles.inputView}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangepassword}
+                value={password}
+                secureTextEntry={isSecure}
+                placeholder="Password"
+                placeholderTextColor={"grey"}
+              />
+              <Entypo
+                style={styles.eyeIcon}
+                name={iconPasswordName}
+                size={25}
+                color="black"
+                onPress={handlePasswordSecure}
+              />
+            </View>
+            <Text style={styles.fieldErrors}>{passwordErrors}</Text>
+            <View>
+              {firstName && email && password ? (
+                <TouchableOpacity
+                  style={styles.registerBtn}
+                  onPress={handleRegister}
+                >
+                  <Text style={styles.registerText}>Register</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity disabled style={styles.registerBtn2}>
+                  <Text style={styles.registerText}>Register</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <Text style={[styles.fieldErrors, { marginTop: 10 }]}>
+              {currentErrors}
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Text style={styles.haveAccount}>
+                Already have an account? Login
+              </Text>
+            </TouchableOpacity>
           </View>
-          <StatusBar style="auto" />
-      </>
-    );
-  }
+        </ScrollView>
+      </View>
+      <StatusBar style="auto" />
+    </>
+  );
+};
 
 export default Register;
 
@@ -275,6 +269,15 @@ const styles = StyleSheet.create({
   registerBtn: {
     width: "80%",
     backgroundColor: "#DAB53F",
+    borderRadius: 25,
+    height: 50,
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  registerBtn2: {
+    width: "80%",
+    backgroundColor: "grey",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",
