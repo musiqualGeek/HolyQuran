@@ -116,12 +116,12 @@ const Register = ({ navigation }) => {
   // } else {
   return (
     <>
+      <View style={styles.mainContainer}>
       <ImageBackground
         style={styles.border}
         source={require("../assets/border_1.png")}
       />
-      <View style={styles.mainContainer}>
-        <ScrollView style={styles.borderContainer}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.borderContainer}>
           <Image
             style={styles.image}
             source={require("../assets/appIcon_Iphone.jpg")}
@@ -191,8 +191,9 @@ const Register = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </ScrollView>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
+
     </>
   );
 };
@@ -201,25 +202,23 @@ export default Register;
 
 const styles = StyleSheet.create({
   border: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 1,
-    zIndex: -1,
-    resizeMode: "cover",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // width: Dimensions.get("window").width,
+    // height: Dimensions.get("window").height,
     // position: "absolute",
+    // top: 0,
+    // left: 0,
+    // right: 0,
     // bottom: 0,
+    // opacity: 1,
+    // zIndex: -1,
+    // resizeMode: "cover",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
     marginStart: 10,
     marginEnd: 10,
     marginBottom: 16,
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#496F51",
     overflow: "hidden",
-    width: 280,
+    width: "80%",
     // height: 420,
     alignSelf: "center",
     marginVertical: 50,

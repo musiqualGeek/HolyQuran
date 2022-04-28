@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 
+import { StatusBar } from "expo-status-bar";
 import PdfReader from "rn-pdf-reader-js";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -184,6 +185,7 @@ const Bookmark = ({ navigation, route }) => {
           </View>
           {/* </View> */}
         </View>
+        <StatusBar style="auto" />
       </View>
     );
   }

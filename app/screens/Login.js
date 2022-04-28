@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Platform,
   ScrollView,
+  Dimensions
 } from "react-native";
 
 import { useFonts } from "@expo-google-fonts/quicksand";
@@ -101,12 +102,13 @@ const Login = ({ navigation }) => {
   //   return <Text>Alex waiting</Text>;
   // } else {
   return (
-    <ScrollView style={styles.mainContainer}>
-      <ImageBackground
+    <>
+    <View style={styles.mainContainer}>
+    <ImageBackground
         style={styles.border}
         source={require("../assets/border_1.png")}
       />
-      <View style={styles.borderContainer}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.borderContainer}>
         <Image
           style={styles.image}
           source={require("../assets/appIcon_Iphone.jpg")}
@@ -147,8 +149,8 @@ const Login = ({ navigation }) => {
             <Entypo
               style={styles.eyeIcon}
               name={iconPasswordName}
-              size={25}
-              color="black"
+              size={20}
+              color="gray"
               onPress={handlePasswordSecure}
             />
           </View>
@@ -178,7 +180,7 @@ const Login = ({ navigation }) => {
           <View style={styles.socialIcons}>
             <View style={styles.googleIcon}>
               <TouchableOpacity>
-                <AntDesign name="google" color="#DB4437" size={24} />
+                <AntDesign name="google" color="#ff4c4c" size={24} />
               </TouchableOpacity>
             </View>
             {/* <View style={styles.facebookIcon}>
@@ -196,9 +198,10 @@ const Login = ({ navigation }) => {
             <Text style={styles.noAccount}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
       <StatusBar style="auto" />
-    </ScrollView>
+    </View>
+    </>
   );
 };
 
@@ -209,10 +212,21 @@ const styles = StyleSheet.create({
     marginStart: 20,
   },
   border: {
+    // width: Dimensions.get("window").width,
+    // height: Dimensions.get("window").height,
+    // position: "absolute",
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    // opacity: 1,
+    // zIndex: -1,
+    // resizeMode: "cover",
     width: "100%",
     height: "100%",
     position: "absolute",
     bottom: 0,
+    // marginTop: Platform.OS === "android" ? 48 : 44,
   },
   borderContainer: {
     flex: 1,
@@ -248,11 +262,11 @@ const styles = StyleSheet.create({
     marginStart: 0,
   },
   image: {
-    width: 185,
-    height: 185,
+    width: 160,
+    height: 160,
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 40,
+    marginTop: 50,
     borderRadius: 20,
   },
   inputText: {

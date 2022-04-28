@@ -11,11 +11,13 @@ import PlayChapters from "../components/PlayChapters";
 
 export default function PlayAudio() {
   return (
+    <View>
     <ScrollView>
-      <TouchableOpacity>
+      
         <PlayChapters />
-      </TouchableOpacity>
+      
     </ScrollView>
+    </View>
   );
 }
 
