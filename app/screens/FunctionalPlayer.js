@@ -32,7 +32,7 @@ const PlayerFunct = ({ navigation, route }) => {
   const [playOrPause, setPlayOrPause] = useState(false);
   const [played, setPlayed] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-
+  const [firstTime, setFirstTime] = useState(false);
   /* Test An Other Slider 1 Start */
   const textRef = useRef();
 
@@ -383,6 +383,7 @@ const PlayerFunct = ({ navigation, route }) => {
           SetLoading(false);
           // PlayAudio();
           SetLoaded(true);
+          setFirstTime(true);
         }
       } catch (error) {
         console.log(error);
@@ -406,8 +407,10 @@ const PlayerFunct = ({ navigation, route }) => {
       console.log(error);
     }
   };
-
-  sound.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+  if (firstTime) {
+    console.log("now yes");
+    sound.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+  }
 
   const PauseAudio = async () => {
     console.log("PauseAudio");
