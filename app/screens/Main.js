@@ -38,7 +38,7 @@ const main = () => {
         }}
       >
         {/* Auth */}
-        {currentProperty && (
+        {!currentProperty && (
           <>
             <Stack.Screen name="Splashscreen" component={Splashscreen} />
             <Stack.Screen name="Login" component={Login} />
@@ -46,7 +46,7 @@ const main = () => {
             <Stack.Screen name="Register" component={Register} />
           </>
         )}
-        {!currentProperty && (
+        {currentProperty && (
           <>
             <Stack.Screen name="Introduction" component={Introduction} />
             <Stack.Screen name="Language" component={Language} />
