@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   },
   forgot: {
     color: "white",
-    fontSize: 13,
+    fontSize: 14,
     marginTop: 5,
     textAlign: "center",
     fontFamily: "Quicksand_1",
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
   },
   noAccount: {
     color: "white",
-    fontSize: 14,
+    fontSize: 16,
     marginTop: 16,
     textAlign: "center",
     fontFamily: "Quicksand_1",
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
     color: "#ececec",
-    fontFamily: "Quicksand_1",
+    fontFamily: "Quicksand_2",
   },
   textWelcome: {
     textAlign: "center",
@@ -345,7 +345,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     textAlign: "center",
-    paddingVertical: 8,
+    fontFamily: "Quicksand_1",
+    fontSize: 16,
+    // paddingVertical: 8,
   },
   pinkBtn: {
     width: "90%",

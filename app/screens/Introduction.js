@@ -22,9 +22,9 @@ const Introduction = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("Language")}>
             <Text
               style={{
-                color: "black",
+                color: "gray",
                 textAlign: "right",
-                marginEnd: 30,
+                marginEnd: 36,
                 marginTop: Platform.OS === "android" ? 36 : 45,
                 fontFamily: 'Quicksand_1'
               }}

@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   square: {
     width: 24,
     height: 24,
-    backgroundColor: "#DAB53F",
+    backgroundColor: "#496F51",
     // opacity: 0.4,
     borderRadius: 5,
     marginRight: 15,

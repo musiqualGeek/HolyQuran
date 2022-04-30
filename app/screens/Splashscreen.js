@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
     width: 336,
     height: 48,
     marginTop: 50,
+    shadowColor: "gray",
+    shadowOffset: { height: 15 },
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
   },
   borderContainer: {
     flex: 1,

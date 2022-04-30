@@ -134,8 +134,8 @@ const Register = ({ navigation }) => {
                 style={styles.inputText}
                 onChangeText={onChangefirstName}
                 value={firstName}
-                placeholder="Fullname"
-                placeholderTextColor="#003f5c"
+                placeholder="Full Name"
+                placeholderTextColor="gray"
               />
             </View>
             <Text style={styles.fieldErrors}>{firstNameErrors}</Text>
@@ -144,7 +144,7 @@ const Register = ({ navigation }) => {
                 style={styles.inputText}
                 value={email}
                 placeholder="Email"
-                placeholderTextColor="#003f5c"
+                placeholderTextColor="gray"
                 onChangeText={onChangeEmail}
               />
             </View>
@@ -162,7 +162,7 @@ const Register = ({ navigation }) => {
                 style={styles.eyeIcon}
                 name={iconPasswordName}
                 size={25}
-                color="black"
+                color="gray"
                 onPress={handlePasswordSecure}
               />
             </View>
@@ -237,10 +237,11 @@ const styles = StyleSheet.create({
   },
   haveAccount: {
     color: "#fff",
-    fontSize: 14,
-    marginTop: 30,
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 16,
     textAlign: "center",
-    fontFamily: "Quicksand_2",
+    fontFamily: "Quicksand_1",
     marginBottom: 20,
   },
   image: {
@@ -287,6 +288,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontFamily: "Quicksand_1",
+    fontSize: 16
   },
   mainContainer: {
     flex: 1,
@@ -315,7 +317,7 @@ const styles = StyleSheet.create({
   eyeIcon: {
     position: "absolute",
     right: 20,
-    top: 22,
+    top: 15,
     fontSize: 22,
   },
   disabledBtn: {

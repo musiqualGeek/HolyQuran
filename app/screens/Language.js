@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     marginTop: 16,
-    backgroundColor: "#000000",
+    backgroundColor: "#333333",
     justifyContent: "center",
   },
   border: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     marginTop: 16,
-    backgroundColor: "#147b32",
+    backgroundColor: "#496F51",
     justifyContent: "center",
   },
   header: {
@@ -239,11 +239,15 @@ const styles = StyleSheet.create({
   readButton: {
     width: "50%",
     height: 50,
-    backgroundColor: "#147b32",
+    backgroundColor: "#DAB53F",
     marginTop: 20,
     borderRadius: 15,
     justifyContent: "center",
     alignSelf: "center",
+    shadowColor: "gray",
+    shadowOffset: { height: 15 },
+    shadowRadius: 8,
+    shadowOpacity: 0.4,
   },
   selectLanguageText: {
     textAlign: "center",
@@ -264,7 +268,7 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand_1",
   },
   textRead: {
-    color: "white",
+    color: "black",
     textAlign: "center",
     fontFamily: "Quicksand_1",
     fontSize: 16,

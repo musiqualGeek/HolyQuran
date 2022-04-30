@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
@@ -21,28 +27,28 @@ const Profile = ({ navigation }) => {
           source={require("../assets/border_1.png")}
         />
         <View style={styles.borderContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-            <Ionicons
-              name="arrow-back"
-              color="#DAB53F"
-              size={24}
-              style={{ marginTop: 48, marginStart: 36}}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              justifyContent: "center",
-              alignSelf: "center",
-              fontSize: 24,
-              fontFamily: 'Quicksand_1',
-              color: "#DAB53F",
-              marginTop: -35,
-            }}
-          >
-            Profile
-          </Text>
-          {/* <View style={styles.profilePic}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
+              <Ionicons
+                name="arrow-back"
+                color="gray"
+                size={28}
+                style={{ marginTop: 48, marginStart: 36 }}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                justifyContent: "center",
+                alignSelf: "center",
+                fontSize: 24,
+                fontFamily: "Quicksand_1",
+                color: "#264A27",
+                marginTop: -35,
+              }}
+            >
+              Profile
+            </Text>
+            {/* <View style={styles.profilePic}>
             {auth.currentUser.photoURL ? (
               <Image
                 source={{ uri: auth.currentUser.photoURL }}
@@ -65,56 +71,56 @@ const Profile = ({ navigation }) => {
               />
             )}
           </View> */}
-          {/* <Image
+            {/* <Image
           style={styles.image}
           source={require("../assets/app_logo.png")}
         /> */}
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: 'Quicksand_1',
-              color: "#DAB53F",
-              marginTop: 60,
-              marginStart: 30,
-            }}
-          >
-            Name
-          </Text>
-          <View style={styles.nameContainer}>
             <Text
               style={{
-                textAlign: "center",
-                color: "#2D5C2E",
-                fontFamily: 'Quicksand_1',
-                fontSize: 16,
+                fontSize: 18,
+                fontFamily: "Quicksand_1",
+                color: "#264A27",
+                marginTop: 60,
+                marginStart: 30,
               }}
             >
-              {auth.currentUser.displayName && auth.currentUser.displayName}
+              Name
             </Text>
-          </View>
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: 'Quicksand_1',
-              color: "#DAB53F",
-              marginTop: 16,
-              marginStart: 30,
-            }}
-          >
-            E-mail
-          </Text>
-          <View style={styles.emailContainer}>
+            <View style={styles.nameContainer}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#2D5C2E",
+                  fontFamily: "Quicksand_1",
+                  fontSize: 16,
+                }}
+              >
+                {auth.currentUser.displayName && auth.currentUser.displayName}
+              </Text>
+            </View>
             <Text
               style={{
-                textAlign: "center",
-                color: "#2D5C2E",
-                fontFamily: 'Quicksand_1',
-                fontSize: 16,
+                fontSize: 18,
+                fontFamily: "Quicksand_1",
+                color: "#264A27",
+                marginTop: 16,
+                marginStart: 30,
               }}
             >
-              {auth.currentUser.email && auth.currentUser.email}
+              E-mail
             </Text>
-          </View>
+            <View style={styles.emailContainer}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  fontFamily: "Quicksand_1",
+                  fontSize: 16,
+                }}
+              >
+                {auth.currentUser.email && auth.currentUser.email}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -142,7 +148,7 @@ const styles = StyleSheet.create({
   },
   emailContainer: {
     width: "80%",
-    backgroundColor: "#DAB53F",
+    backgroundColor: "#496F51",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",
@@ -161,7 +167,7 @@ const styles = StyleSheet.create({
   },
   nameContainer: {
     width: "80%",
-    backgroundColor: "#DAB53F",
+    backgroundColor: "#496F51",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",

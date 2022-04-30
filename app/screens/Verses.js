@@ -134,7 +134,7 @@ const Verses = ({ navigation, route }) => {
             {route.params.verse.info}
           </Text>
           <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 20 }}>
-            <Text
+            <HighlightText
               style={{
                 maxWidth: "100%",
                 color: "white",
@@ -148,9 +148,11 @@ const Verses = ({ navigation, route }) => {
                 marginTop: 10,
                 color: "black",
               }}
-            >
-              {route.params.verse.intro}
-            </Text>
+              selectable={true}
+              highlightStyle={{ backgroundColor: "yellow" }}
+              searchWords={[search]}
+              textToHighlight={route.params.verse.intro}
+            />
             <HighlightText
               style={{
                 textAlign: "justify",

@@ -31,8 +31,8 @@ const Service = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Language")}>
               <Ionicons
                 name="arrow-back"
-                color="#DAB53F"
-                size={24}
+                color="gray"
+                size={28}
                 style={{ marginTop: 20, marginStart: 36 }}
               />
             </TouchableOpacity>
@@ -42,7 +42,7 @@ const Service = ({ navigation }) => {
                 alignSelf: "center",
                 fontSize: 24,
                 fontFamily: 'Quicksand_1',
-                color: "#DAB53F",
+                color: "#264A27",
                 marginStart: 80,
                 marginTop: 15
               }}
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   changePasswordBtn: {
     width: "80%",
-    backgroundColor: "#DAB53F",
+    backgroundColor: "#496F51",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   logoutBtn: {
     width: "80%",
-    backgroundColor: "#DAB53F",
+    backgroundColor: "#496F51",
     borderRadius: 25,
     height: 50,
     alignSelf: "center",

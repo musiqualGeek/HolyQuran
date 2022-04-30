@@ -32,12 +32,12 @@ const Bookmark = ({ navigation, route }) => {
           source={require("../assets/border_1.png")}
         />
         <View style={styles.borderContainer}>
-          {/* <View style={styles.header}> */}
+          <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.navigate("Language")}>
             <Ionicons
               name="arrow-back"
-              color="#DAB53F"
-              size={24}
+              color="gray"
+              size={28}
               style={{ marginTop: 20, marginStart: 36 }}
             />
           </TouchableOpacity>
@@ -45,9 +45,10 @@ const Bookmark = ({ navigation, route }) => {
             style={{
               fontSize: 24,
               fontFamily: "Quicksand_1",
-              color: "#DAB53F",
+              color: "#264A27",
               textAlign: "center",
-              marginTop: 0,
+              marginTop: -30,
+              marginStart: 10
             }}
           >
             Arabic Translation{"\n"}Of Quran
@@ -183,7 +184,7 @@ const Bookmark = ({ navigation, route }) => {
               </Text>
             </TouchableOpacity>
           </View>
-          {/* </View> */}
+          </View>
         </View>
         <StatusBar style="auto" />
       </View>
@@ -218,11 +219,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 24,
   },
-  header: {
-    flexDirection: "row",
-    // justifyContent: "space-around",
-    // alignSelf: "flex-start",
-  },
+  // header: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-around",
+  //   alignSelf: "flex-start",
+  // },
   mainContainer: {
     flex: 1,
     backgroundColor: "#fff",
@@ -234,8 +235,12 @@ const styles = StyleSheet.create({
     height: 120,
     backgroundColor: "#496F51",
     alignSelf: "center",
-    marginTop: 48,
+    marginTop: 60,
     borderRadius: 20,
     elevation: 5,
+    shadowColor: "gray",
+    shadowOffset: { height: 15 },
+    shadowRadius: 9,
+    shadowOpacity: 0.3,
   },
 });

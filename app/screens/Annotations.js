@@ -33,8 +33,8 @@ const Annotations = ({ navigation, route }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Language")}>
               <Ionicons
                 name="arrow-back"
-                color="#DAB53F"
-                size={24}
+                color="gray"
+                size={28}
                 style={{ marginTop: 20, marginStart: 36}}
                 // style={{ position: "absolute", right: 24 }}
                 // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
@@ -46,8 +46,8 @@ const Annotations = ({ navigation, route }) => {
                 alignSelf: "center",
                 fontSize: 24,
                 fontFamily: 'Quicksand_1',
-                color: "#DAB53F",
-                marginStart: 60,
+                color: "#264A27",
+                marginStart: 70,
                 marginTop: 15
               }}
             >
