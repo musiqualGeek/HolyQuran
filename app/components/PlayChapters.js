@@ -10,30 +10,9 @@ import { Audio } from "expo-av";
 import Verse1 from "../assets/verseAudio.mp3";
 import Verse2 from "../assets/verseAudio2.mp3";
 import Verse3 from "../assets/verseAudio3.mp3";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
-// const data = [
-//   {
-//     id: id,
-//     audio: audio,
-//     title: title,
-//   },
-//   {
-//     id: id,
-//     audio: audio,
-//     title: title,
-//   },
-//   {
-//     id: id,
-//     audio: audio,
-//     title: title,
-//   },
-//   {
-//     id: id,
-//     audio: audio,
-//     title: title,
-//   },
-// ];
+
 const PlayChapters = (props) => {
   var Verse1 = "../assets/verseAudio.mp3";
   var Verse2 = "../assets/verseAudio2.mp3";
@@ -96,12 +75,17 @@ const PlayChapters = (props) => {
   }, [sound]);
 
   const AudioComp = (props) => {
-    const { func, title } = props;
+    const { func, title, id } = props;
     const navigation = useNavigation();
     return (
-      <TouchableOpacity onPress={()=> {navigation.navigate('Player',{
-        partTitle:title
-      })}}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Player", {
+            partTitle: title,
+            id: id,
+          });
+        }}
+      >
         <View style={styles.item}>
           <View style={styles.itemLeft}>
             <View style={styles.square}></View>

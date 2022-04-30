@@ -19,6 +19,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TabSection from "./TabSection";
 import ArabicPDF from "./ArabicPDF";
 import { useSelector } from "react-redux";
+import PlayerFunct from "./FunctionalPlayer";
 
 const Stack = createStackNavigator();
 
@@ -37,7 +38,7 @@ const main = () => {
         }}
       >
         {/* Auth */}
-        {!currentProperty && (
+        {currentProperty && (
           <>
             <Stack.Screen name="Splashscreen" component={Splashscreen} />
             <Stack.Screen name="Login" component={Login} />
@@ -45,7 +46,7 @@ const main = () => {
             <Stack.Screen name="Register" component={Register} />
           </>
         )}
-        {currentProperty && (
+        {!currentProperty && (
           <>
             <Stack.Screen name="Introduction" component={Introduction} />
             <Stack.Screen name="Language" component={Language} />
@@ -60,7 +61,7 @@ const main = () => {
             <Stack.Screen name="Verses" component={Verses} />
             <Stack.Screen name="ArabicPDF" component={ArabicPDF} />
             <Stack.Screen name="TestScreen" component={TestScreen} />
-            <Stack.Screen name="Player" component={Player} />
+            <Stack.Screen name="Player" component={PlayerFunct} />
           </>
         )}
       </Stack.Navigator>
