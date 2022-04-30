@@ -108,36 +108,36 @@ const PlayChapters = (props) => {
 
   return (
     <ScrollView style={{ flex: 1 }}>
-      <AudioComp func={playSound1} id="1" title="Part-1" />
-      <AudioComp func={playSound2} id="2" title="Part-2" />
-      <AudioComp func={playSound3} id="3" title="Part-3" />
-      <AudioComp func={playSound3} id="4" title="Part-4" />
-      <AudioComp func={playSound3} id="5" title="Part-5" />
-      <AudioComp func={playSound3} id="6" title="Part-6" />
-      <AudioComp func={playSound3} id="7" title="Part-7" />
-      <AudioComp func={playSound3} id="8" title="Part-8" />
-      <AudioComp func={playSound3} id="9" title="Part-9" />
-      <AudioComp func={playSound3} id="10" title="Part-10" />
-      <AudioComp func={playSound3} id="11" title="Part-11" />
-      <AudioComp func={playSound3} id="12" title="Part-12" />
-      <AudioComp func={playSound3} id="13" title="Part-13" />
-      <AudioComp func={playSound3} id="14" title="Part-14" />
-      <AudioComp func={playSound3} id="15" title="Part-15" />
-      <AudioComp func={playSound3} id="16" title="Part-16" />
-      <AudioComp func={playSound3} id="17" title="Part-17" />
-      <AudioComp func={playSound3} id="18" title="Part-18" />
-      <AudioComp func={playSound3} id="19" title="Part-19" />
-      <AudioComp func={playSound3} id="20" title="Part-20" />
-      <AudioComp func={playSound3} id="21" title="Part-21" />
-      <AudioComp func={playSound3} id="22" title="Part-22" />
-      <AudioComp func={playSound3} id="23" title="Part-23" />
-      <AudioComp func={playSound3} id="24" title="Part-24" />
-      <AudioComp func={playSound3} id="25" title="Part-25" />
-      <AudioComp func={playSound3} id="26" title="Part-26" />
-      <AudioComp func={playSound3} id="27" title="Part-27" />
-      <AudioComp func={playSound3} id="28" title="Part-28" />
-      <AudioComp func={playSound3} id="29" title="Part-29" />
-      <AudioComp func={playSound3} id="30" title="Part-30" />
+      <AudioComp func={playSound1} id={0} title="Part-1" />
+      <AudioComp func={playSound2} id={1} title="Part-2" />
+      <AudioComp func={playSound3} id={2} title="Part-3" />
+      <AudioComp func={playSound3} id={3} title="Part-4" />
+      <AudioComp func={playSound3} id={4} title="Part-5" />
+      <AudioComp func={playSound3} id={5} title="Part-6" />
+      <AudioComp func={playSound3} id={6} title="Part-7" />
+      <AudioComp func={playSound3} id={7} title="Part-8" />
+      <AudioComp func={playSound3} id={8} title="Part-9" />
+      <AudioComp func={playSound3} id={9} title="Part-10" />
+      <AudioComp func={playSound3} id={10} title="Part-11" />
+      <AudioComp func={playSound3} id={11} title="Part-12" />
+      <AudioComp func={playSound3} id={12} title="Part-13" />
+      <AudioComp func={playSound3} id={13} title="Part-14" />
+      <AudioComp func={playSound3} id={14} title="Part-15" />
+      <AudioComp func={playSound3} id={15} title="Part-16" />
+      <AudioComp func={playSound3} id={16} title="Part-17" />
+      <AudioComp func={playSound3} id={17} title="Part-18" />
+      <AudioComp func={playSound3} id={18} title="Part-19" />
+      <AudioComp func={playSound3} id={19} title="Part-20" />
+      <AudioComp func={playSound3} id={20} title="Part-21" />
+      <AudioComp func={playSound3} id={21} title="Part-22" />
+      <AudioComp func={playSound3} id={22} title="Part-23" />
+      <AudioComp func={playSound3} id={23} title="Part-24" />
+      <AudioComp func={playSound3} id={24} title="Part-25" />
+      <AudioComp func={playSound3} id={25} title="Part-26" />
+      <AudioComp func={playSound3} id={26} title="Part-27" />
+      <AudioComp func={playSound3} id={27} title="Part-28" />
+      <AudioComp func={playSound3} id={28} title="Part-29" />
+      <AudioComp func={playSound3} id={29} title="Part-30" />
       {/* <CurrentPlayingAudio  /> */}
     </ScrollView>
   );
