@@ -7,11 +7,11 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
   ScrollView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "@expo-google-fonts/quicksand";
+import { RootSiblingParent } from 'react-native-root-siblings';
 import {
   signUpUser,
   resetAllAuthForms,
@@ -79,7 +79,6 @@ const Register = ({ navigation }) => {
       navigation.navigate("Login");
     }
   }, [propertySignUpSuccess]);
-
   const handleRegister = async () => {
     console.log("Here");
     var checking_form = "true";
@@ -110,6 +109,7 @@ const Register = ({ navigation }) => {
     console.log(propertySignUpSuccess, errors);
     setCurrentErrors(errors);
   }, [errors]);
+  
   // End
   // if (!fontsLoaded) {
   //   return <Text>Alex waiting</Text>;
@@ -193,7 +193,6 @@ const Register = ({ navigation }) => {
         </ScrollView>
         <StatusBar style="auto" />
       </View>
-
     </>
   );
 };

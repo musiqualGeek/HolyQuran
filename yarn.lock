@@ -1876,6 +1876,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@react-native-community/slider@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.2.tgz#06a0de89c26c6bd03d95798b777db1872b60c066"
+  integrity sha512-C1ldx1ypQo+uDWx78TUBG0evLVopKYHK2mQencl+vxi4ebMTL+ipJv5MF5mEvmZWLUOAMm5AsoQNHChYUdyWrQ==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -2791,6 +2796,11 @@ core-js-compat@^3.20.2, core-js-compat@^3.21.0:
     browserslist "^4.19.1"
     semver "7.0.0"
 
+core-js@2, core-js@^2.4.1:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
+
 core-js@3.6.5:
   version "3.6.5"
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.6.5.tgz"
@@ -2800,11 +2810,6 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
-
-core-js@^2.4.1:
-  version "2.6.12"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
-  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -5171,7 +5176,7 @@ prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5320,6 +5325,13 @@ react-native-paper@^3.12.0:
     color "^3.1.2"
     react-native-safe-area-view "^0.14.9"
 
+react-native-reanimated-slider@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated-slider/-/react-native-reanimated-slider-2.0.0.tgz#bbdfadc1a4cea3ac26134f0f0b944a8f625e6685"
+  integrity sha512-k2gbXKnfeV3k2cvkadqotDyRP96Z5ET16xA4tzUt15OmFDoYOuM0DaKn4hwHmbOwHDSTVmeUZRFJSkpcUQTblA==
+  dependencies:
+    core-js "2"
+
 react-native-reanimated@^1.13.1:
   version "1.13.4"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.4.tgz#f57c65e80ab5d2f60bf7dd21716c0bad8108b84e"
@@ -5349,6 +5361,19 @@ react-native-redash@^14.2.3:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
+react-native-root-siblings@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-root-siblings/-/react-native-root-siblings-4.1.1.tgz#b7742db7634a87f507eb99a5fd699c4f10c46ab0"
+  integrity sha512-sdmLElNs5PDWqmZmj4/aNH4anyxreaPm61c4ZkRiR8SO/GzLg6KjAbb0e17RmMdnBdD0AIQbS38h/l55YKN4ZA==
+
+react-native-root-toast@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-root-toast/-/react-native-root-toast-3.3.0.tgz#526aaf0ac48f584fb851d5e82855edfe585930ce"
+  integrity sha512-C4Pqu+Ae7kXsYJwTvz8NshyJ9SL5YJd+/vCkvgDAxxR8AYlPFggEcTCMNARIWXuRwthLbuwcakh4z9k6qg95dg==
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-root-siblings "^4.0.0"
+
 react-native-safe-area-context@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
@@ -5376,13 +5401,6 @@ react-native-screens@~3.10.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
-
-react-native-slider@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/react-native-slider/-/react-native-slider-0.11.0.tgz#b68a0bc43c8422b24cd57947cc5ac2bcdb58fadc"
-  integrity sha512-jV9K87eu9uWr0uJIyrSpBLnCKvVlOySC2wynq9TFCdV9oGgjt7Niq8Q1A8R8v+5GHsuBw/s8vEj1AAkkUi+u+w==
-  dependencies:
-    prop-types "^15.5.6"
 
 react-native-splash-screen@^3.3.0:
   version "3.3.0"

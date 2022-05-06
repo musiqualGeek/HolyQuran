@@ -65,7 +65,10 @@ const data = [
   { id: "48", title: "48. Al-Fatḥ : THE VICTORY" },
   { id: "49", title: "49. Al-Ḥujura\u0304t : THE APARTMENTS" },
   { id: "50", title: "50. Qa\u0304f" },
-  { id: "51", title: "51. Al-D\u0331h\u0331a\u0304riya\u0304t : THE SCATTERERS" },
+  {
+    id: "51",
+    title: "51. Al-D\u0331h\u0331a\u0304riya\u0304t : THE SCATTERERS",
+  },
   { id: "52", title: "52. Al-Ṭu\u0304r : THE MOUNTAIN" },
   { id: "53", title: "53. An-Najm: THE STAR" },
   { id: "54", title: "54. Al-Qamar: THE MOON" },
@@ -78,7 +81,10 @@ const data = [
   { id: "61", title: "61. Al-Ṣaff : THE RANKS" },
   { id: "62", title: "62. Al-Jumu'ah: THE CONGREGATION" },
   { id: "63", title: "63. Al-Muna\u0304fiqu\u0304n : THE HYPOCRITES" },
-  { id: "64", title: "64. Al-Tag\u0331h\u0331a\u0304bun : THE MANIFESTATION OF LOSSES" },
+  {
+    id: "64",
+    title: "64. Al-Tag\u0331h\u0331a\u0304bun : THE MANIFESTATION OF LOSSES",
+  },
   { id: "65", title: "65. Al-Ṭala\u0304q : THE DIVORCE" },
   { id: "66", title: "66. Al-Taḥrim : THE PROHIBITION" },
   { id: "67", title: "67. Al-Mulk: THE KINGDOM" },
@@ -88,7 +94,11 @@ const data = [
   { id: "71", title: "71. Nu\u0304ḥ : NOAH" },
   { id: "72", title: "72. Al-Jinn: THE JINN" },
   { id: "73", title: "73. Al-Muzzammil: THE ONE COVERING HIMSELF UP" },
-  { id: "74", title: "74. Al-Muddat\u0331h\u0331t\u0331h\u0331ir : THE ONE WRAPPING HIMSELF UP" },
+  {
+    id: "74",
+    title:
+      "74. Al-Muddat\u0331h\u0331t\u0331h\u0331ir : THE ONE WRAPPING HIMSELF UP",
+  },
   { id: "75", title: "75. Al-Qiya\u0304mah : THE RESURRECTION" },
   { id: "76", title: "76. Al-Insa\u0304n : THE MAN" },
   { id: "77", title: "77. Al-Mursala\u0304t : THOSE SENT FORTH" },
@@ -98,11 +108,18 @@ const data = [
   { id: "81", title: "81. At-Takweer: THE FOLDING UP" },
   { id: "82", title: "82. Al-Infiṭa\u0304r : THE CLEAVING" },
   { id: "83", title: "83. Al-Taṭfif : DEFAULT IN DUTY" },
-  { id: "84", title: "84. Al-Ins\u0331h\u0331iqa\u0304q : THE BURSTING ASUNDER" },
+  {
+    id: "84",
+    title: "84. Al-Ins\u0331h\u0331iqa\u0304q : THE BURSTING ASUNDER",
+  },
   { id: "85", title: "85. Al-Buru\u0304j : THE STARS" },
   { id: "86", title: "86. Al-Ṭa\u0304riq : THE COMER BY NIGHT" },
   { id: "87", title: "87. Al-A‘l¯a : THE MOST HIGH" },
-  { id: "88", title: "88. Al-G\u0331h\u0331a\u0304s\u0331h\u0331iyah : THE OVERWHELMING EVENT" },
+  {
+    id: "88",
+    title:
+      "88. Al-G\u0331h\u0331a\u0304s\u0331h\u0331iyah : THE OVERWHELMING EVENT",
+  },
   { id: "89", title: "89. Al-Fajr: THE DAYBREAK" },
   { id: "90", title: "90. Al-Balad:  THE CITY" },
   { id: "91", title: "91. Al-S\u0331h\u0331ams : THE SUN" },
@@ -116,7 +133,10 @@ const data = [
   { id: "99", title: "99. Al-Zilza\u0304l : THE SHAKING" },
   { id: "100", title: "100. Al-‘A\u0304diya\u0304t : THE ASSAULTERS" },
   { id: "101", title: "101. Al-Qa\u0304ri‘ah : THE CALAMITY" },
-  { id: "102", title: "102. Al-Taka\u0304t\u0331h\u0331ur : : THE ABUNDANCE OF WEALTH" },
+  {
+    id: "102",
+    title: "102. Al-Taka\u0304t\u0331h\u0331ur : : THE ABUNDANCE OF WEALTH",
+  },
   { id: "103", title: "103. Al-‘Aṣr : THE TIME" },
   { id: "104", title: "104. Al-Humazah: THE SLANDERER" },
   { id: "105", title: "105. Al-Fil: THE ELEPHANT" },
@@ -172,7 +192,10 @@ const Home = ({ navigation }) => {
   const handleVerse = (id) => {
     console.log("Id from handleVerse", id);
     let verseId = parseInt(id);
-    navigation.navigate("Verses", { verse: dataTable[verseId - 1] });
+    navigation.navigate("Verses", {
+      verse: dataTable[verseId - 1],
+      ourId: verseId,
+    });
   };
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
@@ -293,6 +316,6 @@ const styles = StyleSheet.create({
   listItemText: {
     fontSize: 16,
     fontFamily: "Quicksand_1",
-    color: "white"
+    color: "white",
   },
 });

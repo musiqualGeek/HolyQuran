@@ -11,7 +11,7 @@ import Service from "./Service";
 import Annotations from "./Annotations";
 import Bookmark from "./Bookmark";
 import Verses from "./Verses";
-import Player from "./Player";
+
 import TestScreen from "./TestScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,6 +19,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TabSection from "./TabSection";
 import ArabicPDF from "./ArabicPDF";
 import { useSelector } from "react-redux";
+import PlayerFunct from "./FunctionalPlayer";
 
 const Stack = createStackNavigator();
 
@@ -60,7 +61,7 @@ const main = () => {
             <Stack.Screen name="Verses" component={Verses} />
             <Stack.Screen name="ArabicPDF" component={ArabicPDF} />
             <Stack.Screen name="TestScreen" component={TestScreen} />
-            <Stack.Screen name="Player" component={Player} />
+            <Stack.Screen name="Player" component={PlayerFunct} />
           </>
         )}
       </Stack.Navigator>

@@ -146,16 +146,16 @@ const Language = ({ navigation }) => {
                 <Text style={styles.textArabic}>Arabic</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <View style={styles.english}>
                 <Text style={styles.textEnglish}>English</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <View style={styles.readButton}>
                 <Text style={styles.textRead}>READ</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
         <StatusBar style="auto" />

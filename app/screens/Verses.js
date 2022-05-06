@@ -15,9 +15,15 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "@expo-google-fonts/quicksand";
 import { isLoaded } from "expo-font";
 
-// const superTable = ['\u1d43']
-
 const Verses = ({ navigation, route }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // const [selected, setSelected] = useState(false);
+  // const [icon, setIcon] = useState('bookmark-o'); //
+  // const handlePress = () => {
+  //   setSelected(true);
+  // };
+
   let [fontsLoaded] = useFonts({
     Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
     Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
@@ -44,6 +50,15 @@ const Verses = ({ navigation, route }) => {
   //   replaceSuperLetter()
   // }, [chapter, verse])
   const [search, setSearch] = useState("");
+  var ourPosition = 0;
+  const handleScroll = (e) => {
+    ourPosition = e.nativeEvent.contentOffset.y;
+  };
+
+  const handleBookmark = () => {
+    console.log("this chapter id =>  ", route.params.ourId);
+    console.log("we are in the position => ", ourPosition);
+  };
 
   if (!fontsLoaded) {
     return <Text>Alex waiting</Text>;
@@ -80,18 +95,109 @@ const Verses = ({ navigation, route }) => {
             >
               Verses
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Verses")}>
-              <FontAwesome
-                name="bookmark-o"
+            {/* <FontAwesome
+                name='bookmark-o'
                 color="gray"
                 size={24}
+                onPress={handlePress}
                 style={{
                   position: "absolute",
                   right: Platform.OS === "android" ? -280 : -310,
                   marginTop: Platform.OS === "android" ? 2 : 0,
                 }}
-              />
-            </TouchableOpacity>
+              /> */}
+            {/* <View style={{ backgroundColor: "red", elevation: 8 }}>
+              {isOpen ? (
+                <TouchableOpacity
+                  style={{ backgroundColor: "red", width: 20, height: 30 }}
+                  onPress={() => {
+                    setIsOpen(false);
+                    console.log("hello there from ptk change");
+                  }}
+                >
+                  <FontAwesome
+                    name="bookmark"
+                    color="gray"
+                    size={24}
+                    style={{
+                      position: "absolute",
+                      right: Platform.OS === "android" ? -280 : -310,
+                      marginTop: Platform.OS === "android" ? 2 : 0,
+                    }}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={{ backgroundColor: "red", width: 20, height: 30 }}
+                  onPress={() => {
+                    setIsOpen(true);
+                    console.log("hello there from ptk change");
+                  }}
+                >
+                  <FontAwesome
+                    name="bookmark-o"
+                    color="gray"
+                    size={24}
+                    style={{
+                      position: "absolute",
+                      right: Platform.OS === "android" ? -280 : -310,
+                      marginTop: Platform.OS === "android" ? 2 : 0,
+                    }}
+                  />
+                </TouchableOpacity>
+              )}
+            </View> */}
+            <View>
+              {isOpen ? (
+                // <TouchableOpacity
+                //   style={{ backgroundColor: "red", width: 20, height: 30 }}
+                //   onPress={() => {
+                //     setIsOpen(false);
+                //     console.log("hello there from ptk change");
+                //   }}
+                // >
+                <FontAwesome
+                  onPress={() => {
+                    setIsOpen(false);
+
+                    console.log("hello there from ptk change");
+                  }}
+                  name="bookmark"
+                  color="gray"
+                  size={24}
+                  style={{
+                    position: "absolute",
+                    right: Platform.OS === "android" ? -280 : -310,
+                    marginTop: Platform.OS === "android" ? 2 : 0,
+                  }}
+                />
+              ) : (
+                // </TouchableOpacity>
+                // <TouchableOpacity
+                //   style={{ backgroundColor: "red", width: 20, height: 30 }}
+                //   onPress={() => {
+                //     setIsOpen(true);
+                //     console.log("hello there from ptk change");
+                //   }}
+                // >
+                <FontAwesome
+                  onPress={() => {
+                    setIsOpen(true);
+                    handleBookmark();
+                    console.log("hello there from ptk change");
+                  }}
+                  name="bookmark-o"
+                  color="gray"
+                  size={24}
+                  style={{
+                    position: "absolute",
+                    right: Platform.OS === "android" ? -280 : -310,
+                    marginTop: Platform.OS === "android" ? 2 : 0,
+                  }}
+                />
+                // </TouchableOpacity>
+              )}
+            </View>
           </View>
           <View style={styles.searchBox}>
             <Searchbar
@@ -133,7 +239,10 @@ const Verses = ({ navigation, route }) => {
           >
             {route.params.verse.info}
           </Text>
-          <ScrollView style={{ flex: 1, marginBottom: 20, marginTop: 20 }}>
+          <ScrollView
+            style={{ flex: 1, marginBottom: 20, marginTop: 20 }}
+            onScroll={handleScroll}
+          >
             <HighlightText
               style={{
                 maxWidth: "100%",
@@ -187,7 +296,6 @@ const Verses = ({ navigation, route }) => {
           </ScrollView>
         </View>
       </View>
-      
     );
   }
 };

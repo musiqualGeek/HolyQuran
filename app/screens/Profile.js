@@ -90,7 +90,7 @@ const Profile = ({ navigation }) => {
               <Text
                 style={{
                   textAlign: "center",
-                  color: "#2D5C2E",
+                  color: "white",
                   fontFamily: "Quicksand_1",
                   fontSize: 16,
                 }}
