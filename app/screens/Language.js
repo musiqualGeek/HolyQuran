@@ -98,39 +98,6 @@ const Language = ({ navigation }) => {
                 <Text>Service</Text>
               </MenuItem>
             </Menu>
-            {/* <TouchableOpacity onPress={() => navigation.navigate("Bookmark")}>
-              <Feather
-                name="bookmark"
-                color="gray"
-                size={24}
-                style={{
-                  margin: Platform.OS === "android" ? 36 : 36,
-                  marginEnd: Platform.OS === "android" ? 16 : 16,
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Service")}>
-              <Ionicons
-                name="settings-outline"
-                color="gray"
-                size={24}
-                style={{
-                  marginTop: Platform.OS === "android" ? 36 : 36,
-                  marginEnd: Platform.OS === "android" ? 16 : 16,
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <FontAwesome5
-                name="user-circle"
-                color="gray"
-                size={24}
-                style={{
-                  marginTop: Platform.OS === "android" ? 36 : 36,
-                  marginEnd: 36,
-                }}
-              />
-            </TouchableOpacity> */}
           </View>
           <Image
             style={styles.image}
@@ -151,7 +118,7 @@ const Language = ({ navigation }) => {
                 <Text style={styles.textEnglish}>English</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
               <View style={styles.readButton}>
                 <Text style={styles.textRead}>READ</Text>
               </View>

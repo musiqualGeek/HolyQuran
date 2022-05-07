@@ -7,7 +7,7 @@ import Main from "./app/screens/Main";
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Provider store={store}>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
@@ -17,7 +17,7 @@ const App = () => {
           <Main />
         </KeyboardAvoidingView>
       </Provider>
-    </View>
+    </SafeAreaView>
   );
 };
 
