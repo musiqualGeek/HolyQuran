@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // marginTop: Platform.OS === "android" ? 48 : 44,
   },
   noAccount: {
     color: "white",

@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginStart: 10,
     marginEnd: 10,
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   card: {
     borderRadius: 15,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "transparent",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+    // marginTop: Platform.OS === "android" ? 48 : 44,
   },
   textLoginWith: {
     fontSize: 16,

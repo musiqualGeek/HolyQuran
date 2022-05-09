@@ -33,11 +33,12 @@ const TabSection = () => {
         </Text>
       </View>
       <Tab.Navigator
-        tabBarOptions={tabBarOptions}
+        screenOptions={tabBarOptions}
+        initialRouteName="HomeTab"
       >
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="HomeTab" component={Home} />
         {/* <Tab.Screen name="Parts" component={Parts} /> */}
-        <Tab.Screen name="Audio" component={PlayAudio} />
+        <Tab.Screen name="AudioTab" component={PlayAudio} />
       </Tab.Navigator>
     </View>
   );

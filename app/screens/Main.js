@@ -55,7 +55,7 @@ const main = () => {
             <Stack.Screen name="Service" component={Service} />
             <Stack.Screen name="Bookmark" component={Bookmark} />
             <Stack.Screen name="Annotations" component={Annotations} />
-            <Stack.Screen name="Home" component={TabSection} />
+            <Stack.Screen name="HomeScreen" component={TabSection} />
             <Stack.Screen name="Parts" component={TabSection} />
             <Stack.Screen name="PayAudio" component={TabSection} />
             <Stack.Screen name="Verses" component={Verses} />
