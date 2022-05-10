@@ -4,20 +4,13 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
-  ScrollView,
-  Platform,
   FlatList,
 } from "react-native";
-import React, { useEffect } from "react";
-
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import { isLoaded } from "expo-font";
+import React from "react";
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
 const Bookmark = ({ navigation, route }) => {
-
-  const handleBookmark = ({})
-
   const DATA = [
     {
       id: "1",
@@ -73,59 +66,36 @@ const Bookmark = ({ navigation, route }) => {
 
   const renderItem = ({ item }) => <Item title={item.title} />;
 
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
-        />
-        <View style={styles.borderContainer}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-              <Ionicons
-                name="arrow-back"
-                color="gray"
-                size={28}
-                style={{ marginTop: 20, marginStart: 36 }}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                justifyContent: "center",
-                alignSelf: "center",
-                fontSize: 24,
-                fontFamily: "Quicksand_1",
-                color: "#264A27",
-                marginStart: 80,
-                marginTop: 15,
-              }}
-            >
-              Bookmark
-            </Text>
-          </View>
-          <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            marginBottom={20}
-          />
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.borderContainer}>
+      <BackRoute navigation={navigation} color="" />
+        <View style={styles.header}>
+          <CustomText text="Bookmark" style={styles.title} type="1" />
         </View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          marginBottom={20}
+        />
       </View>
-    );
-  }
+    </View>
+  );
 };
 
 export default Bookmark;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
@@ -134,20 +104,20 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
-    marginTop: 24,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
   },
   header: {
-    flexDirection: "row",
+    width: "100%",
     marginBottom: 10,
-    // justifyContent: "space-around",
-    // alignSelf: "flex-start",
   },
+  title: {
+    textAlign: "center",
+    fontSize: 24,
+    color: "#264A27",
+  },
+  // Sorted
   listItem: {
     flex: 0.05,
     alignSelf: "center",
@@ -169,11 +139,6 @@ const styles = StyleSheet.create({
     color: "white",
     alignSelf: "center",
     marginTop: 2,
-  },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   item: {
     width: "80%",

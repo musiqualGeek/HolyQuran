@@ -12,14 +12,13 @@ import Annotations from "./Annotations";
 import Bookmark from "./Bookmark";
 import Verses from "./Verses";
 
-import TestScreen from "./TestScreen";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabSection from "./TabSection";
 import ArabicPDF from "./ArabicPDF";
 import { useSelector } from "react-redux";
 import PlayerFunct from "./FunctionalPlayer";
+import BackRoute from "../components/BackRoute";
 
 const Stack = createStackNavigator();
 
@@ -48,20 +47,19 @@ const main = () => {
         )}
         {currentProperty && (
           <>
-            <Stack.Screen name="Introduction" component={Introduction} />
-            <Stack.Screen name="Language" component={Language} />
-            <Stack.Screen name="Arabic" component={Arabic} />
-            <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="Service" component={Service} />
-            <Stack.Screen name="Bookmark" component={Bookmark} />
-            <Stack.Screen name="Annotations" component={Annotations} />
-            <Stack.Screen name="HomeScreen" component={TabSection} />
-            <Stack.Screen name="Parts" component={TabSection} />
-            <Stack.Screen name="PayAudio" component={TabSection} />
-            <Stack.Screen name="Verses" component={Verses} />
-            <Stack.Screen name="ArabicPDF" component={ArabicPDF} />
-            <Stack.Screen name="TestScreen" component={TestScreen} />
-            <Stack.Screen name="Player" component={PlayerFunct} />
+              <Stack.Screen name="Introduction" component={Introduction} />
+              <Stack.Screen name="Language" component={Language} />
+              <Stack.Screen name="Arabic" component={Arabic} />
+              <Stack.Screen name="HomeScreen" component={TabSection} />
+              <Stack.Screen name="Parts" component={TabSection} />
+              <Stack.Screen name="PayAudio" component={TabSection} />
+              <Stack.Screen name="Verses" component={Verses} />
+              <Stack.Screen name="ArabicPDF" component={ArabicPDF} />
+              <Stack.Screen name="Profile" component={Profile} />
+              <Stack.Screen name="Bookmark" component={Bookmark} />
+              <Stack.Screen name="Annotations" component={Annotations} />
+              <Stack.Screen name="Service" component={Service} />
+              <Stack.Screen name="Player" component={PlayerFunct} />
           </>
         )}
       </Stack.Navigator>

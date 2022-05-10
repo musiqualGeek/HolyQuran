@@ -1,24 +1,22 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
 import React from "react";
-
+import { StyleSheet, ScrollView } from "react-native";
 import PlayChapters from "../components/PlayChapters";
 
-export default function PlayAudio() {
+const PlayAudio = ({ navigation }) => {
   return (
-    <View>
-    <ScrollView>
-      
-        <PlayChapters />
-      
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.scrollContainer}
+    >
+      <PlayChapters navigation={navigation} />
     </ScrollView>
-    </View>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+export default PlayAudio;
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    flex: 1,
+  },
+});

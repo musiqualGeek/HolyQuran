@@ -1,308 +1,132 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   ImageBackground,
   TouchableOpacity,
   ScrollView,
-  Platform,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-
 import { Searchbar } from "react-native-paper";
 import HighlightText from "@sanar/react-native-highlight-text";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import { isLoaded } from "expo-font";
+import CustomText from "../components/CustomText";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+const Tab = createMaterialTopTabNavigator();
 
 const Verses = ({ navigation, route }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // const [selected, setSelected] = useState(false);
-  // const [icon, setIcon] = useState('bookmark-o'); //
-  // const handlePress = () => {
-  //   setSelected(true);
-  // };
-
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-  // const [chapter, setChapter] = useState(null)
-  // const [verse, setVerse] = useState(null)
-  // useEffect(() => {
-  //   console.log('\\')
-  //   if(route?.params?.verse?.chapter) setChapter(route.params.verse.chapter)
-  //   if(route?.params?.verse?.verse) setVerse(route.params.verse.verse)
-  // }, [])
-  // const highlightText = string => (
-  //     <Text style={styles.highlightText}>{string}</Text>
-  // );
-  // const replaceSuperLetter = () => {
-  //   for (let i = 0; i < superTable?.length ; i++) {
-  //     let res = verse.replace(/\u1d43/gi, "\"{highlightText('\u1d43')}\"");
-  //     console.log('response => ', res)
-  //   }
-  // }
-  // useEffect(() => {
-  //   if(verse)
-  //   replaceSuperLetter()
-  // }, [chapter, verse])
   const [search, setSearch] = useState("");
   var ourPosition = 0;
   const handleScroll = (e) => {
     ourPosition = e.nativeEvent.contentOffset.y;
   };
 
-  const handleBookmark = () => {
-    console.log("this chapter id =>  ", route.params.ourId);
-    console.log("we are in the position => ", ourPosition);
-  };
-
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
+  const VersIntro = () => {
     return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScroll}
+        onScroll={handleScroll}
+      >
+        <HighlightText
+          style={styles.highlightContainer}
+          selectable={true}
+          highlightStyle={{ backgroundColor: "yellow" }}
+          searchWords={[search]}
+          textToHighlight={route.params.verse.intro}
         />
-        <View style={styles.borderContainer}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-              <Ionicons
-                name="arrow-back"
-                color="gray"
-                size={24}
-                style={{ marginStart: 24 }}
-                // style={{ position: "absolute", right: 24 }}
-                // style={{marginStart: -20, marginTop: Platform.OS === "android" ? 0 : 0}}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: 24,
-                fontFamily: "Quicksand_1",
-                marginTop: -5,
-                color: "#264A27",
-                position: "absolute",
-                right: Platform.OS === "android" ? 145 : 160,
-              }}
-            >
-              Verses
-            </Text>
-            {/* <FontAwesome
-                name='bookmark-o'
-                color="gray"
-                size={24}
-                onPress={handlePress}
-                style={{
-                  position: "absolute",
-                  right: Platform.OS === "android" ? -280 : -310,
-                  marginTop: Platform.OS === "android" ? 2 : 0,
-                }}
-              /> */}
-            {/* <View style={{ backgroundColor: "red", elevation: 8 }}>
-              {isOpen ? (
-                <TouchableOpacity
-                  style={{ backgroundColor: "red", width: 20, height: 30 }}
-                  onPress={() => {
-                    setIsOpen(false);
-                    console.log("hello there from ptk change");
-                  }}
-                >
-                  <FontAwesome
-                    name="bookmark"
-                    color="gray"
-                    size={24}
-                    style={{
-                      position: "absolute",
-                      right: Platform.OS === "android" ? -280 : -310,
-                      marginTop: Platform.OS === "android" ? 2 : 0,
-                    }}
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={{ backgroundColor: "red", width: 20, height: 30 }}
-                  onPress={() => {
-                    setIsOpen(true);
-                    console.log("hello there from ptk change");
-                  }}
-                >
-                  <FontAwesome
-                    name="bookmark-o"
-                    color="gray"
-                    size={24}
-                    style={{
-                      position: "absolute",
-                      right: Platform.OS === "android" ? -280 : -310,
-                      marginTop: Platform.OS === "android" ? 2 : 0,
-                    }}
-                  />
-                </TouchableOpacity>
-              )}
-            </View> */}
-            <View>
-              {isOpen ? (
-                // <TouchableOpacity
-                //   style={{ backgroundColor: "red", width: 20, height: 30 }}
-                //   onPress={() => {
-                //     setIsOpen(false);
-                //     console.log("hello there from ptk change");
-                //   }}
-                // >
-                <FontAwesome
-                  onPress={() => {
-                    setIsOpen(false);
-
-                    console.log("hello there from ptk change");
-                  }}
-                  name="bookmark"
-                  color="gray"
-                  size={24}
-                  style={{
-                    position: "absolute",
-                    right: Platform.OS === "android" ? -280 : -310,
-                    marginTop: Platform.OS === "android" ? 2 : 0,
-                  }}
-                />
-              ) : (
-                // </TouchableOpacity>
-                // <TouchableOpacity
-                //   style={{ backgroundColor: "red", width: 20, height: 30 }}
-                //   onPress={() => {
-                //     setIsOpen(true);
-                //     console.log("hello there from ptk change");
-                //   }}
-                // >
-                <FontAwesome
-                  onPress={() => {
-                    setIsOpen(true);
-                    handleBookmark();
-                    console.log("hello there from ptk change");
-                  }}
-                  name="bookmark-o"
-                  color="gray"
-                  size={24}
-                  style={{
-                    position: "absolute",
-                    right: Platform.OS === "android" ? -280 : -310,
-                    marginTop: Platform.OS === "android" ? 2 : 0,
-                  }}
-                />
-                // </TouchableOpacity>
-              )}
-            </View>
-          </View>
-          <View style={styles.searchBox}>
-            <Searchbar
-              placeholder="Search"
-              onChangeText={setSearch}
-              value={search}
-            />
-          </View>
-          <Text
-            style={{
-              maxWidth: "100%",
-              color: "white",
-              fontSize: Platform.OS === "android" ? 18 : 16,
-              fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-              fontWeight: "bold",
-              alignSelf: "center",
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-              marginStart: 10,
-              marginEnd: 10,
-              marginTop: 20,
-              color: "#ff4c4c",
+      </ScrollView>
+    );
+  };
+  const VersContent = () => {
+    return (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.mainScroll}
+        onScroll={handleScroll}
+      >
+        <HighlightText
+          style={styles.highlightContainer}
+          selectable={true}
+          highlightStyle={{ backgroundColor: "yellow" }}
+          searchWords={[search]}
+          textToHighlight={route.params.verse.verse}
+        />
+      </ScrollView>
+    );
+  };
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.borderContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back" color="gray" size={24} />
+          </TouchableOpacity>
+          <CustomText text="Verses" style={styles.title1} type="1" />
+          <FontAwesome
+            onPress={() => {
+              setIsOpen(false);
             }}
-          >
-            {route.params.verse.chapter}
-          </Text>
-          <Text
-            style={{
-              maxWidth: "100%",
-              color: "white",
-              fontSize: 12,
-              fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-              fontWeight: "bold",
-              alignSelf: "center",
-              marginStart: 10,
-              marginEnd: 10,
-              color: "green",
+            name={isOpen ? "bookmark" : "bookmark-o"}
+            color="gray"
+            size={24}
+          />
+        </View>
+        <View style={styles.searchBox}>
+          <Searchbar
+            placeholder="Search"
+            onChangeText={setSearch}
+            value={search}
+          />
+        </View>
+        <CustomText
+          text={route.params.verse.chapter}
+          style={styles.title2}
+          type="1"
+        />
+        <CustomText
+          text={route.params.verse.info}
+          style={styles.title3}
+          type="1"
+        />
+        <View style={styles.tabContainer}>
+          <Tab.Navigator
+            tabBarOptions={{
+              activeTintColor: "white",
+              inactiveTintColor: "black",
+              indicatorStyle: { backgroundColor: "#496F51", height: "100%" },
+              pressOpacity: 1,
+              style: {
+                backgroundColor: "white",
+                height: 50,
+                borderBottomColor: "white",
+                borderBottomWidth: 2,
+              },
             }}
+            initialRouteName="Chapters"
           >
-            {route.params.verse.info}
-          </Text>
-          <ScrollView
-            style={{ flex: 1, marginBottom: 20, marginTop: 20 }}
-            onScroll={handleScroll}
-          >
-            <HighlightText
-              style={{
-                maxWidth: "100%",
-                color: "white",
-                textAlign: "justify",
-                fontSize: Platform.OS === "android" ? 15 : 16,
-                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                alignSelf: "center",
-                paddingHorizontal: 20,
-                marginStart: 10,
-                marginEnd: 10,
-                marginTop: 10,
-                color: "black",
-              }}
-              selectable={true}
-              highlightStyle={{ backgroundColor: "yellow" }}
-              searchWords={[search]}
-              textToHighlight={route.params.verse.intro}
-            />
-            <HighlightText
-              style={{
-                textAlign: "justify",
-                marginStart: 16,
-                marginEnd: 16,
-                marginTop: 0,
-                paddingHorizontal: 16,
-                fontSize: Platform.OS === "android" ? 15 : 16,
-                fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-              }}
-              selectable={true}
-              highlightStyle={{ backgroundColor: "yellow" }}
-              searchWords={[search]}
-              textToHighlight={route.params.verse.verse}
-              // highlightComponent={<Text
-              //   style={{
-              //     maxWidth: "100%",
-              //     color: "white",
-              //     fontSize: Platform.OS === "android" ? 15 : 16,
-              //     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-              //     paddingHorizontal: 20,
-              //     paddingVertical: 20,
-              //     marginStart: 10,
-              //     marginEnd: 10,
-              //     marginTop: 5,
-              //     color: "#000",
-              //   }}
-              // >
-              //   {verse}
-              // </Text>}
-            />
-          </ScrollView>
+            <Tab.Screen name="Verse Intro" component={VersIntro} />
+            <Tab.Screen name="Verse Content" component={VersContent} />
+          </Tab.Navigator>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 };
 
 export default Verses;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
@@ -311,31 +135,57 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
-    marginTop: 24,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
   },
   header: {
+    width: "100%",
+    paddingHorizontal: 20,
     flexDirection: "row",
-    // justifyContent: "space-around",
-    // alignSelf: "flex-start",
-    marginTop: 30,
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 20,
   },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: Platform.OS === "android" ? 48 : 44,
+  title1: {
+    alignItems: "center",
+    fontSize: 24,
+    color: "#264A27",
   },
   searchBox: {
     width: "80%",
     alignSelf: "center",
     marginTop: 36,
   },
-  highlightText: {
-    color: "red",
+  title2: {
+    fontSize: 18,
+    alignSelf: "center",
+    marginVertical: 20,
+    color: "#264A27",
+  },
+  title3: {
+    fontSize: 12,
+    alignSelf: "center",
+    color: "#264A27",
+    marginBottom: 20,
+  },
+  mainScroll: {
+    flex: 1,
+    marginBottom: 10,
+    marginTop: 10,
+    padding: 25,
+  },
+  highlightContainer: {
+    textAlign: "justify",
+    fontSize: 16,
+    alignSelf: "center",
+    paddingHorizontal: 0,
+    marginBottom: 30,
+    color: "black",
+  },
+  tabContainer: {
+    flex: 1,
+    paddingHorizontal: 30,
+    backgroundColor: "transparent",
   },
 });

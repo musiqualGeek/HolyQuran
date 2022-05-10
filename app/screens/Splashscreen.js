@@ -1,71 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   Image,
-  Platform,
-  Button,
   TouchableOpacity,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import * as Font from "expo-font";
-import Apploading from "expo-app-loading";
-
-const getFonts = () =>
-  Font.loadAsync({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
+import CustomText from "../components/CustomText";
 
 const Splashscreen = ({ navigation }) => {
-  const [fontsloaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Register");
+      navigation.navigate("Login");
     }, 3000);
   }, []);
 
-  if (fontsloaded) {
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.borderContainer}>
-          <View style={styles.VContainer}>
-            <Text style={styles.textQuran}>THE HOLY QURAN</Text>
-            <Image
-              style={styles.image}
-              source={require("../assets/app_logo.png")}
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.borderContainer}>
+        <View style={styles.VContainer}>
+          <CustomText
+            text="THE HOLY QURAN"
+            style={styles.textQuran}
+            type="1"
+          />
+          <Image
+            style={styles.image}
+            source={require("../assets/app_logo.png")}
+          />
+          <View>
+            <CustomText
+              text="English Translation and Commentry by"
+              style={styles.textEnglish}
+              type="2"
             />
-            <View>
-              <Text style={styles.textEnglish}>
-                English Translation and Commentry{"\n"}by
-              </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Register")}
-                style={styles.authorNameBackground}
-              >
-                <Text style={styles.textAuthorName}>Maulana Muhammad Ali</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Register")}
+              style={styles.authorNameBackground}
+            >
+              <CustomText
+                text="Maulana Muhammad Ali"
+                style={styles.textAuthorName}
+                type="1"
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        <StatusBar style="auto" />
       </View>
-    );
-  } else {
-    return (
-      <Apploading
-        startAsync={getFonts}
-        onFinish={() => {
-          setFontsLoaded(true);
-        }}
-        onError={console.warn}
-      />
-    );
-  }
+    </View>
+  );
 };
 
 export default Splashscreen;
@@ -102,20 +85,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#496F51",
   },
   textAuthorName: {
-    fontSize: 24,
-    fontFamily: "Quicksand_1",
+    fontSize: 20,
     color: "#2D5C2E",
     textAlign: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 15,
   },
   textEnglish: {
     textAlign: "center",
     color: "#DAB53F",
     fontSize: 22,
-    fontFamily: "Quicksand_2",
+    maxWidth: "80%",
   },
   textQuran: {
     fontSize: 32,
-    fontFamily: "Quicksand_1",
     textAlign: "center",
     marginTop: 20,
     color: "#DAB53F",

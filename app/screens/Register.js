@@ -10,8 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import { RootSiblingParent } from 'react-native-root-siblings';
 import {
   signUpUser,
   resetAllAuthForms,
@@ -19,7 +17,8 @@ import {
 } from "../redux/User/user.actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Entypo } from "@expo/vector-icons";
-// import { ScrollView } from "react-native-gesture-handler";
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
 const mapState = ({ user }) => ({
   propertySignUpSuccess: user.propertySignUpSuccess,
@@ -27,14 +26,6 @@ const mapState = ({ user }) => ({
 });
 
 const Register = ({ navigation }) => {
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-
-  // Start
-  console.log("Register Screen");
   const { propertySignUpSuccess, errors } = useSelector(mapState);
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
@@ -50,9 +41,9 @@ const Register = ({ navigation }) => {
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
 
-  useEffect(() => {
-    ResetForm();
-  }, []);
+  // useEffect(() => {
+  //   ResetForm();
+  // }, []);
 
   const ResetForm = () => {
     onChangefirstName("");
@@ -79,6 +70,7 @@ const Register = ({ navigation }) => {
       navigation.navigate("Login");
     }
   }, [propertySignUpSuccess]);
+
   const handleRegister = async () => {
     console.log("Here");
     var checking_form = "true";
@@ -109,26 +101,34 @@ const Register = ({ navigation }) => {
     console.log(propertySignUpSuccess, errors);
     setCurrentErrors(errors);
   }, [errors]);
-  
-  // End
-  // if (!fontsLoaded) {
-  //   return <Text>Alex waiting</Text>;
-  // } else {
+
   return (
     <>
       <View style={styles.mainContainer}>
-      <ImageBackground
-        style={styles.border}
-        source={require("../assets/border_1.png")}
-      />
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.borderContainer}>
-          <Image
-            style={styles.image}
-            source={require("../assets/appIcon_Iphone.jpg")}
-          />
+        <ImageBackground
+          style={styles.border}
+          source={require("../assets/border_1.png")}
+          resizeMode="cover"
+        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.borderContainer}
+        >
+          <BackRoute navigation={navigation} color="" />
+          <View style={styles.imageTopContainer}>
+            <Image
+              style={styles.imageTop}
+              source={require("../assets/appIcon_Iphone.jpg")}
+              resizeMode="contain"
+            />
+          </View>
           <View style={styles.card}>
-            <Text style={styles.textWelcome}>WELCOME TO</Text>
-            <Text style={styles.textQuran}>The Holy Quran</Text>
+            <CustomText text="WELCOME TO" style={styles.textWelcome} type="1" />
+            <CustomText
+              text="The Holy Quran"
+              style={styles.textQuran}
+              type="1"
+            />
             <View style={styles.inputView}>
               <TextInput
                 style={styles.inputText}
@@ -138,7 +138,13 @@ const Register = ({ navigation }) => {
                 placeholderTextColor="gray"
               />
             </View>
-            <Text style={styles.fieldErrors}>{firstNameErrors}</Text>
+            {firstNameErrors.length > 0 && (
+              <CustomText
+                text={firstNameErrors}
+                style={styles.fieldErrors}
+                type="1"
+              />
+            )}
             <View style={styles.inputView}>
               <TextInput
                 style={styles.inputText}
@@ -148,8 +154,25 @@ const Register = ({ navigation }) => {
                 onChangeText={onChangeEmail}
               />
             </View>
-            <Text style={styles.fieldErrors}>{emailErrors}</Text>
-            <View style={styles.inputView}>
+            {emailErrors.length > 0 && (
+              <CustomText
+                text={emailErrors}
+                style={styles.fieldErrors}
+                type="1"
+              />
+            )}
+            <View
+              style={[
+                styles.inputView,
+                {
+                  position: "relative",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingHorizontal: 20,
+                },
+              ]}
+            >
               <TextInput
                 style={styles.input}
                 onChangeText={onChangepassword}
@@ -166,32 +189,43 @@ const Register = ({ navigation }) => {
                 onPress={handlePasswordSecure}
               />
             </View>
-            <Text style={styles.fieldErrors}>{passwordErrors}</Text>
+            {passwordErrors.length > 0 && (
+              <CustomText
+                text={passwordErrors}
+                style={styles.fieldErrors}
+                type="1"
+              />
+            )}
             <View>
               {firstName && email && password ? (
                 <TouchableOpacity
-                  style={styles.registerBtn}
+                  style={styles.pinkBtn}
                   onPress={handleRegister}
                 >
-                  <Text style={styles.registerText}>Register</Text>
+                  <Text style={styles.textBtn}>Register</Text>
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity disabled style={styles.registerBtn2}>
-                  <Text style={styles.registerText}>Register</Text>
+                <TouchableOpacity disabled style={styles.pinkBtn2}>
+                  <Text style={styles.textBtn}>Register</Text>
                 </TouchableOpacity>
               )}
             </View>
-            <Text style={[styles.fieldErrors, { marginTop: 10 }]}>
-              {currentErrors}
-            </Text>
+            {currentErrors.length > 0 && (
+              <CustomText
+                text={currentErrors}
+                style={[styles.fieldErrors, { marginTop: 10 }]}
+                type="1"
+              />
+            )}
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Text style={styles.haveAccount}>
-                Already have an account? Login
-              </Text>
+              <CustomText
+                text="Already have an account? Login here"
+                style={styles.noAccount}
+                type="1"
+              />
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <StatusBar style="auto" />
       </View>
     </>
   );
@@ -200,17 +234,11 @@ const Register = ({ navigation }) => {
 export default Register;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
-    // width: Dimensions.get("window").width,
-    // height: Dimensions.get("window").height,
-    // position: "absolute",
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
-    // opacity: 1,
-    // zIndex: -1,
-    // resizeMode: "cover",
     width: "100%",
     height: "100%",
     position: "absolute",
@@ -218,118 +246,83 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    marginStart: 10,
-    marginEnd: 10,
-    // marginBottom: 16,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
+  },
+  imageTopContainer: {
+    width: "80%",
+    alignSelf: "center",
+  },
+  imageTop: {
+    width: "100%",
+    height: 340,
+    borderRadius: 8,
   },
   card: {
+    paddingVertical: 30,
+    paddingHorizontal: 10,
     borderRadius: 15,
     backgroundColor: "#496F51",
-    overflow: "hidden",
     width: "80%",
-    // height: 420,
     alignSelf: "center",
-    marginVertical: 50,
-    shadowRadius: 10,
-    shadowRadius: 2,
     elevation: 3,
-  },
-  haveAccount: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 16,
-    textAlign: "center",
-    fontFamily: "Quicksand_1",
     marginBottom: 20,
-  },
-  image: {
-    width: 160,
-    height: 160,
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 45,
-    borderRadius: 20,
-  },
-  inputText: {
-    height: 50,
-    color: "black",
-  },
-  inputView: {
-    width: "90%",
-    backgroundColor: "#ececec",
-    borderRadius: 25,
-    height: 50,
-    marginTop: 20,
-    justifyContent: "center",
-    alignSelf: "center",
-    paddingStart: 20,
-  },
-  registerBtn: {
-    width: "80%",
-    backgroundColor: "#DAB53F",
-    borderRadius: 25,
-    height: 50,
-    alignSelf: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-  registerBtn2: {
-    width: "80%",
-    backgroundColor: "grey",
-    borderRadius: 25,
-    height: 50,
-    alignSelf: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-  registerText: {
-    color: "#fff",
-    textAlign: "center",
-    fontFamily: "Quicksand_1",
-    fontSize: 16
-  },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "transparent",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-  },
-  textLoginWith: {
-    fontSize: 16,
-    textAlign: "center",
-    color: "#ececec",
   },
   textWelcome: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 18,
     color: "#ececec",
-    marginTop: 30,
-    fontFamily: "Quicksand_1",
   },
   textQuran: {
     textAlign: "center",
     fontSize: 32,
     color: "#DAB53F",
-    marginTop: 5,
-    fontFamily: "Quicksand_1",
+    marginBottom: 20,
   },
-  eyeIcon: {
-    position: "absolute",
-    right: 20,
-    top: 15,
-    fontSize: 22,
+  inputView: {
+    width: "90%",
+    backgroundColor: "#ececec",
+    borderRadius: 25,
+    paddingVertical: 10,
+    marginVertical: 5,
+    alignSelf: "center",
+    paddingStart: 20,
   },
-  disabledBtn: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "grey",
-    marginTop: 50,
-    borderRadius: 10,
+  inputText: {
+    color: "black",
+    fontSize: 16,
   },
   fieldErrors: {
-    // backgroundColor: "white",
     color: "red",
     fontSize: 14,
+    textAlign: "center",
+  },
+  pinkBtn: {
+    width: "90%",
+    backgroundColor: "#DAB53F",
+    borderRadius: 25,
+    paddingVertical: 10,
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  pinkBtn2: {
+    width: "90%",
+    backgroundColor: "grey",
+    borderRadius: 25,
+    paddingVertical: 10,
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  textBtn: {
+    color: "white",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  noAccount: {
+    color: "white",
+    fontSize: 16,
+    marginTop: 16,
     textAlign: "center",
   },
 });

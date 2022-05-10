@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Platform,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { Searchbar } from "react-native-paper";
-import { StatusBar } from "expo-status-bar";
 import quoran from "../assets/quoran.json";
 import { Ionicons } from "@expo/vector-icons";
-
-import { useFonts } from "@expo-google-fonts/quicksand";
+import CustomText from "../components/CustomText";
 
 const data = [
   { id: "1", title: "1. Al-Fa\u0304tiḥah: THE OPENING" },
@@ -150,15 +141,9 @@ const data = [
   { id: "113", title: "113. Al-Falaq: THE DAWN" },
   { id: "114", title: "114. Al-Na\u0304s : THE MEN" },
 ];
-
 const dataTable = quoran;
 
 const Home = ({ navigation }) => {
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
   const [search, setSearch] = useState("");
   const [searchArray, setSearchArray] = useState([]);
 
@@ -190,91 +175,64 @@ const Home = ({ navigation }) => {
     return false;
   };
   const handleVerse = (id) => {
-    console.log("Id from handleVerse", id);
     let verseId = parseInt(id);
     navigation.navigate("Verses", {
       verse: dataTable[verseId - 1],
       ourId: verseId,
     });
   };
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    return (
-      <View style={styles.mainContainer}>
-        {/* <ImageBackground
-          style={styles.image}
-          source={require("../assets/border_new.png")}
-        /> */}
-        <View style={styles.borderContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-            <Ionicons
-              name="arrow-back"
-              color="gray"
-              size={24}
-              style={{ margin: 20 }}
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.borderContainer}>
+        <CustomText text="QURAN CHAPTERS" style={styles.title} type="1" />
+        <View style={styles.container}>
+          <Searchbar
+            placeholder="Search"
+            onChangeText={setSearch}
+            value={search}
+            borderColor="#36bf49"
+          />
+          {searchArray.length > 0 ? (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={searchArray}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => handleVerse(item.id)}
+                  style={styles.listItem}
+                >
+                  <CustomText
+                    text={item.title}
+                    style={styles.listItemText}
+                    type="1"
+                  />
+                </TouchableOpacity>
+              )}
             />
-          </TouchableOpacity>
-          <Text
-            style={{
-              justifyContent: "center",
-              alignSelf: "center",
-              fontSize: 24,
-              fontFamily: "Quicksand_1",
-              color: "#264A27",
-              marginTop: -50,
-            }}
-          >
-            QURAN CHAPTERS
-          </Text>
-          <View style={styles.container}>
-            <Searchbar
-              placeholder="Search"
-              onChangeText={setSearch}
-              value={search}
-              borderColor="#36bf49"
+          ) : (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={data}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => handleVerse(item.id)}
+                  style={styles.listItem}
+                >
+                  <CustomText
+                    text={item.title}
+                    style={styles.listItemText}
+                    type="1"
+                  />
+                </TouchableOpacity>
+              )}
             />
-            {searchArray.length > 0 ? (
-              <FlatList
-                data={searchArray}
-                keyExtractor={(item) => "" + item.id}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => handleVerse(item.id)}
-                    style={styles.listItem}
-                  >
-                    <Text style={styles.listItemText}>{item.title}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            ) : (
-              <FlatList
-                data={data}
-                keyExtractor={(item) => "" + item.id}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => handleVerse(item.id)}
-                    style={styles.listItem}
-                  >
-                    <Text style={styles.listItemText}>{item.title}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            )}
-            {/* <Image
-              style={styles.image}
-              source={require("../assets/mosque.png")}
-            /> */}
-            <StatusBar style="auto" />
-          </View>
-          {/* <ImageBackground
-          style={[styles.fixed, styles.bgcontainter, { zIndex: -1 }]}
-          source={require("../assets/mosque.png")}
-        /> */}
+          )}
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 };
 
 export default Home;
@@ -282,29 +240,26 @@ export default Home;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    height: "100%",
-    backgroundColor: "#fff",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
+    backgroundColor: "white",
   },
-  borderContainer: {
-    flex: 1,
-    borderWidth: 0.1,
-    borderColor: "#496F51",
-    paddingBottom: 16,
-  },
-  container: {
-    marginTop: 16,
-    flex: 1,
-    backgroundColor: "#fff",
-    marginStart: 20,
-    marginEnd: 20,
-    justifyContent: "center",
-  },
-  image: {
+  border: {
     width: "100%",
     height: "100%",
     position: "absolute",
     bottom: 0,
+  },
+  borderContainer: {
+    flex: 1,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
+  },
+  title: {
+    justifyContent: "center",
+    alignSelf: "center",
+    fontSize: 24,
+    color: "#264A27",
+    marginVertical: 10,
   },
   listItem: {
     marginTop: 10,
@@ -315,7 +270,14 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     fontSize: 16,
-    fontFamily: "Quicksand_1",
     color: "white",
+  },
+  container: {
+    marginTop: 16,
+    flex: 1,
+    backgroundColor: "#fff",
+    marginStart: 20,
+    marginEnd: 20,
+    justifyContent: "center",
   },
 });

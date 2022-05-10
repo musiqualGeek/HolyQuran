@@ -1,17 +1,15 @@
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   TextInput,
   ImageBackground,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "@expo-google-fonts/quicksand";
 import React, { useEffect, useState } from "react";
 import { recoveryUser } from "../redux/User/user.actions";
 import { useDispatch, useSelector } from "react-redux";
-// import React, { FC, ReactElement, useState } from "react";
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
 const mapState = ({ user }) => ({
   propertyRecoverySuccess: user.propertyRecoverySuccess,
@@ -26,7 +24,6 @@ const ForgotPassword = ({ navigation }) => {
 
   useEffect(() => {
     if (propertyRecoverySuccess) navigation.navigate("Splashscreen");
-
     if (errors) setErrorsField(errors);
   }, [propertyRecoverySuccess]);
 
@@ -34,11 +31,6 @@ const ForgotPassword = ({ navigation }) => {
     dispatch(recoveryUser(email));
   };
 
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -46,53 +38,28 @@ const ForgotPassword = ({ navigation }) => {
         source={require("../assets/border_1.png")}
       />
       <View style={styles.borderContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Ionicons
-              name="arrow-back"
-              color="gray"
-              size={24}
-              style={{ marginTop: 20, marginStart: 36 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ fontSize: 24, marginTop: 50, textAlign: "center" }}>
-          Forgot Password?
-        </Text>
-        <View
-          style={{
-            width: "80%",
-            height: 45,
-            marginTop: 50,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignSelf: "center",
-            backgroundColor: "white",
-            borderWidth: 1,
-            borderRadius: 5,
-            marginBottom: 20,
-          }}
-        >
-          <TextInput
-            placeholder="Enter email"
-            placeholderTextColor="grey"
-            value={email}
-            onChangeText={setEmail}
-          />
-        </View>
+      <BackRoute navigation={navigation} color="" />
+        <CustomText text="Forgot Password?" style={styles.title1} type="1" />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter email"
+          placeholderTextColor="grey"
+          value={email}
+          onChangeText={setEmail}
+        />
         {errorsField.length > 0 && (
-          <Text style={styles.fieldErrors}>{errorsField}</Text>
+          <CustomText text={errorsField} style={styles.fieldErrors} type="1" />
         )}
         {email.length > 0 ? (
           <TouchableOpacity
             style={styles.thisButonStyle}
             onPress={handleRecovery}
           >
-            <Text style={styles.textBtn}>Recover</Text>
+            <CustomText text="Recover" style={styles.textBtn} type="1" />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.thisButonStyle2}>
-            <Text style={styles.textBtn}>Recover</Text>
+            <CustomText text="Recover" style={styles.textBtn} type="1" />
           </TouchableOpacity>
         )}
       </View>
@@ -103,6 +70,10 @@ const ForgotPassword = ({ navigation }) => {
 export default ForgotPassword;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
@@ -111,69 +82,52 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
-    marginTop: 24,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
   },
-  card: {
-    borderRadius: 15,
-    backgroundColor: "#496F51",
-    overflow: "hidden",
-    width: 300,
-    height: 300,
+  title1: {
+    fontSize: 24,
+    marginTop: 30,
+    textAlign: "center",
+  },
+  input: {
+    width: "80%",
     alignSelf: "center",
-    marginTop: 100,
-    shadowRadius: 10,
-    shadowRadius: 2,
-    elevation: 3,
-  },
-  header: {
-    flexDirection: "row",
-  },
-  imageMosque: {
-    width: "100%",
-    height: 250,
-    position: "absolute",
-    bottom: 0,
-    marginTop: 25,
-  },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: Platform.OS === "android" ? 48 : 44,
-    paddingHorizontal: 0,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 15,
+    fontSize: 16,
+    marginTop: 50,
+    marginBottom: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   fieldErrors: {
     color: "red",
     fontSize: 12,
     marginVertical: 10,
-    marginLeft: 0,
     textAlign: "center",
-  },
-  thisButonStyle: {
-    backgroundColor: "#496F51",
-    padding: 0,
-    marginTop: 0,
-    width: "80%",
-    height: 55,
-    justifyContent: "center",
-    alignSelf: "center",
-    borderRadius: 10,
-  },
-  thisButonStyle2: {
-    backgroundColor: "grey",
-    padding: 0,
-    marginTop: 0,
-    width: "80%",
-    height: 55,
-    justifyContent: "center",
-    alignSelf: "center",
-    borderRadius: 10,
   },
   textBtn: {
     color: "white",
-    textAlignVertical: "center",
     alignSelf: "center",
+    fontSize: 18,
+  },
+  thisButonStyle: {
+    backgroundColor: "#496F51",
+    padding: 10,
+    marginTop: 0,
+    width: "80%",
+    alignSelf: "center",
+    borderRadius: 15,
+  },
+  thisButonStyle2: {
+    backgroundColor: "grey",
+    padding: 10,
+    marginTop: 0,
+    width: "80%",
+    alignSelf: "center",
+    borderRadius: 15,
   },
 });

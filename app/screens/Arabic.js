@@ -1,205 +1,89 @@
+import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
   ImageBackground,
-  TouchableOpacity,
   ScrollView,
-  Platform,
-  Dimensions,
 } from "react-native";
-import React, { useEffect } from "react";
+import Part from "../components/Part";
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
-import { StatusBar } from "expo-status-bar";
-import PdfReader from "rn-pdf-reader-js";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import { isLoaded } from "expo-font";
-
-const Bookmark = ({ navigation, route }) => {
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
+const Arabic = ({ navigation }) => {
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <ScrollView
+        style={styles.borderContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <BackRoute navigation={navigation} color="" />
+        <CustomText
+          text={`Arabic Translation${"\n"}Of Quran`}
+          style={styles.title}
+          type="1"
         />
-        <View style={styles.borderContainer}>
-          <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-            <Ionicons
-              name="arrow-back"
-              color="gray"
-              size={28}
-              style={{ marginTop: 20, marginStart: 36 }}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 24,
-              fontFamily: "Quicksand_1",
-              color: "#264A27",
-              textAlign: "center",
-              marginTop: -30,
-              marginStart: 10
-            }}
-          >
-            Arabic Translation{"\n"}Of Quran
-          </Text>
-          <View style={styles.block_1}>
-          {/* <TouchableOpacity
-              style={{width:50,height:40,backgroundColor:'red'}}
-                onPress={()=> {console.log('hi there')}}
-              >
-                <Text>Oussama</Text>
-              </TouchableOpacity> */}
-            <View style={styles.part}>
-             
-              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca"} )}>
-                {/* <PdfReader
-                  style={{
-                    width: Dimensions.get("window").width,
-                    height: Dimensions.get("window").height,
-                  }}
-                  source={{
-                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca",
-                  }}
-                /> */}
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                    fontWeight: "bold",
-                    lineHeight: 25,
-                  }}
-                >
-                  AUDIO PART{"\n"}(1-9)
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.part}>
-              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c"} )}>
-                {/* <PdfReader
-                  style={{
-                    width: Dimensions.get("window").width,
-                    height: Dimensions.get("window").height,
-                  }}
-                  source={{
-                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c",
-                  }}
-                /> */}
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                    fontWeight: "bold",
-                    lineHeight: 25,
-                  }}
-                >
-                  AUDIO PART{"\n"}(9-16)
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.block_2}>
-            <View style={styles.part}>
-              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde"} )}>
-                {/* <PdfReader
-                  style={{
-                    width: Dimensions.get("window").width,
-                    height: Dimensions.get("window").height,
-                  }}
-                  source={{
-                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde",
-                  }}
-                /> */}
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                    fontWeight: "bold",
-                    lineHeight: 25,
-                  }}
-                >
-                  AUDIO PART{"\n"}(16-22)
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.part}>
-              <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809"} )}>
-                {/* <PdfReader
-                  style={{
-                    width: Dimensions.get("window").width,
-                    height: Dimensions.get("window").height,
-                  }}
-                  source={{
-                    uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809",
-                  }}
-                /> */}
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                    fontWeight: "bold",
-                    lineHeight: 25,
-                  }}
-                >
-                  AUDIO PART{"\n"}(22-27)
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.part}>
-            <TouchableOpacity onPress={() => navigation.navigate("ArabicPDF", {uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9"} )}>
-              {/* <PdfReader
-                style={{
-                  width: Dimensions.get("window").width,
-                  height: Dimensions.get("window").height,
-                }}
-                source={{
-                  uri: "https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9",
-                }}
-              /> */}
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-                  fontWeight: "bold",
-                  lineHeight: 25,
-                }}
-              >
-                AUDIO PART{"\n"}(27-30)
-              </Text>
-            </TouchableOpacity>
-          </View>
-          </View>
+        <View style={styles.block_1}>
+          <Part
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca"
+            name={`AUDIO PART${"\n"}(1-9)`}
+            navigation={navigation}
+          />
+          <Part
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c"
+            name={`AUDIO PART${"\n"}(9-16)`}
+            navigation={navigation}
+          />
         </View>
-        <StatusBar style="auto" />
-      </View>
-    );
-  }
+        <View style={styles.block_2}>
+          <Part
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde"
+            name={`AUDIO PART${"\n"}(16-22)`}
+            navigation={navigation}
+          />
+          <Part
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809"
+            name={`AUDIO PART${"\n"}(22-27)`}
+            navigation={navigation}
+          />
+        </View>
+        <Part
+          url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9"
+          name={`AUDIO PART${"\n"}(27-30)`}
+          navigation={navigation}
+        />
+      </ScrollView>
+    </View>
+  );
 };
 
-export default Bookmark;
+export default Arabic;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
     position: "absolute",
     bottom: 0,
+  },
+  borderContainer: {
+    flex: 1,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
+  },
+  title: {
+    fontSize: 24,
+    color: "#264A27",
+    textAlign: "center",
+    marginBottom: 20,
   },
   block_1: {
     flexDirection: "row",
@@ -208,39 +92,5 @@ const styles = StyleSheet.create({
   block_2: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-  },
-  borderContainer: {
-    flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
-    marginTop: 24,
-  },
-  // header: {
-  //   flexDirection: "row",
-  //   justifyContent: "space-around",
-  //   alignSelf: "flex-start",
-  // },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: Platform.OS === "android" ? 48 : 44,
-  },
-  part: {
-    justifyContent: "center",
-    width: 120,
-    height: 120,
-    backgroundColor: "#496F51",
-    alignSelf: "center",
-    marginTop: 60,
-    borderRadius: 20,
-    elevation: 5,
-    shadowColor: "gray",
-    shadowOffset: { height: 15 },
-    shadowRadius: 9,
-    shadowOpacity: 0.3,
   },
 });

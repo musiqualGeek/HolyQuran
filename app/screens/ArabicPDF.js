@@ -1,19 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View , Dimensions} from 'react-native'
-import PDFReader  from "rn-pdf-reader-js";
+import PDFReader from "rn-pdf-reader-js";
 
 const ArabicPDF = ({ route }) => {
+  const { uri } = route.params;
   return (
-      <PDFReader
-        source={{
-          uri: route.params.uri,
-        }}/>
-    // <View style={{backgroundColor:'red',flex:1}}>
-    //   <Text>ArabicPDF</Text>
-    // </View>
-  )
-}
+    <PDFReader
+      source={{
+        uri: uri,
+      }}
+    />
+  );
+};
 
-export default ArabicPDF; 
-
-const styles = StyleSheet.create({})
+export default ArabicPDF;

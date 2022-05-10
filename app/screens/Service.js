@@ -1,73 +1,54 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import React from "react";
-
 import { Ionicons } from "@expo/vector-icons";
-import { signOut } from "firebase/auth";
-import { useFonts } from "@expo-google-fonts/quicksand";
-import { auth } from "../../firebase/utils";
 import { signOutUser } from "../redux/User/user.actions";
 import { useDispatch } from "react-redux";
-
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
 const Service = ({ navigation }) => {
   const dispatch = useDispatch();
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-  
-    const handleLogout = () => {
-      dispatch(signOutUser());
-    };
-    return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
-        />
-        <View style={styles.borderContainer}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-              <Ionicons
-                name="arrow-back"
-                color="gray"
-                size={28}
-                style={{ marginTop: 20, marginStart: 36 }}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                justifyContent: "center",
-                alignSelf: "center",
-                fontSize: 24,
-                fontFamily: 'Quicksand_1',
-                color: "#264A27",
-                marginStart: 80,
-                marginTop: 15
-              }}
-            >
-              Service
-            </Text>
-          </View>
-          {/* <Image
-            style={styles.image}
-            source={require("../assets/app_logo.png")}
-          /> */}
-          <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
-            <Text style={styles.logoutText}>LOGOUT</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.changePasswordBtn} onPress={() => navigation.navigate("ForgotPassword")}>
-            <Text style={styles.changePasswordText}>CHANGE PASSWORD</Text>
-          </TouchableOpacity>
+  const handleLogout = () => {
+    dispatch(signOutUser());
+  };
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.borderContainer}>
+        <BackRoute navigation={navigation} color="" />
+        <View style={styles.header}>
+          <CustomText text="Service" style={styles.title} type="1" />
+          <View style={{ width: 50 }}></View>
         </View>
+        <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
+          <CustomText text="LOGOUT" style={styles.title2} type="1" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.logoutBtn}
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
+          <CustomText text="CHANGE PASSWORD" style={styles.title2} type="1" />
+        </TouchableOpacity>
       </View>
-    );
-  }
+    </View>
+  );
+};
 
 export default Service;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
@@ -76,50 +57,30 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
-  },
-  changePasswordBtn: {
-    width: "80%",
-    backgroundColor: "#496F51",
-    borderRadius: 25,
-    height: 50,
-    alignSelf: "center",
-    justifyContent: "center",
-    marginTop: 30,
-    elevation: 5,
-  },
-  changePasswordText: {
-    color: "#fff",
-    fontFamily: 'Quicksand_1',
-    textAlign: "center",
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
   },
   header: {
-    flexDirection: "row",
-    marginTop: 30,
+    width: "100%",
+  },
+  title: {
+    alignSelf: "center",
+    fontSize: 24,
+    color: "#264A27",
+    marginTop: 15,
   },
   logoutBtn: {
     width: "80%",
     backgroundColor: "#496F51",
     borderRadius: 25,
-    height: 50,
     alignSelf: "center",
-    justifyContent: "center",
-    marginTop: 45,
+    marginTop: 20,
     elevation: 5,
+    paddingVertical: 10,
   },
-  logoutText: {
+  title2: {
     color: "#fff",
-    fontFamily: 'Quicksand_1',
     textAlign: "center",
-  },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    marginTop: Platform.OS === "android" ? 48 : 44,
   },
 });

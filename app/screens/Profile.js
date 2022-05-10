@@ -1,136 +1,57 @@
+import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import React from "react";
-
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { useFonts } from "@expo-google-fonts/quicksand";
 import { auth } from "../../firebase/utils";
+import CustomText from "../components/CustomText";
+import BackRoute from "../components/BackRoute";
 
 const Profile = ({ navigation }) => {
-  let [fontsLoaded] = useFonts({
-    Quicksand_1: require("../assets/fonts/Quicksand_Bold.ttf"),
-    Quicksand_2: require("../assets/fonts/Quicksand_Regular.ttf"),
-    Quicksand_3: require("../assets/fonts/Quicksand_Light.ttf"),
-  });
-  if (!fontsLoaded) {
-    return <Text>Alex waiting</Text>;
-  } else {
-    return (
-      <View style={styles.mainContainer}>
-        <ImageBackground
-          style={styles.border}
-          source={require("../assets/border_1.png")}
-        />
-        <View style={styles.borderContainer}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Language")}>
-              <Ionicons
-                name="arrow-back"
-                color="gray"
-                size={28}
-                style={{ marginTop: 48, marginStart: 36 }}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                justifyContent: "center",
-                alignSelf: "center",
-                fontSize: 24,
-                fontFamily: "Quicksand_1",
-                color: "#264A27",
-                marginTop: -35,
-              }}
-            >
-              Profile
-            </Text>
-            {/* <View style={styles.profilePic}>
-            {auth.currentUser.photoURL ? (
-              <Image
-                source={{ uri: auth.currentUser.photoURL }}
-                style={{
-                  width: 200,
-                  height: 200,
-                }}
-                resizeMode="cover"
-              />
-            ) : (
-              <FontAwesome
-                name="user"
-                color="#ffc845"
-                size={80}
-                style={{
-                  margin: 16,
-                  justifyContent: "center",
-                  alignSelf: "center",
-                }}
-              />
-            )}
-          </View> */}
-            {/* <Image
-          style={styles.image}
-          source={require("../assets/app_logo.png")}
-        /> */}
-            <Text
-              style={{
-                fontSize: 18,
-                fontFamily: "Quicksand_1",
-                color: "#264A27",
-                marginTop: 60,
-                marginStart: 30,
-              }}
-            >
-              Name
-            </Text>
-            <View style={styles.nameContainer}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontFamily: "Quicksand_1",
-                  fontSize: 16,
-                }}
-              >
-                {auth.currentUser.displayName && auth.currentUser.displayName}
-              </Text>
-            </View>
-            <Text
-              style={{
-                fontSize: 18,
-                fontFamily: "Quicksand_1",
-                color: "#264A27",
-                marginTop: 16,
-                marginStart: 30,
-              }}
-            >
-              E-mail
-            </Text>
-            <View style={styles.emailContainer}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontFamily: "Quicksand_1",
-                  fontSize: 16,
-                }}
-              >
-                {auth.currentUser.email && auth.currentUser.email}
-              </Text>
-            </View>
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground
+        style={styles.border}
+        source={require("../assets/border_1.png")}
+      />
+      <View style={styles.borderContainer}>
+      <BackRoute navigation={navigation} color="" />
+        <View style={styles.header}>
+          <CustomText text="Profile" style={styles.title1} type="1" />
+          <CustomText text="Name" style={styles.title2} type="1" />
+          <View style={styles.nameContainer}>
+            <CustomText
+              text={
+                auth.currentUser.displayName
+                  ? auth.currentUser.displayName
+                  : "..."
+              }
+              style={styles.title3}
+              type="1"
+            />
+          </View>
+          <CustomText text="E-mail" style={styles.title2} type="1" />
+          <View style={styles.nameContainer}>
+            <CustomText
+              text={auth.currentUser.email ? auth.currentUser.email : "..."}
+              style={styles.title3}
+              type="1"
+            />
           </View>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 };
 
 export default Profile;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   border: {
     width: "100%",
     height: "100%",
@@ -139,13 +60,30 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: "#DAB53F",
-    // marginTop: Platform.OS === "android" ? 48 : 44,
-    marginStart: 10,
-    marginEnd: 10,
-    marginBottom: 16,
+    marginVertical: 10,
+    marginTop: 28,
+    marginBottom: 28,
   },
+  title1: {
+    alignSelf: "center",
+    fontSize: 24,
+    fontFamily: "Quicksand_1",
+    color: "#264A27",
+    marginTop: 10,
+  },
+  title2: {
+    fontSize: 18,
+    color: "#264A27",
+    marginTop: 20,
+    marginLeft: 30,
+  },
+  title3: {
+    textAlign: "center",
+    color: "white",
+    fontFamily: "Quicksand_1",
+    fontSize: 16,
+  },
+  // Sorted
   emailContainer: {
     width: "80%",
     backgroundColor: "#496F51",
@@ -154,16 +92,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     marginTop: 5,
-  },
-  // header: {
-  //   flexDirection: "row",
-  //   // justifyContent: "space-around",
-  //   // alignSelf: "flex-start",
-  // },
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    marginTop: Platform.OS === "android" ? 48 : 44,
   },
   nameContainer: {
     width: "80%",
