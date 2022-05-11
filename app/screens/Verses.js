@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
   ImageBackground,
   TouchableOpacity,
   ScrollView,
+  Modal,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import HighlightText from "@sanar/react-native-highlight-text";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import CustomText from "../components/CustomText";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import quoran from "../assets/quoran.json";
 
 const Tab = createMaterialTopTabNavigator();
 
 const Verses = ({ navigation, route }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(null);
   const [search, setSearch] = useState("");
-  var ourPosition = 0;
-  const handleScroll = (e) => {
-    ourPosition = e.nativeEvent.contentOffset.y;
-  };
+  const [yScroll1, setyScroll1] = useState(0);
+  const [yScroll2, setyScroll2] = useState(0);
+
+  // const handleScroll = (e) => {
+  //   setyScroll(e.nativeEvent.contentOffset.y);
+  // };
 
   const VersIntro = () => {
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.mainScroll}
-        onScroll={handleScroll}
+        // onScroll={(e) => setyScroll1(e.nativeEvent.contentOffset.y)}
       >
         <HighlightText
           style={styles.highlightContainer}
@@ -45,7 +51,7 @@ const Verses = ({ navigation, route }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.mainScroll}
-        onScroll={handleScroll}
+        // onScroll={(e) => setyScroll2(e.nativeEvent.contentOffset.y)}
       >
         <HighlightText
           style={styles.highlightContainer}
@@ -57,26 +63,110 @@ const Verses = ({ navigation, route }) => {
       </ScrollView>
     );
   };
+
+  const saveBookmark = async () => {
+    const value = await AsyncStorage.getItem("@holy_quran_Key");
+    try {
+      if (!isOpen) {
+        // this 1 bookmark-o => bookmark
+        if (value === null) {
+          let arr = [route.params.ourId];
+          console.log("array => ", arr);
+          const jsonValue = JSON.stringify(arr);
+          console.log("jsonValue => ", jsonValue);
+          await AsyncStorage.setItem("@holy_quran_Key", jsonValue);
+          setSaveSuccess(true);
+        } else {
+          // let arr = parse(value)
+          console.log('Areray here 2 ', arr)
+        }
+      } else {
+        // this 2 bookmark => bookmark-o
+        console.log("remove saved bookmark");
+        setSaveSuccess(true);
+      }
+    } catch (e) {
+      setSaveSuccess(false);
+    }
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 3000);
+  };
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@holy_quran_Key");
+      console.log(" value => ", value);
+      if (value !== null) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const removeData = async () => {
+    try {
+      await AsyncStorage.removeItem("@holy_quran_Key");
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    // removeData();
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(" =)> =)> ", yScroll1);
+    console.log(" =)> =)> ", yScroll2);
+  }, [yScroll1, yScroll2]);
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
         style={styles.border}
         source={require("../assets/border_1.png")}
       />
+      <Modal animationType="slide" visible={modalVisible} transparent={true}>
+        <View style={styles.modalContainer}>
+          {isOpen ? (
+            <CustomText
+              // text={saveSuccess ? "Bookmark Saved" : "Please try again later"}
+              text="Bookmark Saved"
+              style={styles.modalText}
+              type="1"
+            />
+          ) : (
+            <CustomText
+              text="Bookmark Unsaved"
+              style={styles.modalText}
+              type="1"
+            />
+          )}
+        </View>
+      </Modal>
       <View style={styles.borderContainer}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" color="gray" size={24} />
           </TouchableOpacity>
           <CustomText text="Verses" style={styles.title1} type="1" />
-          <FontAwesome
+          <TouchableOpacity
             onPress={() => {
-              setIsOpen(false);
+              setIsOpen(!isOpen);
+              saveBookmark();
             }}
-            name={isOpen ? "bookmark" : "bookmark-o"}
-            color="gray"
-            size={24}
-          />
+          >
+            <FontAwesome
+              name={isOpen ? "bookmark" : "bookmark-o"}
+              // name={"bookmark"}
+              color="gray"
+              size={24}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.searchBox}>
           <Searchbar
@@ -187,5 +277,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 30,
     backgroundColor: "transparent",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalText: {
+    fontSize: 16,
+    color: "#fff",
+    backgroundColor: "#222",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    opacity: 0.9,
   },
 });

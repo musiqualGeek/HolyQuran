@@ -151,7 +151,6 @@ const Home = ({ navigation }) => {
     if (search.length > 0) {
       let after = data.filter(checkWord);
       let array2 = [];
-      console.log("after => ", after);
       if (after.length > 0) {
         for (let i = 0; i < 10; i++) {
           if (after[i]) {
@@ -250,9 +249,7 @@ const styles = StyleSheet.create({
   },
   borderContainer: {
     flex: 1,
-    marginVertical: 10,
     marginTop: 28,
-    marginBottom: 28,
   },
   title: {
     justifyContent: "center",

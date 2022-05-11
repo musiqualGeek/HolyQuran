@@ -8,19 +8,28 @@ import BackRoute from "../components/BackRoute";
 
 const Tab = createMaterialTopTabNavigator();
 const TabSection = ({ navigation }) => {
-  const tabBarOptions = {
-    activeTintColor: "white",
-    inactiveTintColor: "black",
-    indicatorStyle: { backgroundColor: "#496F51", height: "100%" },
-    pressOpacity: 1,
-  };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.appBar}>
         <BackRoute navigation={navigation} color="#fff" />
         <CustomText text="The Holy Qur'an" style={styles.title} type="1" />
       </View>
-      <Tab.Navigator screenOptions={tabBarOptions} initialRouteName="Chapters">
+      <Tab.Navigator
+        screenOptions={{
+          activeTintColor: "white",
+          inactiveTintColor: "black",
+          indicatorStyle: { backgroundColor: "#496F51", height: "100%" },
+          pressOpacity: 1,
+          style: {
+            backgroundColor: "white",
+            height: 50,
+            borderBottomColor: "white",
+            borderBottomWidth: 2,
+            marginTop: 2,
+          },
+        }}
+        initialRouteName="Chapters"
+      >
         <Tab.Screen name="Chapters" component={Home} />
         <Tab.Screen name="Audio" component={PlayAudio} />
       </Tab.Navigator>

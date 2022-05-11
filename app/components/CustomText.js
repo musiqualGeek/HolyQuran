@@ -12,8 +12,6 @@ const getFonts = () =>
 
 const CustomText = (props) => {
   const { text, type, style } = props;
-  console.log(" ========= ");
-  console.log({ text, type, style });
   const [fontsloaded, setFontsLoaded] = useState(false);
   if (fontsloaded) {
     return (

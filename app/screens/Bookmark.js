@@ -64,6 +64,11 @@ const Bookmark = ({ navigation, route }) => {
     );
   };
 
+  // navigation.navigate("Verses", {
+  //   verse: dataTable[verseId - 1],
+  //   ourId: verseId,
+  // });
+
   const renderItem = ({ item }) => <Item title={item.title} />;
 
   return (
