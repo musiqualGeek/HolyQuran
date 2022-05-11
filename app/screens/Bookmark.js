@@ -6,57 +6,26 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomText from "../components/CustomText";
 import BackRoute from "../components/BackRoute";
+import quoran from "../assets/quoran.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+var DATA = [];
 const Bookmark = ({ navigation, route }) => {
-  const DATA = [
-    {
-      id: "1",
-      title: "Chapter-1 : THE OPENING",
-    },
-    {
-      id: "2",
-      title: "Chapter-2 : THE COW",
-    },
-    {
-      id: "3",
-      title: "Chapter-3 : THE FAMILY OF AMRAN",
-    },
-    {
-      id: "4",
-      title: "Chapter-4 : THE WOMEN",
-    },
-    {
-      id: "5",
-      title: "Chapter-5 : THE FOOD",
-    },
-    {
-      id: "6",
-      title: "Chapter-6 : THE CATTLE",
-    },
-    {
-      id: "7",
-      title: "Chapter-7 : THE ELEVATED PLACES",
-    },
-    {
-      id: "8",
-      title: "Chapter-8 : VOLUNTARY GIFTS",
-    },
-    {
-      id: "9",
-      title: "Chapter-9 : THE IMMUNITY",
-    },
-    {
-      id: "10",
-      title: "Chapter-10 : JONAH",
-    },
-  ];
-
-  const Item = ({ title }) => {
+  const Item = ({ id, title }) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          // console.log(" =======================>");
+          // console.log({ verse: quoran[id], ourId: id });
+          navigation.navigate("Verses", {
+            verse: quoran[id - 1],
+            ourId: id,
+          });
+        }}
+      >
         <View style={styles.item}>
           <Text style={{ color: "white" }}>{title}</Text>
         </View>
@@ -64,12 +33,34 @@ const Bookmark = ({ navigation, route }) => {
     );
   };
 
-  // navigation.navigate("Verses", {
-  //   verse: dataTable[verseId - 1],
-  //   ourId: verseId,
-  // });
+  const renderItem = ({ item }) => <Item id={item.id} title={item.title} />;
 
-  const renderItem = ({ item }) => <Item title={item.title} />;
+  const existInTab = (tab, a) => {
+    let i = 0;
+    while (i < tab.length) {
+      if (tab[i].id === a) return true;
+      i++;
+    }
+    return false;
+  };
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@holy_quran_Key");
+      let arr = JSON.parse(value);
+      for (let i = 0; i < arr.length; i++) {
+        let obj = {
+          id: arr[i],
+          title: quoran[arr[i] - 1].chapter,
+        };
+        if (!existInTab(DATA, arr[i])) DATA.push(obj);
+      }
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
@@ -78,17 +69,27 @@ const Bookmark = ({ navigation, route }) => {
         source={require("../assets/border_1.png")}
       />
       <View style={styles.borderContainer}>
-      <BackRoute navigation={navigation} color="" />
+        <BackRoute navigation={navigation} color="" />
         <View style={styles.header}>
           <CustomText text="Bookmark" style={styles.title} type="1" />
         </View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={DATA}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          marginBottom={20}
-        />
+        {DATA.length > 0 ? (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            marginBottom={20}
+          />
+        ) : (
+          <View style={styles.nobookmarkContainer}>
+            <CustomText
+              text="No Bookmarks yet"
+              style={styles.nobookmark}
+              type="1"
+            />
+          </View>
+        )}
       </View>
     </View>
   );
@@ -154,5 +155,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 16,
     borderRadius: 5,
+  },
+  nobookmarkContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  nobookmark: {
+    textAlign: "center",
+    fontSize: 18,
   },
 });

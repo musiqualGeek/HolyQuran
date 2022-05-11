@@ -15,12 +15,12 @@ const TabSection = ({ navigation }) => {
         <CustomText text="The Holy Qur'an" style={styles.title} type="1" />
       </View>
       <Tab.Navigator
-        tabBarOptions={{
+        screenOptions={{
           activeTintColor: "white",
           inactiveTintColor: "black",
           indicatorStyle: { backgroundColor: "#496F51", height: "100%" },
           pressOpacity: 1,
-          style: {
+          tabBarItemStyle: {
             backgroundColor: "white",
             height: 50,
             borderBottomColor: "white",

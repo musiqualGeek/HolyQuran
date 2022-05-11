@@ -13,11 +13,11 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import CustomText from "../components/CustomText";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import quoran from "../assets/quoran.json";
 
 const Tab = createMaterialTopTabNavigator();
 
 const Verses = ({ navigation, route }) => {
+  console.log("route props", route.params);
   const [isOpen, setIsOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(null);
@@ -71,18 +71,31 @@ const Verses = ({ navigation, route }) => {
         // this 1 bookmark-o => bookmark
         if (value === null) {
           let arr = [route.params.ourId];
-          console.log("array => ", arr);
           const jsonValue = JSON.stringify(arr);
-          console.log("jsonValue => ", jsonValue);
           await AsyncStorage.setItem("@holy_quran_Key", jsonValue);
-          setSaveSuccess(true);
         } else {
-          // let arr = parse(value)
-          console.log('Areray here 2 ', arr)
+          let arr = JSON.parse(value);
+          if (arr.indexOf(route.params.ourId) === -1)
+            arr.push(route.params.ourId);
+          const jsonValue = JSON.stringify(arr);
+          await AsyncStorage.setItem("@holy_quran_Key", jsonValue);
         }
+        setSaveSuccess(true);
       } else {
         // this 2 bookmark => bookmark-o
-        console.log("remove saved bookmark");
+        if (value !== null) {
+          console.log("here AYO");
+          let arr = JSON.parse(value);
+          let arr2 = [];
+          let i = 0;
+          while (i < arr.length) {
+            if (arr[i] !== route.params.ourId) arr2.push(arr[i]);
+            i++;
+          }
+          const jsonValue = JSON.stringify(arr2);
+          await AsyncStorage.setItem("@holy_quran_Key", jsonValue);
+          console.log("remove saved bookmark");
+        }
         setSaveSuccess(true);
       }
     } catch (e) {
@@ -91,21 +104,19 @@ const Verses = ({ navigation, route }) => {
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
-    }, 3000);
+    }, 1200);
   };
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("@holy_quran_Key");
-      console.log(" value => ", value);
-      if (value !== null) {
+      console.log("Value => ", JSON.parse(value));
+      if (value.includes(route.params.ourId)) {
         setIsOpen(true);
       } else {
         setIsOpen(false);
       }
-    } catch (e) {
-      // error reading value
-    }
+    } catch (e) {}
   };
 
   const removeData = async () => {
@@ -119,10 +130,10 @@ const Verses = ({ navigation, route }) => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(" =)> =)> ", yScroll1);
-    console.log(" =)> =)> ", yScroll2);
-  }, [yScroll1, yScroll2]);
+  // useEffect(() => {
+  //   console.log(" =)> =)> ", yScroll1);
+  //   console.log(" =)> =)> ", yScroll2);
+  // }, [yScroll1, yScroll2]);
 
   return (
     <View style={styles.mainContainer}>
@@ -134,7 +145,6 @@ const Verses = ({ navigation, route }) => {
         <View style={styles.modalContainer}>
           {isOpen ? (
             <CustomText
-              // text={saveSuccess ? "Bookmark Saved" : "Please try again later"}
               text="Bookmark Saved"
               style={styles.modalText}
               type="1"
@@ -162,7 +172,6 @@ const Verses = ({ navigation, route }) => {
           >
             <FontAwesome
               name={isOpen ? "bookmark" : "bookmark-o"}
-              // name={"bookmark"}
               color="gray"
               size={24}
             />
@@ -187,16 +196,20 @@ const Verses = ({ navigation, route }) => {
         />
         <View style={styles.tabContainer}>
           <Tab.Navigator
-            tabBarOptions={{
+            screenOptions={{
               activeTintColor: "white",
               inactiveTintColor: "black",
               indicatorStyle: { backgroundColor: "#496F51", height: "100%" },
               pressOpacity: 1,
-              style: {
+              tabBarStyle: {
                 backgroundColor: "white",
                 height: 50,
                 borderBottomColor: "white",
                 borderBottomWidth: 2,
+              },
+              tabBarActiveTintColor: "#496F51",
+              tabBarContentContainerStyle: {
+                backgroundColor: "white",
               },
             }}
             initialRouteName="Chapters"
