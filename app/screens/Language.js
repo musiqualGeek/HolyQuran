@@ -1,13 +1,12 @@
+import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   TouchableOpacity,
   ImageBackground,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
 import CustomText from "../components/CustomText";
 import MenuModal from "../components/MenuModal";
 

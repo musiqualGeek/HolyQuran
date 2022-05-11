@@ -9,6 +9,7 @@ import CustomText from "../components/CustomText";
 import BackRoute from "../components/BackRoute";
 
 const Profile = ({ navigation }) => {
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground

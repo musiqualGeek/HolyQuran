@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   FontAwesome5,
   FontAwesome,
   Ionicons,
   Entypo,
+  MaterialIcons,
+  AntDesign,
+  EvilIcons,
 } from "@expo/vector-icons";
 import { Menu, MenuItem, MenuDivider } from "react-native-material-menu";
 import CustomText from "./CustomText";
@@ -16,9 +19,49 @@ const MenuModal = (props) => {
   const hideMenu = () => setVisible(false);
   const showMenu = () => setVisible(true);
   return (
-    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+    <View
+      style={{
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        paddingHorizontal: 10,
+      }}
+    >
       <BackRoute navigation={navigation} color="" />
-      <Menu
+      <View style={styles.subTitleContainer}>
+        <TouchableOpacity
+          style={styles.userIcon}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <FontAwesome5 name="user-circle" size={20} color="gray" />
+          <CustomText text="Profile" style={styles.subtitle} type="1" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.userIcon}
+          onPress={() => navigation.navigate("Annotations")}
+        >
+          <AntDesign name="infocirlceo" size={20} color="gray" />
+          <CustomText text="Annotations" style={styles.subtitle} type="1" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.userIcon}
+          onPress={() => navigation.navigate("Service")}
+        >
+          <EvilIcons name="gear" size={24} color="gray" />
+          <CustomText text="Service" style={styles.subtitle} type="1" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.userIcon}
+          onPress={() => navigation.navigate("Bookmark")}
+        >
+          <Ionicons
+            name="md-checkmark-circle-outline"
+            size={20}
+            color="black"
+          />
+          <CustomText text="Bookmark" style={styles.subtitle} type="1" />
+        </TouchableOpacity>
+      </View>
+      {/* <Menu
         visible={visible}
         onRequestClose={hideMenu}
         anchor={
@@ -42,28 +85,6 @@ const MenuModal = (props) => {
             showMenu();
           }}
         >
-          {/* <FontAwesome
-            onPress={showMenu}
-            name="user"
-            color="#DAB53F"
-            size={16}
-            style={styles.iconStyle}
-          /> */}
-          <CustomText text="Profile" style={styles.title} type="1" />
-        </MenuItem>
-        <MenuItem
-          onPress={() => {
-            navigation.navigate("Bookmark");
-            showMenu();
-          }}
-        >
-          {/* <FontAwesome
-            onPress={showMenu}
-            name="bookmark"
-            color="#DAB53F"
-            size={16}
-            style={styles.iconStyle}
-          /> */}
           <CustomText text="Bookmark" style={styles.title} type="1" />
         </MenuItem>
         <MenuItem
@@ -72,13 +93,6 @@ const MenuModal = (props) => {
             showMenu();
           }}
         >
-          {/* <FontAwesome5
-            onPress={showMenu}
-            name="pen"
-            color="#DAB53F"
-            size={14}
-            style={styles.iconStyle}
-          /> */}
           <CustomText text="Annotation" style={styles.title} type="1" />
         </MenuItem>
         <MenuDivider />
@@ -88,16 +102,10 @@ const MenuModal = (props) => {
             showMenu();
           }}
         >
-          {/* <Ionicons
-            onPress={showMenu}
-            name="settings-sharp"
-            color="#DAB53F"
-            size={16}
-            style={styles.iconStyle}
-          /> */}
+          
           <CustomText text="Service" style={styles.title} type="1" />
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </View>
   );
 };
@@ -116,5 +124,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#000",
     marginLeft: 25,
+  },
+  subTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  userIcon: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "transparent",
+  },
+  subtitle: {
+    fontSize: 12,
+    color: "#000",
   },
 });
