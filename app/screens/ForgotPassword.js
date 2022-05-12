@@ -23,6 +23,10 @@ const ForgotPassword = ({ navigation }) => {
   const [errorsField, setErrorsField] = useState("");
 
   useEffect(() => {
+    setEmail("");
+  }, []);
+
+  useEffect(() => {
     if (propertyRecoverySuccess) navigation.navigate("Splashscreen");
     if (errors) setErrorsField(errors);
   }, [propertyRecoverySuccess]);

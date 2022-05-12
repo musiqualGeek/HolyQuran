@@ -25,21 +25,20 @@ const mapState = ({ user }) => ({
 });
 
 const Login = ({ navigation }) => {
-  console.log("Loign Screen");
   const { propertySignInSuccess, errors } = useSelector(mapState);
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
-  const [email, onChangeEmail] = useState("rami@gmail.com");
-  const [password, onChangepassword] = useState("hellodude");
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangepassword] = useState("");
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
 
-  // useEffect(() => {
-  //   ResetForm();
-  // }, []);
+  useEffect(() => {
+    ResetForm();
+  }, []);
 
   const ResetForm = () => {
     onChangeEmail("");
@@ -215,7 +214,7 @@ const styles = StyleSheet.create({
   imageTop: {
     width: "100%",
     height: 340,
-    borderRadius: 8,
+    borderRadius: 15,
   },
   card: {
     paddingVertical: 30,
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     elevation: 3,
-    marginBottom: 20,
+    marginVertical: 20,
   },
   textWelcome: {
     textAlign: "center",
@@ -248,6 +247,7 @@ const styles = StyleSheet.create({
     paddingStart: 20,
   },
   inputText: {
+    width: "90%",
     color: "black",
     fontSize: 16,
   },
@@ -283,4 +283,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     textAlign: "center",
   },
+  eyeIcon: {
+    width: 20,
+  }
 });

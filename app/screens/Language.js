@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   imageTop: {
     width: "100%",
     height: 340,
-    borderRadius: 8,
+    borderRadius: 15,
   },
   card: {
     paddingVertical: 30,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     elevation: 3,
-    marginBottom: 20,
+    marginVertical: 20,
   },
   textWelcome: {
     textAlign: "center",

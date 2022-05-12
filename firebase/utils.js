@@ -8,14 +8,15 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// linked with allied firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyD7gs-X9KcO_M6_v_rvCcdEGme7l6aBSBc",
-  authDomain: "holyquran-f922b.firebaseapp.com",
-  projectId: "holyquran-f922b",
-  storageBucket: "holyquran-f922b.appspot.com",
-  messagingSenderId: "196895921558",
-  appId: "1:196895921558:web:a722b99faf6ff2ba7c39b7",
-  measurementId: "G-F2FDTHHJ2G"
+  apiKey: "AIzaSyDXJUURqkwkE36GEuCWmvMc100SYxdaGLY",
+  authDomain: "holyquran-b3ee0.firebaseapp.com",
+  projectId: "holyquran-b3ee0",
+  storageBucket: "holyquran-b3ee0.appspot.com",
+  messagingSenderId: "90424158428",
+  appId: "1:90424158428:web:a85f40f1dac1717ec02c19",
+  measurementId: "G-FMQXZ2G19T"
 };
 
 // Initialize Firebase

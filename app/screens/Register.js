@@ -30,9 +30,9 @@ const Register = ({ navigation }) => {
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
 
-  const [firstName, onChangefirstName] = useState("rami");
-  const [email, onChangeEmail] = useState("rami@gmail.com");
-  const [password, onChangepassword] = useState("hellodude");
+  const [firstName, onChangefirstName] = useState("");
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangepassword] = useState("");
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
   // Hnadle Errors
@@ -41,9 +41,9 @@ const Register = ({ navigation }) => {
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
 
-  // useEffect(() => {
-  //   ResetForm();
-  // }, []);
+  useEffect(() => {
+    ResetForm();
+  }, []);
 
   const ResetForm = () => {
     onChangefirstName("");
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   imageTop: {
     width: "100%",
     height: 340,
-    borderRadius: 8,
+    borderRadius: 15,
   },
   card: {
     paddingVertical: 30,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     elevation: 3,
-    marginBottom: 20,
+    marginVertical: 20,
   },
   textWelcome: {
     textAlign: "center",

@@ -17,7 +17,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Tab = createMaterialTopTabNavigator();
 
 const Verses = ({ navigation, route }) => {
-  console.log("route props", route.params);
   const [isOpen, setIsOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(null);
@@ -84,7 +83,6 @@ const Verses = ({ navigation, route }) => {
       } else {
         // this 2 bookmark => bookmark-o
         if (value !== null) {
-          console.log("here AYO");
           let arr = JSON.parse(value);
           let arr2 = [];
           let i = 0;
@@ -94,7 +92,6 @@ const Verses = ({ navigation, route }) => {
           }
           const jsonValue = JSON.stringify(arr2);
           await AsyncStorage.setItem("@holy_quran_Key", jsonValue);
-          console.log("remove saved bookmark");
         }
         setSaveSuccess(true);
       }
@@ -110,7 +107,6 @@ const Verses = ({ navigation, route }) => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("@holy_quran_Key");
-      console.log("Value => ", JSON.parse(value));
       if (value.includes(route.params.ourId)) {
         setIsOpen(true);
       } else {
@@ -240,7 +236,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 10,
     marginTop: 28,
-    marginBottom: 28,
+    marginBottom: 15,
   },
   header: {
     width: "100%",
@@ -274,7 +270,7 @@ const styles = StyleSheet.create({
   },
   mainScroll: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: 0,
     marginTop: 10,
     padding: 25,
   },
@@ -283,7 +279,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: "center",
     paddingHorizontal: 0,
-    marginBottom: 30,
+    marginBottom: 10,
     color: "black",
   },
   tabContainer: {

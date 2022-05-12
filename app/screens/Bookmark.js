@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CustomText from "../components/CustomText";
 import BackRoute from "../components/BackRoute";
 import quoran from "../assets/quoran.json";
@@ -14,12 +14,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 var DATA = [];
 const Bookmark = ({ navigation, route }) => {
+  const [bookmark, setBookmark] = useState([])
   const Item = ({ id, title }) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          // console.log(" =======================>");
-          // console.log({ verse: quoran[id], ourId: id });
           navigation.navigate("Verses", {
             verse: quoran[id - 1],
             ourId: id,
@@ -55,7 +54,10 @@ const Bookmark = ({ navigation, route }) => {
         };
         if (!existInTab(DATA, arr[i])) DATA.push(obj);
       }
-    } catch (e) {}
+      setBookmark(DATA)
+    } catch (e) {
+      console.error("error bookmark => ",e)
+    }
   };
 
   useEffect(() => {
@@ -73,7 +75,7 @@ const Bookmark = ({ navigation, route }) => {
         <View style={styles.header}>
           <CustomText text="Bookmark" style={styles.title} type="1" />
         </View>
-        {DATA.length > 0 ? (
+        {bookmark.length > 0 ? (
           <FlatList
             showsVerticalScrollIndicator={false}
             data={DATA}
