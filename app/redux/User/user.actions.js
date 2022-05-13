@@ -63,10 +63,11 @@ export const signInUser =
         .then(async () => {
           const qq = query(
             collection(db, "users"),
-            where("email", "==", email)
+            where("id", "==", auth.currentUser.uid)
           );
           const qquerySnapshot = await getDocs(qq);
           qquerySnapshot.forEach((doc) => {
+            console.log('info user => ', doc.data())
             dispatch({
               type: userTypes.USER_SIGN_IN_SUCCESS,
               payload: doc.data(),

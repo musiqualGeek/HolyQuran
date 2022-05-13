@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -7,8 +7,29 @@ import {
   ScrollView,
 } from "react-native";
 import CustomText from "../components/CustomText";
+import { useDispatch } from "react-redux";
+import { auth, db } from "../../firebase/utils";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { setUserD } from "../redux/User/user.actions";
 
 const Introduction = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "users"),
+      where("id", "==", auth.currentUser.uid)
+    );
+    const querySnapshot = onSnapshot(q, (snapshot) => {
+      snapshot.docs.map((doc) => {
+        dispatch(setUserD(doc.data(), doc.id));
+      });
+    });
+    return () => {
+      querySnapshot();
+    };
+  }, []);
+  
   return (
     <View style={styles.mainContainer}>
       <ImageBackground

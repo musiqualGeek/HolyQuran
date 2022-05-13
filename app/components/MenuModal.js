@@ -18,7 +18,14 @@ const MenuModal = (props) => {
       }}
     >
       <BackRoute navigation={navigation} color="" />
-      <View style={styles.subTitleContainer}>
+      <TouchableOpacity
+          style={styles.userIcon}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <FontAwesome5 name="user-circle" size={28} color="gray" />
+          <CustomText text="Profile" style={styles.subtitle} type="1" />
+        </TouchableOpacity>
+      {/* <View style={styles.subTitleContainer}>
         <TouchableOpacity
           style={styles.userIcon}
           onPress={() => navigation.navigate("Profile")}
@@ -51,7 +58,7 @@ const MenuModal = (props) => {
           />
           <CustomText text="Bookmark" style={styles.subtitle} type="1" />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -84,7 +91,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 16,
     color: "#000",
+    marginVertical: 10,
   },
 });

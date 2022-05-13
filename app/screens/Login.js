@@ -78,6 +78,7 @@ const Login = ({ navigation }) => {
     }
 
     if (checking_form === "true") {
+      console.log('here login ?')
       dispatch(signInUser({ email, password }));
     }
   };
