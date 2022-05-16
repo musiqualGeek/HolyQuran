@@ -28,17 +28,17 @@ const Login = ({ navigation }) => {
   const { propertySignInSuccess, errors } = useSelector(mapState);
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangepassword] = useState("");
+  const [email, onChangeEmail] = useState("Ramy@gmail.com");
+  const [password, onChangepassword] = useState("hello156");
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
 
-  useEffect(() => {
-    ResetForm();
-  }, []);
+  // useEffect(() => {
+  //   ResetForm();
+  // }, []);
 
   const ResetForm = () => {
     onChangeEmail("");
