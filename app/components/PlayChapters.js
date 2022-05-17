@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -12,68 +12,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import BackRoute from "./BackRoute";
 
 const PlayChapters = (props) => {
-  const { navigation } = props;
-  var Verse1 = "../assets/verseAudio.mp3";
-  var Verse2 = "../assets/verseAudio2.mp3";
-  var Verse3 = "../assets/verseAudio3.mp3";
-  var Verse4 = "../assets/verseAudio4.mp3";
-  var Verse5 = "../assets/verseAudio5.mp3";
-  const [sound, setSound] = React.useState();
   const items = [];
 
-  async function playSound1() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require(Verse1));
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
-  }
-
-  async function playSound2() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require(Verse2));
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
-  }
-
-  async function playSound3() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require(Verse3));
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
-  }
-
-  async function playSound4() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require(Verse4));
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
-  }
-
-  async function playSound5() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(require(Verse5));
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
-  }
-  React.useEffect(() => {
-    return sound
-      ? () => {
-          console.log("Unloading Sound");
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
-
+  useEffect(() => {
+    console.log("Items ");
+    console.log(items);
+  }, [items]);
   const AudioComp = (props) => {
     const { title, id } = props;
     const navigation = useNavigation();
@@ -106,8 +50,9 @@ const PlayChapters = (props) => {
     );
   };
 
-  for (let i = 0; i < 31; i++) {
-    items.push(<AudioComp id={i} title={`Part-${i + 1}`} />);
+  for (let i = 0; i < 30; i++) {
+    console.log(`Part-${i + 1}`);
+    items.push(<AudioComp key={i} id={i} title={`Part-${i + 1}`} />);
   }
 
   return (

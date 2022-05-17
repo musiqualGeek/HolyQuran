@@ -315,8 +315,6 @@ const PlayerFunct = ({ navigation, route }) => {
   };
 
   const LoadAudio = async () => {
-    SetLoaded(false);
-    SetLoading(true);
     const checkLoading = await sound.current.getStatusAsync();
     if (checkLoading.isLoaded === false) {
       try {
@@ -327,7 +325,6 @@ const PlayerFunct = ({ navigation, route }) => {
         );
 
         if (result.isLoaded === false) {
-          SetLoading(false);
           console.log("Error in Loading Audio");
         } else {
           console.log("hahaha", result);
@@ -338,17 +335,13 @@ const PlayerFunct = ({ navigation, route }) => {
           console.log("Can you see me", result.durationMillis);
           console.log("22222 Again", trackLength);
           //   setTimeElapsed(result.durationMillis);
-          SetLoading(false);
           // PlayAudio();
-          SetLoaded(true);
           setFirstTime(true);
         }
       } catch (error) {
         console.log(error);
-        SetLoading(false);
       }
     } else {
-      SetLoading(false);
     }
   };
   const PlayAudio = async () => {
@@ -417,7 +410,7 @@ const PlayerFunct = ({ navigation, route }) => {
       setPlayed(true);
     }
   };
-  
+
   return (
     <View style={styles.main}>
       <View style={styles.headerBack}>
