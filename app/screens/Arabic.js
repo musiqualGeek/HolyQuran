@@ -28,30 +28,30 @@ const Arabic = ({ navigation }) => {
         />
         <View style={styles.block_1}>
           <Part
-            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(1-9).pdf?alt=media&token=cf905b4d-cb11-4f61-82f9-9e7d9040d2ca"
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-b3ee0.appspot.com/o/pdf%2FPart%20(1-9).pdf?alt=media&token=6c57c4d9-5e1b-49c2-b0cd-ea2c21024c31"
             name={`AUDIO PART${"\n"}(1-9)`}
             navigation={navigation}
           />
           <Part
-            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(9-16).pdf?alt=media&token=11952e9b-d000-4e62-963e-18295589ed8c"
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-b3ee0.appspot.com/o/pdf%2FPart%20(9-16).pdf?alt=media&token=29e90e6b-c393-4e92-a746-3ca865f99d9d"
             name={`AUDIO PART${"\n"}(9-16)`}
             navigation={navigation}
           />
         </View>
         <View style={styles.block_2}>
           <Part
-            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(16-22).pdf?alt=media&token=a9ee6419-fafc-423f-8e33-b644296d3fde"
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-b3ee0.appspot.com/o/pdf%2FPart%20(16-22).pdf?alt=media&token=7bd08cc0-9059-4070-8953-7a01ac919021"
             name={`AUDIO PART${"\n"}(16-22)`}
             navigation={navigation}
           />
           <Part
-            url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(22-27).pdf?alt=media&token=899834af-baab-4ba2-8e04-4f9aaba79809"
+            url="https://firebasestorage.googleapis.com/v0/b/holyquran-b3ee0.appspot.com/o/pdf%2FPart%20(22-27).pdf?alt=media&token=f12de3db-f269-4027-9a89-4dab9636c9cd"
             name={`AUDIO PART${"\n"}(22-27)`}
             navigation={navigation}
           />
         </View>
         <Part
-          url="https://firebasestorage.googleapis.com/v0/b/holyquran-f922b.appspot.com/o/Part%20(27-30).pdf?alt=media&token=8b3b9a7f-1904-4fe9-94d6-96c75c618cb9"
+          url="https://firebasestorage.googleapis.com/v0/b/holyquran-b3ee0.appspot.com/o/pdf%2FPart%20(27-30).pdf?alt=media&token=07d7c934-b8df-468c-be3d-993e0ee85094"
           name={`AUDIO PART${"\n"}(27-30)`}
           navigation={navigation}
         />
