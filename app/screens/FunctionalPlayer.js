@@ -15,7 +15,9 @@ import BackRoute from "../components/BackRoute";
 
 const PlayerFunct = ({ navigation, route }) => {
   const sound = React.useRef(new Audio.Sound());
-  const { id } = route.params;
+  const { partTitle, id } = route.params;
+  const [Loaded, SetLoaded] = React.useState(false);
+  const [Loading, SetLoading] = React.useState(false);
   const [trackLength, setTrackLength] = useState(3500);
   const [timeElapsed, setTimeElapsed] = useState("__:__");
   const [timeRemaining, setTimeRemaining] = useState("__:__");
@@ -23,6 +25,11 @@ const PlayerFunct = ({ navigation, route }) => {
   const [played, setPlayed] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [firstTime, setFirstTime] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  /* Test An Other Slider 1 Start */
+  const textRef = useRef();
+
+  /* Test An Other Slider 1 End */
 
   const Tracks = [
     {
@@ -226,17 +233,26 @@ const PlayerFunct = ({ navigation, route }) => {
 
   const [CurrentSong, SetCurrentSong] = React.useState(Tracks[id]);
 
+  useEffect(() => {});
+
   const NextSong = () => {
+    console.log("current ID => ", CurrentSong.id);
+    // 4 ---> 5
+
+    setCurrentTime(0);
     if (CurrentSong.id === Tracks[Tracks.length - 1].id) {
+      console.log("next no");
       SetCurrentSong(Tracks[0]);
       setPlayOrPause(false);
     } else {
+      console.log("next yess");
       SetCurrentSong(Tracks[CurrentSong.id + 1]);
       setPlayOrPause(false);
     }
   };
 
   const PrevSong = () => {
+    setCurrentTime(0);
     if (CurrentSong.id === 0) {
       SetCurrentSong(Tracks[Tracks.length - 1]);
       setPlayOrPause(false);
@@ -247,24 +263,33 @@ const PlayerFunct = ({ navigation, route }) => {
   };
 
   const changeTime = (seconds) => {
+    console.log("---------- seconds : ", seconds);
+    console.log("---------- trackLength : ", trackLength);
+
     var minutes = Math.floor(seconds / 60);
     var secondss = ((seconds % 60) / 1000).toFixed(0);
     var res = minutes.toString() + ":" + secondss.toString();
     setTimeElapsed(res);
     setTimeRemaining(res);
-  };
 
+    // setTimeElapsed(Moment.utc(seconds * 1000).format("m:ss"));
+    // setTimeRemaining(
+    //   Moment.utc((trackLength - seconds) * 1000).format("	HH:mm:ss")
+    // );
+  };
   const convertMillisToSec = (mil) => {
     var sec = Math.floor(mil / 1000);
     return sec;
   };
-
   const changeTimeInitial = (seconds) => {
+    console.log("let try that => ", seconds);
     var sec = Math.floor((seconds / 1000) % 60);
     setTimeElapsed("0:00");
+
     var minutes = Math.floor(seconds / 60000);
     var secondss = ((seconds % 60000) / 1000).toFixed(0);
     var res = minutes.toString() + ":" + secondss.toString();
+    console.log('Moment.utc(sec * 1000).format("m:ss")', res);
     setTimeRemaining(res);
   };
 
@@ -281,6 +306,7 @@ const PlayerFunct = ({ navigation, route }) => {
       const result = await sound.current.getStatusAsync();
       if (result.isLoaded) {
         if (result.isPlaying === true) {
+          console.log(" lets Gooo");
           setCurrentTime(convertMillisToSec(result.positionMillis));
           // currentTimee.setValue(convertMillisToSec(result.positionMillis));
           // Update Time Elapsed and Time Remaining
@@ -306,44 +332,107 @@ const PlayerFunct = ({ navigation, route }) => {
   };
 
   React.useEffect(() => {
-    LoadAudio();
+    console.log("this is the superId ", id);
+    if (mounted) {
+      console.log("hello there is a call there for this function ");
+      LoadAudio();
+    }
+    console.log("is this excuted ");
     return () => Unload();
-  }, [CurrentSong]);
-
-  const Unload = async () => {
-    await sound.current.unloadAsync();
-  };
+  }, [mounted, CurrentSong]);
 
   const LoadAudio = async () => {
+    SetLoaded(false);
+    SetLoading(true);
     const checkLoading = await sound.current.getStatusAsync();
     if (checkLoading.isLoaded === false) {
       try {
         const result = await sound.current.loadAsync(
           {
             uri: CurrentSong.track,
-          }
+          },
+          {},
+          true
         );
 
         if (result.isLoaded === false) {
+          SetLoading(false);
           console.log("Error in Loading Audio");
         } else {
-          console.log("hahaha", result);
-          setTrackLength((result.durationMillis / 1000).toFixed(0));
+          console.log("  hahaha", result);
+          setTrackLength(result.durationMillis / 1000);
           changeTimeInitial(result.durationMillis);
           console.log("11111 Again", trackLength);
 
           console.log("Can you see me", result.durationMillis);
           console.log("22222 Again", trackLength);
           //   setTimeElapsed(result.durationMillis);
+          SetLoading(false);
           // PlayAudio();
+          SetLoaded(true);
           setFirstTime(true);
         }
+        // if (!mounted) {
+        //   setMounted(true);
+        // }
       } catch (error) {
         console.log(error);
+        SetLoading(false);
       }
     } else {
+      SetLoading(false);
     }
   };
+
+  const LoadAudioFirstTime = async () => {
+    console.log("first line should be showed");
+    try {
+      const result = await sound.current.loadAsync(
+        {
+          uri: CurrentSong.track,
+        },
+        {},
+        true
+      );
+
+      if (result.isLoaded === false) {
+        setMounted(true);
+        console.log("result.isLoaded === false");
+      } else {
+        console.log(
+          "hahaha",
+          typeof (result.durationMillis / 1000),
+          " the value => ",
+          result.durationMillis / 1000
+        );
+        setTrackLength(result.durationMillis / 1000);
+        setMounted(true);
+      }
+    } catch (error) {
+      setMounted(true);
+      console.log("catch (error) ", error);
+      console.log(error);
+    }
+  };
+
+  const Unload = async () => {
+    await sound.current.unloadAsync();
+  };
+  const checkForTheFirstTime = async () => {
+    if (!mounted) {
+      // Code for componentWillMount here
+      // This code is called only one time before intial render
+      console.log("Code for componentWillMount here");
+      await LoadAudioFirstTime();
+    }
+  };
+  if (!mounted) {
+    checkForTheFirstTime().then(() => {
+      setMounted(true);
+      console.log("hello there");
+    });
+  }
+
   const PlayAudio = async () => {
     try {
       console.log("PlayAudio");
@@ -358,7 +447,6 @@ const PlayerFunct = ({ navigation, route }) => {
       console.log(error);
     }
   };
-
   if (firstTime) {
     console.log("now yes");
     sound.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);

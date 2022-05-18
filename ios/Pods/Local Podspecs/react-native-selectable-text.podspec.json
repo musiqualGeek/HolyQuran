@@ -1,0 +1,21 @@
+{
+  "name": "react-native-selectable-text",
+  "version": "1.0.0",
+  "summary": "React Native component used to provide the features of pass different context menu items and events",
+  "license": "MIT",
+  "authors": "Astrocoders <contact@astrocoders.com>",
+  "homepage": "https://github.com/Astrocoders/react-native-selectable-text",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/Astrocoders/react-native-selectable-text.git",
+    "tag": "1.0.0"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+module Pods_HolyQuran {
+  umbrella header "Pods-HolyQuran-umbrella.h"
+
+  export *
+  module * { export * }
+}
