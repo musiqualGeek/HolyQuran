@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     paddingStart: 20,
   },
   inputText: {
-    color: "black",
+    color: "#000",
     fontSize: 16,
   },
   fieldErrors: {

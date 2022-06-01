@@ -28,8 +28,8 @@ const Login = ({ navigation }) => {
   const { propertySignInSuccess, errors } = useSelector(mapState);
   const dispatch = useDispatch();
   dispatch(ResetErrorsState);
-  const [email, onChangeEmail] = useState("Ramy@gmail.com");
-  const [password, onChangepassword] = useState("hello156");
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangepassword] = useState("");
   const [isSecure, setIsSecure] = useState(true);
   const [iconPasswordName, setIconPasswordName] = useState("eye-with-line");
   const [emailErrors, setEmailErrors] = useState("");
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     width: "90%",
-    color: "black",
+    color: "#000",
     fontSize: 16,
   },
   fieldErrors: {
