@@ -249,11 +249,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     width: "90%",
-<<<<<<< HEAD
     color: "#003666",
-=======
-    color: "#000",
->>>>>>> 0ddcbbcb6da4479a889fa361bfef89c260f930c6
     fontSize: 16,
   },
   fieldErrors: {
