@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     flex: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: "10%",
     backgroundColor: "transparent",
   },
   modalContainer: {

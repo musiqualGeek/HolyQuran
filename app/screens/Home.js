@@ -186,7 +186,7 @@ const Home = ({ navigation }) => {
         <CustomText text="QURAN CHAPTERS" style={styles.title} type="1" />
         <View style={styles.container}>
           <Searchbar
-            placeholder="Search"
+            placeholder="Search by chapter number"
             onChangeText={setSearch}
             value={search}
             borderColor="#36bf49"

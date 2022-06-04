@@ -12,6 +12,8 @@ import BackRoute from "../components/BackRoute";
 import { useSelector } from "react-redux";
 import quoran from "../assets/quoran.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from 'react-redux'
+import { signOutUser } from "../redux/User/user.actions";
 
 const mapState = ({ user }) => ({
   userD: user.userD,
@@ -21,6 +23,7 @@ var DATA = []
 const Profile = ({ navigation }) => {
   const { userD } = useSelector(mapState);
   const [bookmark, setBookmark] = useState([])
+  const dispatch = useDispatch()
 
   const Item = ({ id, title }) => {
     return (
@@ -54,14 +57,16 @@ const Profile = ({ navigation }) => {
     try {
       const value = await AsyncStorage.getItem("@holy_quran_Key");
       let arr = JSON.parse(value);
-      for (let i = 0; i < arr.length; i++) {
-        let obj = {
-          id: arr[i],
-          title: quoran[arr[i] - 1].chapter,
-        };
-        if (!existInTab(DATA, arr[i])) DATA.push(obj);
+      if(arr){
+        for (let i = 0; i < arr.length; i++) {
+          let obj = {
+            id: arr[i],
+            title: quoran[arr[i] - 1].chapter,
+          };
+          if (!existInTab(DATA, arr[i])) DATA.push(obj);
+        }
+        setBookmark(DATA)
       }
-      setBookmark(DATA)
     } catch (e) {
       console.error("error bookmark => ",e)
     }
@@ -252,4 +257,7 @@ const styles = StyleSheet.create({
     color: "#222",
     marginBottom: 20,
   },
+  header: {
+    paddingHorizontal: "10%",
+  }
 });
