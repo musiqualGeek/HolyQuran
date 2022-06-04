@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     width: "90%",
-    color: "black",
+    color: "#003666",
     fontSize: 16,
   },
   fieldErrors: {
