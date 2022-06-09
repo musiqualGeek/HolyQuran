@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import {
@@ -35,6 +36,7 @@ const Login = ({ navigation }) => {
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   ResetForm();
@@ -57,21 +59,27 @@ const Login = ({ navigation }) => {
 
   useEffect(() => {
     if (propertySignInSuccess) {
+      
+      setLoading(false);
       ResetForm();
       dispatch(resetAllAuthForms());
     }
   }, [propertySignInSuccess]);
 
   const handleLogin = async () => {
+
+    setLoading(true)
     var checking_form = "true";
     if (email.length === 0 || email.indexOf("@") === -1) {
       setEmailErrors("* Email Field Required");
+      setLoading(false);
       checking_form = "false";
     } else {
       setEmailErrors("");
     }
     if (password.length < 6) {
       setPasswordErrors("* Password Field Required, 6 caracter min");
+      setLoading(false);
       checking_form = "false";
     } else {
       setPasswordErrors("");
@@ -157,15 +165,23 @@ const Login = ({ navigation }) => {
             <Text style={[styles.fieldErrors, { marginTop: 0 }]}>
               {currentErrors}
             </Text>
-            {email && password ? (
-              <TouchableOpacity style={styles.pinkBtn} onPress={handleLogin}>
-                <CustomText text="Sign in" style={styles.textBtn} type="1" />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity disabled style={styles.pinkBtn2}>
-                <CustomText text="Sign in" style={styles.textBtn} type="1" />
-              </TouchableOpacity>
-            )}
+            {email && password ?
+
+              loading ?
+
+                <View style={styles.pinkBtn}>
+                  <ActivityIndicator />
+                </View>
+                :
+                (
+                  <TouchableOpacity style={styles.pinkBtn} onPress={handleLogin}>
+                    <CustomText text="Sign in" style={styles.textBtn} type="1" />
+                  </TouchableOpacity>
+                ) : (
+                <TouchableOpacity disabled style={styles.pinkBtn2}>
+                  <CustomText text="Sign in" style={styles.textBtn} type="1" />
+                </TouchableOpacity>
+              )}
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <CustomText
                 text="Don't have an account? Sign up"

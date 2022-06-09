@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
   ScrollView,
 } from "react-native";
 import {
@@ -39,6 +40,7 @@ const Register = ({ navigation }) => {
   const [emailErrors, setEmailErrors] = useState("");
   const [passwordErrors, setPasswordErrors] = useState("");
   const [currentErrors, setCurrentErrors] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     ResetForm();
@@ -64,6 +66,7 @@ const Register = ({ navigation }) => {
 
   useEffect(() => {
     if (propertySignUpSuccess) {
+      setLoading(false);
       ResetForm();
       dispatch(resetAllAuthForms());
       navigation.navigate("Login");
@@ -71,22 +74,26 @@ const Register = ({ navigation }) => {
   }, [propertySignUpSuccess]);
 
   const handleRegister = async () => {
+    setLoading(true);
     console.log("Here");
     var checking_form = "true";
     if (firstName.length === 0) {
       setFirstNameErrors("* First Name Field Required");
+      setLoading(false);
       checking_form = "false";
     } else {
       setFirstNameErrors("");
     }
     if (email.length === 0 || email.indexOf("@") === -1) {
       setEmailErrors("* Email Field Required");
+      setLoading(false);
       checking_form = "false";
     } else {
       setEmailErrors("");
     }
     if (password.length < 6) {
       setPasswordErrors("* Password Field Required, 6 caracter min");
+      setLoading(false);
       checking_form = "false";
     } else {
       setPasswordErrors("");
@@ -196,18 +203,27 @@ const Register = ({ navigation }) => {
               />
             )}
             <View>
-              {firstName && email && password ? (
-                <TouchableOpacity
-                  style={styles.pinkBtn}
-                  onPress={handleRegister}
-                >
-                  <Text style={styles.textBtn}>Register</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity disabled style={styles.pinkBtn2}>
-                  <Text style={styles.textBtn}>Register</Text>
-                </TouchableOpacity>
-              )}
+              {
+                firstName && email && password ?
+
+                  loading ?
+
+                    <View style={styles.pinkBtn}>
+                      <ActivityIndicator />
+                    </View>
+                    :
+                    (
+                      <TouchableOpacity
+                        style={styles.pinkBtn}
+                        onPress={handleRegister}
+                      >
+                        <Text style={styles.textBtn}>Register</Text>
+                      </TouchableOpacity>
+                    ) : (
+                    <TouchableOpacity disabled style={styles.pinkBtn2}>
+                      <Text style={styles.textBtn}>Register</Text>
+                    </TouchableOpacity>
+                  )}
             </View>
             {currentErrors.length > 0 && (
               <CustomText

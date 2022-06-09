@@ -11,43 +11,45 @@ const Splashscreen = ({ navigation }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Login");
+      navigation.navigate("Register");
     }, 3000);
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.borderContainer}>
-        <View style={styles.VContainer}>
-          <CustomText
-            text="THE HOLY QURAN"
-            style={styles.textQuran}
-            type="1"
-          />
-          <Image
-            style={styles.image}
-            source={require("../assets/app_logo.png")}
-          />
-          <View>
+
+      <View style={styles.mainContainer}>
+
+        <View style={styles.borderContainer}>
+          <View style={styles.VContainer}>
             <CustomText
-              text="English Translation and Commentry by"
-              style={styles.textEnglish}
-              type="2"
+              text="THE HOLY QURAN"
+              style={styles.textQuran}
+              type="1"
             />
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Register")}
-              style={styles.authorNameBackground}
-            >
+            <Image
+              style={styles.image}
+              source={require("../assets/app_logo.png")}
+            />
+            <View>
               <CustomText
-                text="Maulana Muhammad Ali"
-                style={styles.textAuthorName}
-                type="1"
+                text="English Translation and Commentry by"
+                style={styles.textEnglish}
+                type="2"
               />
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Register")}
+                style={styles.authorNameBackground}
+              >
+                <CustomText
+                  text="Maulana Muhammad Ali"
+                  style={styles.textAuthorName}
+                  type="1"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
-    </View>
   );
 };
 

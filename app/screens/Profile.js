@@ -5,6 +5,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   FlatList,
+  ScrollView
 } from "react-native";
 import { auth } from "../../firebase/utils";
 import CustomText from "../components/CustomText";
@@ -57,7 +58,7 @@ const Profile = ({ navigation }) => {
     try {
       const value = await AsyncStorage.getItem("@holy_quran_Key");
       let arr = JSON.parse(value);
-      if(arr){
+      if (arr) {
         for (let i = 0; i < arr.length; i++) {
           let obj = {
             id: arr[i],
@@ -68,7 +69,7 @@ const Profile = ({ navigation }) => {
         setBookmark(DATA)
       }
     } catch (e) {
-      console.error("error bookmark => ",e)
+      console.error("error bookmark => ", e)
     }
   };
 
@@ -88,72 +89,81 @@ const Profile = ({ navigation }) => {
         style={styles.border}
         source={require("../assets/border_1.png")}
       />
-      <View style={styles.borderContainer}>
-      <BackRoute navigation={navigation} color="" />
-        <View style={styles.header}>
-          {/* Profile */}
-          <CustomText text="Profile" style={styles.title1} type="1" />
-          <CustomText text="Name" style={styles.title2} type="1" />
-          <View style={styles.nameContainer}>
-            <CustomText
-              text={
-                userD?.fullname
-                  ? userD?.fullname
-                  : "..."
-              }
-              style={styles.title3}
-              type="1"
-            />
-          </View>
-          <CustomText text="E-mail" style={styles.title2} type="1" />
-          <View style={styles.nameContainer}>
-            <CustomText
-              text={userD?.email ? userD?.email : "..."}
-              style={styles.title3}
-              type="1"
-            />
-          </View>
-          {/* Bookmark */}
-          <CustomText text="Bookmarks" style={styles.title1} type="1" />
-          {bookmark.length > 0 ? (
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={bookmark}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id}
-              marginBottom={20}
-            />
-          ) : (
-            <View style={styles.nobookmarkContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{
+          paddingBottom: 50
+        }}
+      >
+        <View style={styles.borderContainer}>
+          <BackRoute navigation={navigation} color="" />
+          <View style={styles.header}>
+            {/* Profile */}
+            <CustomText text="Profile" style={styles.title1} type="1" />
+            <CustomText text="Name" style={styles.title2} type="1" />
+            <View style={styles.nameContainer}>
               <CustomText
-                text="No Bookmarks yet"
-                style={styles.nobookmark}
+                text={
+                  userD?.fullname
+                    ? userD?.fullname
+                    : "..."
+                }
+                style={styles.title3}
                 type="1"
               />
             </View>
-          )}
-          {/* Annotations */}
-          <CustomText text="Annotations" style={styles.title1} type="1" />
-          <View style={styles.nameContainer}>
-            <CustomText
-              text="Coming soon..."
-              style={styles.title3}
-              type="1"
-            />
+            <CustomText text="E-mail" style={styles.title2} type="1" />
+            <View style={styles.nameContainer}>
+              <CustomText
+                text={userD?.email ? userD?.email : "..."}
+                style={styles.title3}
+                type="1"
+              />
+            </View>
+            {/* Bookmark */}
+            <CustomText text="Bookmarks" style={styles.title1} type="1" />
+            {bookmark.length > 0 ? (
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={bookmark}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+                marginBottom={20}
+              />
+            ) : (
+              <View style={styles.nobookmarkContainer}>
+                <CustomText
+                  text="No Bookmarks yet"
+                  style={styles.nobookmark}
+                  type="1"
+                />
+              </View>
+            )}
+            {/* Annotations */}
+            <CustomText text="Annotations" style={styles.title1} type="1" />
+            <View style={styles.nameContainer}>
+              <CustomText
+                text="Coming soon..."
+                style={styles.title3}
+                type="1"
+              />
+            </View>
+            {/* Services */}
+            <CustomText text="Services" style={styles.title1} type="1" />
+            <TouchableOpacity style={styles.nameContainer} onPress={handleLogout}>
+              <CustomText
+                text="Logout"
+                style={styles.title3}
+                type="1"
+              />
+            </TouchableOpacity>
           </View>
-          {/* Services */}
-          <CustomText text="Services" style={styles.title1} type="1" />
-          <TouchableOpacity style={styles.nameContainer} onPress={handleLogout}>
-            <CustomText
-              text="Logout"
-              style={styles.title3}
-              type="1"
-            />
-          </TouchableOpacity>
-        </View>
 
-      </View>
+        </View>
+      </ScrollView>
     </View>
+
+
   );
 };
 

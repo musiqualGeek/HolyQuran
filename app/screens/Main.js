@@ -41,8 +41,8 @@ const main = () => {
           <>
             <Stack.Screen name="Splashscreen" component={Splashscreen} />
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           </>
         )}
         {currentProperty && (
